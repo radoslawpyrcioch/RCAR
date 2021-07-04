@@ -1,0 +1,8 @@
+/RCAR/bin
+/RCAR/obj
+/RCAR.Domain/bin
+/RCAR.Domain/obj
+/.vs
+/.vscode
+*.user
+.vscode
