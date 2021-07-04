@@ -15,4 +15,8 @@
     <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\RCAR.Domain\RCAR.Domain.csproj" />
+  </ItemGroup>
+
 </Project>
