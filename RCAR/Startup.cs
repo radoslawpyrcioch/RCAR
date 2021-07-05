@@ -30,7 +30,7 @@ namespace RCAR
             services.AddDbContext<ApplicationDbContext>(options =>
             {
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
-                // options.UseLazyLoadingProxies();
+                options.UseLazyLoadingProxies();
             });
             services.AddDatabaseDeveloperPageExceptionFilter();
 
