@@ -46,7 +46,7 @@ namespace RCAR
                 .AddDefaultTokenProviders();
 
             // Identity settings
-            //services.AddIdentitySettings();
+            services.AddIdentitySettings();
 
             // Add Repository via Dependency Injection extension container
             services.RepositoryInjector();
@@ -68,7 +68,7 @@ namespace RCAR
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+        public void Configure(IApplicationBuilder app, IWebHostEnvironment env, IDbInitializer dbInitializer)
         {
             if (env.IsDevelopment())
             {
@@ -96,6 +96,8 @@ namespace RCAR
                     pattern: "{controller=Home}/{action=Index}/{id?}");
                 endpoints.MapRazorPages();
             });
+
+            dbInitializer.Initializer();
         }
     }
 }

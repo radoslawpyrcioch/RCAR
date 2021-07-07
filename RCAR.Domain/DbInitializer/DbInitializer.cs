@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
+using RCAR.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
