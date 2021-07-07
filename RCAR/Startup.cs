@@ -8,6 +8,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using RCAR.Domain.Context;
+using RCAR.Domain.DbInitializer;
 using RCAR.Extension;
 using System;
 using System.Collections.Generic;
@@ -61,6 +62,8 @@ namespace RCAR
                 options.Cookie.IsEssential = true;
             });
 
+            //Add DBInitializer
+            services.AddScoped<IDbInitializer, DbInitializer>();
 
         }
 
