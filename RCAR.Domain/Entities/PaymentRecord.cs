@@ -17,10 +17,10 @@ namespace RCAR.Domain.Entities
         public decimal Discount { get; set; }
 
         public int CarId { get; set; }
-        public Car Car { get; set; }
+        public virtual Car Car { get; set; }
         public int MemberId { get; set; }
-        public Member Member { get; set; }
+        public virtual Member Member { get; set; }
         public int ServiceId { get; set; }
-        public Service Service { get; set; }
+        public virtual Service Service { get; set; }
     }
 }

@@ -25,7 +25,7 @@ namespace RCAR.Domain.Entities
 
         public virtual User User { get; set; }
         public string UserId { get; set; }
-        public IEnumerable<PaymentRecord> PaymentRecords { get; set; }
+        public virtual ICollection<PaymentRecord> PaymentRecords { get; set; }
 
     }
 }

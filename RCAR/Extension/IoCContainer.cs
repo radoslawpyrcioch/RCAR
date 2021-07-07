@@ -30,6 +30,7 @@ namespace RCAR.Extension
             services.AddScoped<IPaymentRecordService, PaymentRecordService>();
             services.AddScoped<IServiceService, ServiceService>();
             services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IEmailService, EmailService>();
 
             return services;
         }

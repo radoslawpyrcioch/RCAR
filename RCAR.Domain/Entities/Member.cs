@@ -19,8 +19,8 @@ namespace RCAR.Domain.Entities
         public string City { get; set; }
         public string PostCode { get; set; }
 
-        public IEnumerable<Car> Cars { get; set; }
-        public IEnumerable<PaymentRecord> PaymentRecords { get; set; }
+        public virtual ICollection<Car> Cars { get; set; }
+        public virtual ICollection<PaymentRecord> PaymentRecords { get; set; }
         public virtual User User { get; set; }
         public string UserId { get; set; }
     }
