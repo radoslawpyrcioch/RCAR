@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,16 @@ namespace RCAR.Controllers
             _serviceService = serviceService;
         }
 
-        public IActionResult Index()
+        [HttpGet]
+        public async Task<IActionResult> Index()
         {
-            return View();
+            var currentUserId = User.Claims.ElementAt(0).Value; //user id
+
+            var model = new ServiceIndexVM()
+            {
+                Services = await _serviceService.GetAllServiceAsync(currentUserId)
+            };
+            return View(model);
         }
     }
 }

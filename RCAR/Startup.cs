@@ -45,6 +45,8 @@ namespace RCAR
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
+            services.AddAutoMapper(typeof(Startup));
+
             // Identity settings
             services.AddIdentitySettings();
 
