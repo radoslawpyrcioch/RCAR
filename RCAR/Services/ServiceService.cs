@@ -36,6 +36,21 @@ namespace RCAR.Services
             return new List<ServiceVM>();
         }
 
+        public async Task<IEnumerable<ServiceVM>> GetAllServiceRemovedAsync(string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            if (user != null)
+            {
+                if (user.Services.Count() > 0)
+                {
+                    var service = user.Services.Where(s => s.IsRemoved);
+                    var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ServiceVM>>(service);
+                    return model;
+                }
+            }
+            return new List<ServiceVM>();
+        }
+
         public async Task<bool> CreateServiceAsync(ServiceCreateVM model, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
@@ -47,7 +62,7 @@ namespace RCAR.Services
         public async Task<ServiceDetailVM> DetailServiceAsync(int serviceId, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
-            var service = user.Services.FirstOrDefault();
+            var service = user.Services.Where(s => s.ServiceId == serviceId).FirstOrDefault();
             var model = _mapper.Map<Service, ServiceDetailVM>(service);
             return model;
         }
@@ -58,5 +73,7 @@ namespace RCAR.Services
             service.IsRemoved = true;
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        
     }
 }

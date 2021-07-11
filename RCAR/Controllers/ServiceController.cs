@@ -30,6 +30,18 @@ namespace RCAR.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Removed()
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+
+            var model = new ServiceIndexVM()
+            {
+                Services = await _serviceService.GetAllServiceRemovedAsync(currentUserId)
+            };
+            return View(model);
+        }
+
         public IActionResult Create()
         {
             return View();

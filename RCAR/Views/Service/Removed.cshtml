@@ -10,13 +10,14 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Lista Serwisów</li>
+                        <li class="breadcrumb-item"><a asp-controller="Service" asp-action="Index">Lista Serwisów</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Historia Serwisów</li>
                     </ol>
                 </nav><br /><br />
                 <div class="row">
                     <div class="col-md-12 table-responsive-md">
-                        <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Service" asp-action="Create"> Nowy Serwis</a>
-                        <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Service" asp-action="Removed">Historia</a>
+                        <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Service" asp-action="Index"> Wróć do dostepnej listy serwisów</a>
+                        <br />
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -35,7 +36,7 @@
                             <tbody>
                                 @foreach (var item in Model.Services)
                                 {
-                                    <tr>
+                                    <tr class="table table-primary">
                                         <td>
                                             <a asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
                                         </td>
@@ -47,8 +48,8 @@
                                         <td>@item.ServiceTo.ToString("dd/MM/yyyy")</td>
                                         <td>@item.Description</td>
                                         @*<td>
-                            <img alt="image" src="@Url.Content(item.ImageUrl)" />
-                        </td>*@
+                                                <img alt="image" src="@Url.Content(item.ImageUrl)" />
+                                            </td>*@
                                         <td>
                                             <a class="text-primary" asp-action="Edit" asp-route-id="@item.ServiceId">
                                                 <i class="fas fa-edit"></i>Edytuj
@@ -56,13 +57,6 @@
                                             <a class="text-success" asp-action="Detail" asp-route-id="@item.ServiceId">
                                                 <i class="fas fa-bars"></i>Szczegóły
                                             </a>
-                                            <a class="text-danger" asp-action="Delete" asp-route-id="@item.ServiceId">
-                                                <i class="far fa-trash-alt"></i>Usuń
-                                            </a>
-
-
-                                            @*@Html.ActionLink("Usuń", "Remove", new { id = item.ServiceId }, new { onclick =                     "return confirm('Czy napewno chcesz usunąc ten seriws?');"})*@
-
                                         </td>
                                     </tr>
                                 }

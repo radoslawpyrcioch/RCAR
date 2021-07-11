@@ -1,8 +1,5 @@
 ﻿@model RCAR.Models.ServiceVM.ServiceDetailVM
 
-@{
-    ViewData["Title"] = "Detail";
-}
 
 <div class="col-md-12 grid-margin grid-margin-md-0">
     <div class="card">
@@ -15,6 +12,7 @@
                 </ol>
             </nav><br /><br />
             <a class="btn btn-xs btn-outline-success float-md-right" href="/Service/Edit/@Model.ServiceId"> Edytuj</a>
+            <a class="btn btn-xs btn-outline-success float-md-right" href="/Service/Index/@Model.ServiceId"> Wróć</a>
             <div class="wrap d-flex justify-content-start justify-content-sm-center flex-wrap">
                 <div class="wrap align-items-center ml-5">
                     <p class="font-weight-bold text-success" style="font-size:20px">Numer serwisu: @Model.ServiceNo</p>
