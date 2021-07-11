@@ -28,7 +28,7 @@ namespace RCAR.Services
             {
                 if(user.Services.Count() > 0)
                 {
-                    var service = user.Services;
+                    var service = user.Services.Where(s => !s.IsRemoved);
                     var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ServiceVM>>(service);
                     return model;
                 }  
@@ -52,6 +52,11 @@ namespace RCAR.Services
             return model;
         }
 
-
+        public async Task<bool> RemoveServiceAsync(int serviceId)
+        {
+            var service = await _unitOfWork.Service.GetByIdAsync(serviceId);
+            service.IsRemoved = true;
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

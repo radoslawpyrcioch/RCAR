@@ -46,8 +46,8 @@
                                         <td>@item.ServiceTo.ToString("dd/MM/yyyy")</td>
                                         <td>@item.Description</td>
                                         @*<td>
-                                            <img alt="image" src="@Url.Content(item.ImageUrl)" />
-                                        </td>*@
+                                                <img alt="image" src="@Url.Content(item.ImageUrl)" />
+                                            </td>*@
                                         <td>
                                             <a class="text-primary" asp-action="Edit" asp-route-id="@item.ServiceId">
                                                 <i class="fas fa-edit"></i>Edytuj
@@ -58,6 +58,10 @@
                                             <a class="text-danger" asp-action="Delete" asp-route-id="@item.ServiceId">
                                                 <i class="far fa-trash-alt"></i>Usuń
                                             </a>
+                                                
+                                            
+                                                @*@Html.ActionLink("Usuń", "Remove", new { id = item.ServiceId }, new { onclick =                     "return confirm('Czy napewno chcesz usunąc ten seriws?');"})*@
+
                                         </td>
                                     </tr>
                                 }

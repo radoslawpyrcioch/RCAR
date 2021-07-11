@@ -50,6 +50,12 @@ namespace RCAR.Controllers
             return View("Index", model);
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            var result = await _serviceService.RemoveServiceAsync(id);
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {
