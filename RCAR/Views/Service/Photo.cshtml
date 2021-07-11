@@ -1,0 +1,31 @@
+﻿@model RCAR.Models.ServiceVM.ServiceDetailVM
+
+
+<div class="col-md-12 grid-margin grid-margin-md-0">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Service" asp-action="Index">Lista serwisów</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Zdjęcia</li>
+                </ol>
+            </nav><br /><br />
+            @if (@Url.Content(Model.ImageUrl) == null)
+            {
+        <div class="wrap d-flex justify-content-start justify-content-sm-center flex-wrap">
+            <div class="wrap align-items-center ml-5">
+                <p class="font-weight-bold text-success" style="font-size:20px">Brak zdjęć</p>
+            </div>
+
+        </div>
+            }
+            else
+            {
+                <div class="wrap d-flex justify-content-start justify-content-sm-center flex-wrap">
+                    <img class="rounded-circle shadow-lg" style="width:300px; height:350px" src="@Url.Content(Model.ImageUrl)" alt="" />
+                </div>
+            }
+        </div>
+    </div>
+</div>

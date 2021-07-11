@@ -13,6 +13,8 @@ namespace RCarManager.Helper
         public AutoMaperConfiguration()
         {
             CreateMap<Service, ServiceVM>();
+            CreateMap<ServiceCreateVM, Service>();
+            CreateMap<Service, ServiceDetailVM>();
         }
     }
 }

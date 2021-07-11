@@ -7,6 +7,7 @@ namespace RCAR.Models.ServiceVM
 {
     public class ServiceIndexVM
     {
+        public ServiceCreateVM ServiceCreateVM { get; set; }
         public IEnumerable<ServiceVM> Services { get; set; }
     }
 }

@@ -35,6 +35,23 @@ namespace RCAR.Services
             }
             return new List<ServiceVM>();
         }
-        
+
+        public async Task<bool> CreateServiceAsync(ServiceCreateVM model, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            var service = _mapper.Map<ServiceCreateVM, Service>(model);
+            _unitOfWork.Service.Add(service);
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task<ServiceDetailVM> DetailServiceAsync(int serviceId, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            var service = user.Services.FirstOrDefault();
+            var model = _mapper.Map<Service, ServiceDetailVM>(service);
+            return model;
+        }
+
+
     }
 }

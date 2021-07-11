@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RCAR.Helper;
 using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
 using System;
@@ -26,6 +27,42 @@ namespace RCAR.Controllers
             {
                 Services = await _serviceService.GetAllServiceAsync(currentUserId)
             };
+            return View(model);
+        }
+
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind(include: "ServiceCreateVM")]ServiceIndexVM model)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            if(ModelState.IsValid)
+            {
+                var result = await _serviceService.CreateServiceAsync(model.ServiceCreateVM, currentUserId);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Serwis o podanym numerze już istnieje.");
+            }
+            model.Services = await _serviceService.GetAllServiceAsync(currentUserId);
+            return View("Index", model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _serviceService.DetailServiceAsync(id, currentUserId);
+            return View(model);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> Photo(int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _serviceService.DetailServiceAsync(id, currentUserId);
             return View(model);
         }
     }

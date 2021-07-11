@@ -9,5 +9,8 @@ namespace RCAR.Services.Interfaces
     public interface IServiceService
     {
         Task<IEnumerable<ServiceVM>> GetAllServiceAsync(string userId);
+        Task<bool> CreateServiceAsync(ServiceCreateVM model, string userId);
+        Task<ServiceDetailVM> DetailServiceAsync(int serviceId, string userId);
+
     }
 }

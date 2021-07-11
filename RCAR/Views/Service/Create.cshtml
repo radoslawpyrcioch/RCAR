@@ -1,0 +1,112 @@
+﻿@model RCAR.Models.ServiceVM.ServiceCreateVM
+@{
+    ViewBag.Title = "Service";
+}
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Service" asp-action="Index">Lista serwisów</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Nowy Serwis</li>
+                </ol>
+            </nav><br /><br />
+            <form method="post" enctype="multipart/form-data" asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <label asp-for="ServiceNo"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="ServiceNo" class="form-control" placeholder="1234" />
+                        <span asp-validation-for="ServiceNo" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="ServiceSince"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="ServiceSince" class="form-control" />
+                        <span asp-validation-for="ServiceSince" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="ServiceTo"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="ServiceTo" class="form-control" />
+                        <span asp-validation-for="ServiceTo" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <label asp-for="FirstName"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="FirstName" class="form-control" placeholder="1234" />
+                        <span asp-validation-for="FirstName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="MiddleName"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="MiddleName" class="form-control" />
+                        <span asp-validation-for="MiddleName" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="FullName"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="FullName" class="form-control" />
+                        <span asp-validation-for="FullName" class="text-danger"></span>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div class="form-group col-md-1">
+                        <label asp-for="Brand"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="Brand" class="form-control" />
+                        <span asp-validation-for="Brand" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="Model"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <input asp-for="Model" class="form-control" />
+                        <span asp-validation-for="Model" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-1">
+                        <label asp-for="ImageUrl"></label>
+                    </div>
+                    <div class="form-group col-md-3">
+                        <div class="btn btn-primary btn-icon-text">
+                            <i class="fas fa-cloud-upload-alt"></i>
+                            <input asp-for="ImageUrl" type="file" value="Upload" />
+                            <span asp-validation-for="ImageUrl" class="text-danger"></span>
+                        </div>
+                    </div>
+                </div>
+                <br /><br />
+                <div class="form-group">
+                    <label asp-for="Description"></label>
+                    <input asp-for="Description" class="form-control" />
+                    <span asp-validation-for="Description" class="text-danger"></span>
+                </div>
+
+
+                <div class="form-group">
+                    <button type="submit" class="btn btn-rounded btn-primary float-left"><i class="fas fa-plus-square" style="margin-right:0.7em"></i>Save</button>
+                    <a asp-action="Index" class="btn btn-rounded btn-success float-right"><i class="far fa-caret-square-left" style="margin-right:0.7em"></i>Back</a>
+                    <br /><br /><br />
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    @{ await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
