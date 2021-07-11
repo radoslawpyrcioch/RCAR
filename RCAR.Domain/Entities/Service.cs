@@ -12,8 +12,7 @@ namespace RCAR.Domain.Entities
         public int ServiceId { get; set; }
         public string ServiceNo { get; set; }
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string FullName { get; set; }
+        public string LastName { get; set; }
         public string Phone { get; set; }
         public DateTime ServiceSince { get; set; }
         public DateTime? ServiceTo { get; set; }
@@ -21,7 +20,7 @@ namespace RCAR.Domain.Entities
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Description { get; set; }
-
+        public bool IsRemoved { get; set; }
 
         public virtual User User { get; set; }
         public string UserId { get; set; }

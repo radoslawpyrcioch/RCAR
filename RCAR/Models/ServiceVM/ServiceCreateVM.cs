@@ -21,13 +21,13 @@ namespace RCAR.Models.ServiceVM
 
         [Required(ErrorMessage = "Nazwisko jest wymagany.")]
         [Display(Name = "Nazwisko")]
-        public string MiddleName { get; set; } // change for LastName
+        public string LastName { get; set; } 
 
         public string FullName 
         {
             get
             {
-                return FirstName + " " + MiddleName;
+                return FirstName + " " + LastName;
             }
         }
 

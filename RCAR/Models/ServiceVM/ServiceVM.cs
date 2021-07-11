@@ -17,13 +17,13 @@ namespace RCAR.Models.ServiceVM
         public string FirstName { get; set; }
 
         [Display(Name = "Nazwisko")]
-        public string MiddleName { get; set; } // change for LastName
+        public string LastName { get; set; } 
 
         public string FullName
         {
             get
             {
-                return FirstName + " " + MiddleName;
+                return FirstName + " " + LastName;
             }
         }
 

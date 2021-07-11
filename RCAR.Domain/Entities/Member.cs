@@ -11,13 +11,14 @@ namespace RCAR.Domain.Entities
         public int MemberId { get; set; }
         public string MemberNo { get; set; }
         public string FirstName { get; set; }
-        public string MiddleName { get; set; }
-        public string FullName { get; set; }
+        public string LastName { get; set; }
         public string Phone { get; set; }
+        public string Email { get; set; }
         public DateTime DateJoined { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string PostCode { get; set; }
+        public bool IsRemoved { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; }
         public virtual ICollection<PaymentRecord> PaymentRecords { get; set; }
