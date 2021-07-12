@@ -69,6 +69,12 @@ namespace RCAR.Controllers
             return RedirectToAction("Index");
         }
 
+        public async Task<IActionResult> BackToDraft(int id)
+        {
+            var result = await _serviceService.BackServiceAsync(id);
+            return RedirectToAction("Index");
+        }
+
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {

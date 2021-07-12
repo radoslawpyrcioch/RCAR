@@ -76,10 +76,16 @@ namespace RCAR.Services
         {
             var service = await _unitOfWork.Service.GetByIdAsync(serviceId);
             service.IsRemoved = true;
-            
+            service.Status = "Zakończony";
             return await _unitOfWork.SaveChangesAsync();
         }
 
-        
+        public async Task<bool> BackServiceAsync(int serviceId)
+        {
+            var service = await _unitOfWork.Service.GetByIdAsync(serviceId);
+            service.IsRemoved = false;
+            service.Status = "Cofnięty";
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

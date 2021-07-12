@@ -55,6 +55,9 @@
                                             <a class="text-success" asp-action="Detail" asp-route-id="@item.ServiceId">
                                                 <i class="fas fa-bars"></i>Szczegóły
                                             </a>
+                                            <a class="text-danger" asp-action="BackToDraft" asp-route-id="@item.ServiceId">
+                                                <i class="far fa-trash-alt"></i>Cofnij
+                                            </a>
                                         </td>
                                     </tr>
                                 }
