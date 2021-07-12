@@ -48,5 +48,8 @@ namespace RCAR.Models.ServiceVM
 
         [Display(Name = "Opis naprawy / uwagi")]
         public string Description { get; set; }
+
+        [Display(Name = "Status")]
+        public string Status { get; set; }
     }
 }

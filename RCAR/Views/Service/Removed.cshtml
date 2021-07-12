@@ -29,14 +29,14 @@
                                     <th>Data przyjecia</th>
                                     <th>Data zakończenia</th>
                                     <th>Opis</th>
-                                    @*<th>Zdjecie</th>*@
+                                    <th>Status</th>
                                     <th class="text-warning">Akcje</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach (var item in Model.Services)
                                 {
-                                    <tr class="table table-primary">
+                                    <tr>
                                         <td>
                                             <a asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
                                         </td>
@@ -47,9 +47,7 @@
                                         <td>@item.ServiceSince.ToString("dd/MM/yyyy")</td>
                                         <td>@item.ServiceTo.ToString("dd/MM/yyyy")</td>
                                         <td>@item.Description</td>
-                                        @*<td>
-                                                <img alt="image" src="@Url.Content(item.ImageUrl)" />
-                                            </td>*@
+                                        <td>@item.Status</td>
                                         <td>
                                             <a class="text-primary" asp-action="Edit" asp-route-id="@item.ServiceId">
                                                 <i class="fas fa-edit"></i>Edytuj

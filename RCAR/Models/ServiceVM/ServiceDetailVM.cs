@@ -12,13 +12,18 @@ namespace RCAR.Models.ServiceVM
         public string ServiceNo { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; } 
-        public string FullName { get; set; }
+        public string FullName 
+        { get
+            {
+                return FirstName + " " + LastName;
+            } 
+        }
         public string Phone { get; set; }
         public DateTime ServiceSince { get; set; }
         public DateTime ServiceTo { get; set; }
-        public string ImageUrl { get; set; }
         public string Brand { get; set; }
         public string Model { get; set; }
         public string Description { get; set; }
+        public string Status { get; set; }
     }
 }

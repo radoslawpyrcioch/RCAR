@@ -9,6 +9,8 @@ namespace RCAR.Models.ServiceVM
 {
     public class ServiceCreateVM
     {
+        public ServiceCreateVM() => IsRemoved = false;
+
         public int ServiceId { get; set; }
 
         [Required(ErrorMessage = "Numer jest wymagany.")]
@@ -23,26 +25,16 @@ namespace RCAR.Models.ServiceVM
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; } 
 
-        public string FullName 
-        {
-            get
-            {
-                return FirstName + " " + LastName;
-            }
-        }
-
-
         [Display(Name = "Telefon")]
         public string Phone { get; set; }
 
+        [Required(ErrorMessage = "Data przyjęcia jest wymagana.")]
         [DataType(DataType.Date), Display(Name = "Data przyjęcia")]
         public DateTime ServiceSince { get; set; } = DateTime.UtcNow;
 
+        [Required(ErrorMessage = "Data zakończenia jest wymagana.")]
         [DataType(DataType.Date), Display(Name = "Data zakończenia")]
         public DateTime? ServiceTo { get; set; } = DateTime.UtcNow;
-
-        [Display(Name = "Zdjęcie")]
-        public IFormFile ImageUrl { get; set; }
 
         [Required(ErrorMessage = "Marka samochodu jest wymagana.")]
         [Display(Name = "Marka samochodu")]
@@ -55,5 +47,10 @@ namespace RCAR.Models.ServiceVM
         [Required(ErrorMessage = "Opis jest wymagany.")]
         [Display(Name = "Opis naprawy / uwagi")]
         public string Description { get; set; }
+
+        [Required(ErrorMessage = "Status jest wymagany.")]
+        public string Status { get; set; }
+
+        public bool IsRemoved { get; set; }
     }
 }

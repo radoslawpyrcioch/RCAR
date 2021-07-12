@@ -14,7 +14,7 @@ namespace RCAR.Domain.Entities
         public string Description { get; set; }
         public DateTime ServiceSince { get; set; }
         public DateTime? ServiceTo { get; set; }
-        public string ImageUrl { get; set; }
+        public string Status { get; set; }
         public bool IsRemoved { get; set; }
 
         public virtual Member Member { get; set; }

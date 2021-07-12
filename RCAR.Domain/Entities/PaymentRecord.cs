@@ -16,6 +16,7 @@ namespace RCAR.Domain.Entities
         public decimal TotalAmount { get; set; }
         public decimal Discount { get; set; }
         public bool IsRemoved { get; set; }
+        public string Status { get; set; }
 
         public int CarId { get; set; }
         public virtual Car Car { get; set; }

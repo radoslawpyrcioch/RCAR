@@ -54,9 +54,14 @@ namespace RCAR.Services
         public async Task<bool> CreateServiceAsync(ServiceCreateVM model, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
-            var service = _mapper.Map<ServiceCreateVM, Service>(model);
-            _unitOfWork.Service.Add(service);
-            return await _unitOfWork.SaveChangesAsync();
+            if (!user.Services.Where(s => s.ServiceNo == model.ServiceNo && !s.IsRemoved).Any())
+            {
+                var service = _mapper.Map<ServiceCreateVM, Service>(model);
+                service.UserId = userId;
+                _unitOfWork.Service.Add(service);
+                return await _unitOfWork.SaveChangesAsync();
+            }
+            return false; 
         }
 
         public async Task<ServiceDetailVM> DetailServiceAsync(int serviceId, string userId)
@@ -71,6 +76,7 @@ namespace RCAR.Services
         {
             var service = await _unitOfWork.Service.GetByIdAsync(serviceId);
             service.IsRemoved = true;
+            
             return await _unitOfWork.SaveChangesAsync();
         }
 

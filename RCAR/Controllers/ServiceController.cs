@@ -44,7 +44,8 @@ namespace RCAR.Controllers
 
         public IActionResult Create()
         {
-            return View();
+            var model = new ServiceCreateVM();
+            return View(model);
         }
 
         [HttpPost]
@@ -76,12 +77,5 @@ namespace RCAR.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> Photo(int id)
-        {
-            var currentUserId = User.Claims.ElementAt(0).Value;
-            var model = await _serviceService.DetailServiceAsync(id, currentUserId);
-            return View(model);
-        }
     }
 }

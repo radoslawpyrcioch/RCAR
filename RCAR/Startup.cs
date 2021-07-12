@@ -1,3 +1,4 @@
+using Alocha.WebUi.Helpers;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -42,6 +43,7 @@ namespace RCAR
 
             // Add IdentityUser and IdentityRole
             services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddErrorDescriber<OverrideIdentityResultErrors>()
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders();
 
