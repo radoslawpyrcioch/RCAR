@@ -15,10 +15,12 @@ namespace RCAR.Domain.Entities
         public string Phone { get; set; }
         public string Email { get; set; }
         public DateTime DateJoined { get; set; }
+        public DateTime DateLeaves { get; set; }
         public string Address { get; set; }
         public string City { get; set; }
         public string PostCode { get; set; }
         public bool IsRemoved { get; set; }
+        public string Status { get; set; }
 
         public virtual ICollection<Car> Cars { get; set; }
         public virtual ICollection<PaymentRecord> PaymentRecords { get; set; }

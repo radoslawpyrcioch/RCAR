@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RCAR.Domain.Entities;
+using RCAR.Models.MemberVM;
 using RCAR.Models.ServiceVM;
 using System;
 using System.Collections.Generic;
@@ -16,6 +17,9 @@ namespace RCarManager.Helper
             CreateMap<ServiceCreateVM, Service>();
             CreateMap<Service, ServiceDetailVM>();
             CreateMap<Service, ServiceEditVM>().ForMember(dest => dest.CarModel, opt => opt.MapFrom(src => src.Model)).ReverseMap();
+
+            CreateMap<Member, MemberVM>();
+        
         }
     }
 }
