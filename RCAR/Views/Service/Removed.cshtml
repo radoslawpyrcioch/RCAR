@@ -49,14 +49,8 @@
                                         <td>@item.Description</td>
                                         <td>@item.Status</td>
                                         <td>
-                                            <a class="text-primary" asp-action="Edit" asp-route-id="@item.ServiceId">
-                                                <i class="fas fa-edit"></i>Edytuj
-                                            </a>
-                                            <a class="text-success" asp-action="Detail" asp-route-id="@item.ServiceId">
-                                                <i class="fas fa-bars"></i>Szczegóły
-                                            </a>
                                             <a class="text-danger" asp-action="BackToDraft" asp-route-id="@item.ServiceId">
-                                                <i class="far fa-trash-alt"></i>Cofnij
+                                                <i class="fas fa-undo-alt"></i>Cofnij
                                             </a>
                                         </td>
                                     </tr>

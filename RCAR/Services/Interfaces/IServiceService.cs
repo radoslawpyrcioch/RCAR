@@ -14,6 +14,9 @@ namespace RCAR.Services.Interfaces
         Task<ServiceDetailVM> DetailServiceAsync(int serviceId, string userId);
         Task<bool> RemoveServiceAsync(int serviceId);
         Task<bool> BackServiceAsync(int serviceId);
+        Task<ServiceEditVM> GetServiceForEditAsync(int serviceId, string userId);
+        Task<bool> EditServiceAsync(ServiceEditVM model);
+        
         
 
     }

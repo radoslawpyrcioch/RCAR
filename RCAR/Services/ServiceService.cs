@@ -87,5 +87,31 @@ namespace RCAR.Services
             service.Status = "Cofnięty";
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task<ServiceEditVM> GetServiceForEditAsync(int serviceId, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            var service = await _unitOfWork.Service.FindOneAsync(u => u.UserId == user.Id && u.ServiceId == serviceId);
+            var model = _mapper.Map<Service, ServiceEditVM>(service);
+            return model;
+        }
+
+        public async Task<bool> EditServiceAsync(ServiceEditVM model)
+        {
+            var service = await _unitOfWork.Service.GetByIdAsync(model.ServiceId);
+            if (model.Status == "Przyjęty")
+            {
+                model.Status = "Przyjęty";
+            }
+            if (model.Status == "Rozpoczęty")
+            {
+                model.Status = "Rozpoczęty";
+            }
+            _mapper.Map(model, service);
+            return await _unitOfWork.SaveChangesAsync();
+
+
+
+        }
     }
 }

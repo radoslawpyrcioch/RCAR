@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RCAR.Helper;
 using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
@@ -9,8 +10,10 @@ using System.Threading.Tasks;
 
 namespace RCAR.Controllers
 {
+    [Authorize]
     public class ServiceController : Controller
     {
+        
         private readonly IServiceService _serviceService;
 
         public ServiceController(IServiceService serviceService)
@@ -80,6 +83,29 @@ namespace RCAR.Controllers
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = await _serviceService.DetailServiceAsync(id, currentUserId);
+            return View(model);
+        }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _serviceService.GetServiceForEditAsync(id, currentUserId);
+            if (model == null)
+                return RedirectToAction("Index");
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(ServiceEditVM model)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            if (ModelState.IsValid)
+            {
+                var result = await _serviceService.EditServiceAsync(model);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Niestety nie udało się dokonać zmian.");
+            }
             return View(model);
         }
 

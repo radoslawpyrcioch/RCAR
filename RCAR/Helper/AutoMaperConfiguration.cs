@@ -15,6 +15,7 @@ namespace RCarManager.Helper
             CreateMap<Service, ServiceVM>();
             CreateMap<ServiceCreateVM, Service>();
             CreateMap<Service, ServiceDetailVM>();
+            CreateMap<Service, ServiceEditVM>().ForMember(dest => dest.CarModel, opt => opt.MapFrom(src => src.Model)).ReverseMap();
         }
     }
 }

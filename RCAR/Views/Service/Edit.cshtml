@@ -1,0 +1,96 @@
+﻿@model RCAR.Models.ServiceVM.ServiceEditVM
+@{ ViewBag.Title = "Edit"; }
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Service" asp-action="Index">Lista serwisów</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edycja</li>
+                </ol>
+            </nav><br /><br />
+            <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Service" asp-action="Index">Wróć</a>
+            <form id="create" method="post">
+                @Html.HiddenFor(m => m.ServiceId)
+                <div class="form-row">
+                    <div class="form-group col-sm-10">
+                        <h3>Numer serwisu: <b>@Html.DisplayFor(m => m.ServiceNo)</b></h3>
+                    </div>
+                    <div class="form-group col-sm-5">
+                        @Html.LabelFor(m => m.FirstName)
+                        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-5">
+                        @Html.LabelFor(m => m.LastName)
+                        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-5">
+                        @Html.LabelFor(m => m.ServiceSince)
+                        @Html.EditorFor(m => m.ServiceSince, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.ServiceSince, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-5">
+                        @Html.LabelFor(m => m.ServiceTo)
+                        @Html.EditorFor(m => m.ServiceTo, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.ServiceTo, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-5">
+                        @Html.LabelFor(m => m.Brand)
+                        @Html.EditorFor(m => m.Brand, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Brand, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-5">
+                        @Html.LabelFor(m => m.CarModel)
+                        @Html.EditorFor(m => m.CarModel, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.CarModel, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-5">
+                        @Html.LabelFor(m => m.Description)
+                        @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-5">
+                        @Html.LabelFor(m => m.Phone)
+                        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-10">
+                        @Html.LabelFor(m => m.Status)
+                        @{ List<SelectListItem> listItems = new List<SelectListItem>();
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Przyjęty",
+                                Value = "Przyjęty"
+                            });
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Rozpoczęty",
+                                Value = "Rozpoczęty",
+                            }); }
+                        @Html.DropDownListFor(m => m.Status, listItems, "Wybierz status:*", new { @class = "form-control" })<br />
+                        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <hr />
+
+
+                <div class="col-sm-12 ">
+                    <button type="submit" class="btn btn-outline-danger">Zapisz</button>
+                </div>
+                <div class="form-group col-sm-5">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+}
