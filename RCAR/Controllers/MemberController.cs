@@ -53,5 +53,29 @@ namespace RCAR.Controllers
             var model = await _memberService.DetailMemberAsync(id, currentUserId);
             return View(model);
         }
+
+        public async Task<IActionResult> Edit(int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _memberService.GetMemberForEditAsync(id, currentUserId);
+            if (model == null)
+                return RedirectToAction("Index");
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(MemberEditVM model)
+        {
+            //var currentUserId = User.Claims.ElementAt(0).Value; // it will be use late
+
+            if (ModelState.IsValid)
+            {
+                var result = await _memberService.EditMemberAsync(model);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Niestety nie udało się dokonać zmian");
+            }
+            return View(model);
+        }
     }
 }

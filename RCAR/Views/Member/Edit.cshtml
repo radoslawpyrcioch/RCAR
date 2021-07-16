@@ -1,0 +1,104 @@
+﻿@model RCAR.Models.MemberVM.MemberEditVM
+@{ ViewBag.Title = "Edit"; }
+
+<div class="col-md-12 grid-margin stretch-card">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Service" asp-action="Index">Lista członków</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Edycja</li>
+                </ol>
+            </nav><br /><br />
+            <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Member" asp-action="Index">Wróć</a>
+            <form id="create" method="post">
+                @Html.HiddenFor(m => m.MemberId)
+                <div class="form-row">
+                    <div class="form-group col-sm-12">
+                        @Html.LabelFor(m => m.MemberNo)
+                        @Html.EditorFor(m => m.MemberNo, new { htmlAttributes = new { @class = "form-control", id = "numberInput", maxlength = "4" } })
+                        @Html.ValidationMessageFor(m => m.MemberNo, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-6">
+                        @Html.LabelFor(m => m.FirstName)
+                        @Html.EditorFor(m => m.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.FirstName, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-6">
+                        @Html.LabelFor(m => m.LastName)
+                        @Html.EditorFor(m => m.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.LastName, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-6">
+                        @Html.LabelFor(m => m.DateJoined)
+                        @Html.EditorFor(m => m.DateJoined, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.DateJoined, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-6">
+                        @Html.LabelFor(m => m.DateLeaves)
+                        @Html.EditorFor(m => m.DateLeaves, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.DateLeaves, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-6">
+                        @Html.LabelFor(m => m.Phone)
+                        @Html.EditorFor(m => m.Phone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Phone, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-6">
+                        @Html.LabelFor(m => m.Email)
+                        @Html.EditorFor(m => m.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-4">
+                        @Html.LabelFor(m => m.Address)
+                        @Html.EditorFor(m => m.Address, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.Address, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-4">
+                        @Html.LabelFor(m => m.City)
+                        @Html.EditorFor(m => m.City, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.City, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-4">
+                        @Html.LabelFor(m => m.PostCode)
+                        @Html.EditorFor(m => m.PostCode, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(m => m.PostCode, "", new { @class = "field-validation text-danger" })
+                    </div>
+                    <div class="form-group col-sm-4">
+                        @Html.LabelFor(m => m.Status)
+                        @{ List<SelectListItem> listItems = new List<SelectListItem>();
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Aktywny",
+                                Value = "Aktywny"
+                            });
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Nieaktywny",
+                                Value = "Nieaktywny",
+                            }); }
+                        @Html.DropDownListFor(m => m.Status, listItems, "Wybierz status:*", new { @class = "form-control" })<br />
+                        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <hr />
+
+
+                <div class="col-sm-12 ">
+                    <button type="submit" class="btn btn-outline-danger">Zapisz</button>
+                </div>
+                <div class="form-group col-sm-5">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+@section Scripts{
+    <script src="~/lib/jquery-validation/dist/jquery.validate.min.js"></script>
+    <script src="~/lib/jquery-validation-unobtrusive/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/js/member-service.js"></script>
+}

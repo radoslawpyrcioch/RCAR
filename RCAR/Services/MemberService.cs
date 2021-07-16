@@ -58,5 +58,28 @@ namespace RCAR.Services
             var model = _mapper.Map<Member, MemberDetailVM>(member);
             return model;
         }
+
+        public async Task<MemberEditVM> GetMemberForEditAsync(int memberId, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            var member = await _unitOfWork.Member.FindOneAsync(u => u.UserId == user.Id && u.MemberId == memberId);
+            var model = _mapper.Map<Member, MemberEditVM>(member);
+            return model;
+        }
+
+        public async Task<bool> EditMemberAsync(MemberEditVM model)
+        {
+            var member = await _unitOfWork.Member.GetByIdAsync(model.MemberId);
+            if (model.Status == "Aktywny")
+            {
+                model.Status = "Aktywny";
+            }
+            if (model.Status == "Nieaktywny")
+            {
+                model.Status = "Nieaktywny";
+            }
+            _mapper.Map(model, member);
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

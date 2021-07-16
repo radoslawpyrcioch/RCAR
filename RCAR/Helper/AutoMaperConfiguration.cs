@@ -21,7 +21,7 @@ namespace RCarManager.Helper
             CreateMap<Member, MemberVM>();
             CreateMap<MemberCreateVM, Member>();
             CreateMap<Member, MemberDetailVM>();
-        
+            CreateMap<Member, MemberEditVM>().ReverseMap();
         }
     }
 }
