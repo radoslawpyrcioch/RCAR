@@ -10,5 +10,6 @@ namespace RCAR.Services.Interfaces
     {
         Task<IEnumerable<MemberVM>> GetAllMemberAsync(string userId);
         Task<bool> CreateMemberAsync(MemberCreateVM model, string userId);
+        Task<MemberDetailVM> DetailMemberAsync(int memberId, string userId);
     }
 }

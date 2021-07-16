@@ -45,5 +45,13 @@ namespace RCAR.Controllers
             model.Members = await _memberService.GetAllMemberAsync(currentUserId);
             return View("Index", model);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> Detail(int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _memberService.DetailMemberAsync(id, currentUserId);
+            return View(model);
+        }
     }
 }

@@ -50,5 +50,13 @@ namespace RCAR.Services
             }
             return false;
         }
+
+        public async Task<MemberDetailVM> DetailMemberAsync(int memberId, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            var member = user.Members.Where(m => m.MemberId == memberId).FirstOrDefault();
+            var model = _mapper.Map<Member, MemberDetailVM>(member);
+            return model;
+        }
     }
 }
