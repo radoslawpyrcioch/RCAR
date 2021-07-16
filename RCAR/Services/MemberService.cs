@@ -37,6 +37,21 @@ namespace RCAR.Services
             return new List<MemberVM>();
         }
 
+        public async Task<IEnumerable<MemberVM>> GetAllMemberRemovedAsync(string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            if (user != null)
+            {
+                if (user.Members.Count() > 0)
+                {
+                    var member = user.Members.Where(s => s.IsRemoved);
+                    var model = _mapper.Map<IEnumerable<Member>, IEnumerable<MemberVM>>(member);
+                    return model;
+                }
+            }
+            return new List<MemberVM>();
+        }
+
         public async Task<bool> CreateMemberAsync(MemberCreateVM model, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
@@ -73,13 +88,33 @@ namespace RCAR.Services
             if (model.Status == "Aktywny")
             {
                 model.Status = "Aktywny";
+                model.IsRemoved = false;
             }
             if (model.Status == "Nieaktywny")
             {
                 model.Status = "Nieaktywny";
+                model.IsRemoved = true;
             }
             _mapper.Map(model, member);
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task<bool> RemoveServiceAsync(int memberId)
+        {
+            var member = await _unitOfWork.Member.GetByIdAsync(memberId);
+            member.IsRemoved = true;
+            member.Status = "Nieaktywny";
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
+        public async Task<bool> BackToDraftAsync(int memberId)
+        {
+            var member = await _unitOfWork.Member.GetByIdAsync(memberId);
+            member.IsRemoved = false;
+            member.Status = "Aktywny";
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
+        
     }
 }

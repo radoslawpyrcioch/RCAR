@@ -52,5 +52,8 @@ namespace RCAR.Models.MemberVM
         [Display(Name = "Status")]
         public string Status { get; set; }
 
+        public bool IsRemoved { get; set; }
+
+
     }
 }

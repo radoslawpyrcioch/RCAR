@@ -30,6 +30,17 @@ namespace RCAR.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> Removed()
+        {
+            var currenUserId = User.Claims.ElementAt(0).Value;
+            var model = new MemberIndexVM()
+            {
+                Members = await _memberService.GetAllMemberRemovedAsync(currenUserId)
+            };
+            return View(model);
+        }
+
 
         [HttpPost]
         public async Task<IActionResult> Create([Bind(include: "MemberCreateVM")]MemberIndexVM model)
@@ -76,6 +87,30 @@ namespace RCAR.Controllers
                 ModelState.AddModelError("", "Niestety nie udało się dokonać zmian");
             }
             return View(model);
+        }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _memberService.RemoveServiceAsync(id);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Niestety nie udało się dokonać zmian");
+            }
+            return View();
+        }
+
+        public async Task<IActionResult> BackToDraft(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _memberService.BackToDraftAsync(id);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Niestety nie udało się dokonać zmian");
+            }
+            return View();
         }
     }
 }

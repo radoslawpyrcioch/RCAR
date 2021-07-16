@@ -9,9 +9,13 @@ namespace RCAR.Services.Interfaces
     public interface IMemberService
     {
         Task<IEnumerable<MemberVM>> GetAllMemberAsync(string userId);
+        Task<IEnumerable<MemberVM>> GetAllMemberRemovedAsync(string userId);
         Task<bool> CreateMemberAsync(MemberCreateVM model, string userId);
         Task<MemberDetailVM> DetailMemberAsync(int memberId, string userId);
         Task<MemberEditVM> GetMemberForEditAsync(int memberId, string userId);
         Task<bool> EditMemberAsync(MemberEditVM model);
+        Task<bool> RemoveServiceAsync(int memberId);
+        Task<bool> BackToDraftAsync(int memberId);
+       
     }
 }
