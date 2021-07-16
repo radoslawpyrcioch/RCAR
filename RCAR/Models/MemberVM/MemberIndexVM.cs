@@ -7,6 +7,7 @@ namespace RCAR.Models.MemberVM
 {
     public class MemberIndexVM
     {
+        public MemberCreateVM MemberCreateVM { get; set; }
         public IEnumerable<MemberVM> Members { get; set; }
     }
 }

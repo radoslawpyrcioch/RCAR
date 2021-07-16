@@ -29,5 +29,21 @@ namespace RCAR.Controllers
             };
             return View(model);
         }
+
+
+        [HttpPost]
+        public async Task<IActionResult> Create([Bind(include: "MemberCreateVM")]MemberIndexVM model)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            if(ModelState.IsValid)
+            {
+                var result = await _memberService.CreateMemberAsync(model.MemberCreateVM, currentUserId);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Członek o podanym numerze już istnieje.");
+            }
+            model.Members = await _memberService.GetAllMemberAsync(currentUserId);
+            return View("Index", model);
+        }
     }
 }

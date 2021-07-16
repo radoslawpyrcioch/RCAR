@@ -21,6 +21,7 @@ namespace RCAR.Services
             _unitOfWork = unitOfWork;
         }
 
+
         public async Task<IEnumerable<MemberVM>> GetAllMemberAsync(string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
@@ -34,6 +35,20 @@ namespace RCAR.Services
                 }
             }
             return new List<MemberVM>();
+        }
+
+        public async Task<bool> CreateMemberAsync(MemberCreateVM model, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            if (!user.Members.Where(m => m.MemberNo == model.MemberNo && !m.IsRemoved).Any())
+            {
+                var member = _mapper.Map<MemberCreateVM, Member>(model);
+                member.UserId = userId;
+                member.Status = "Aktywny";
+                _unitOfWork.Member.Add(member);
+                return await _unitOfWork.SaveChangesAsync();
+            }
+            return false;
         }
     }
 }

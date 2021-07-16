@@ -9,5 +9,6 @@ namespace RCAR.Services.Interfaces
     public interface IMemberService
     {
         Task<IEnumerable<MemberVM>> GetAllMemberAsync(string userId);
+        Task<bool> CreateMemberAsync(MemberCreateVM model, string userId);
     }
 }

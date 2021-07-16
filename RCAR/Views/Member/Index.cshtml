@@ -23,7 +23,8 @@
                             <thead>
                                 <tr>
                                     <th>Numer</th>
-                                    <th>Imie i Nazwisko</th>
+                                    <th>Imię</th>
+                                    <th>Nazwisko</th>
                                     <th>Data przyjęcia</th>
                                     <th>Telefon</th>
                                     <th>Status</th>
@@ -37,9 +38,10 @@
                                         <td>
                                             <a asp-action="Detail" asp-route-id="@item.MemberId">@item.MemberNo</a>
                                         </td>
-                                        <td>@item.FullName</td>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.LastName</td>
                                         <td>@item.DateJoined.ToString("dd/MM/yyyy")</td>
-                                        <td>@item.Phone</td>                                      
+                                        <td>@item.Phone</td>
                                         <td>@item.Status</td>
                                         <td>
                                             <a class="text-primary" asp-action="Edit" asp-route-id="@item.MemberId">
@@ -69,7 +71,7 @@
 <body onload="OpenModalWithValidation()">
     <!-- Modal -->
     <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-dialog-centered modal-xl" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="exampleModalLongTitle"><b>Nowy członek</b></h3>
@@ -80,8 +82,57 @@
                 <div class="modal-body">
                     @using (Html.BeginForm("Create", "Member", FormMethod.Post))
                     {
-                        
-
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.MemberNo)
+                                @Html.EditorFor(m => m.MemberCreateVM.MemberNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Numer", id = "numberInput", maxlength = "4" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.MemberNo, "", new { @class = "field-validation text-danger" })
+                            </div>
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.FirstName)
+                                @Html.EditorFor(m => m.MemberCreateVM.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Imię" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.FirstName, "", new { @class = "field-validation text-danger" })
+                            </div>
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.LastName)
+                                @Html.EditorFor(m => m.MemberCreateVM.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Nazwisko" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.LastName, "", new { @class = "field-validation text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.Address)
+                                @Html.EditorFor(m => m.MemberCreateVM.Address, new { htmlAttributes = new { @class = "form-control", placeholder = "Adres" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.Address, "", new { @class = "field-validation text-danger" })
+                            </div>
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.City)
+                                @Html.EditorFor(m => m.MemberCreateVM.City, new { htmlAttributes = new { @class = "form-control", placeholder = "Miasto" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.City, "", new { @class = "field-validation text-danger" })
+                            </div>
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.PostCode)
+                                @Html.EditorFor(m => m.MemberCreateVM.PostCode, new { htmlAttributes = new { @class = "form-control", placeholder = "Kod pocztowy" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.PostCode, "", new { @class = "field-validation text-danger" })
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.DateJoined)
+                                @Html.EditorFor(m => m.MemberCreateVM.DateJoined, new { htmlAttributes = new { @class = "form-control", placeholder = "Data przyjęcia" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.DateJoined, "", new { @class = "field-validation text-danger" })
+                            </div>
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.Phone)
+                                @Html.EditorFor(m => m.MemberCreateVM.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Telefon", id = "numberInput", maxlength = "9" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.Phone, "", new { @class = "field-validation text-danger" })
+                            </div>
+                            <div class="form-group col-sm-4">
+                                @Html.LabelFor(m => m.MemberCreateVM.Email)
+                                @Html.EditorFor(m => m.MemberCreateVM.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                                @Html.ValidationMessageFor(m => m.MemberCreateVM.Email, "", new { @class = "field-validation text-danger" })
+                            </div>
+                        </div>
                         <div class="modal-footer">
                             <button type="submit" class="btn btn-primary" href="/Service/Index">
                                 <span class="fa fa-floppy-o text-light"></span>
@@ -98,5 +149,6 @@
     </div>
     @section Scripts {
         <script src="~/js/datatables-filters-classic.js"></script>
+        <script src="~/js/member-service.js"></script>
     }
 </body>
