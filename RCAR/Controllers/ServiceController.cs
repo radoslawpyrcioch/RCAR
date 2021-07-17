@@ -68,14 +68,26 @@ namespace RCAR.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            var result = await _serviceService.RemoveServiceAsync(id);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var result = await _serviceService.RemoveServiceAsync(id);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Niestety nie udało się dokonać zmian");
+            }
+            return View();
         }
 
         public async Task<IActionResult> BackToDraft(int id)
         {
-            var result = await _serviceService.BackServiceAsync(id);
-            return RedirectToAction("Index");
+            if (ModelState.IsValid)
+            {
+                var result = await _serviceService.BackServiceAsync(id);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Niestety nie udało się dokonać zmian");
+            }
+            return View();
         }
 
         [HttpGet]
