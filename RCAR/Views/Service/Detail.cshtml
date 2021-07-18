@@ -13,32 +13,53 @@
             </nav><br /><br />
             <a class="btn btn-xs btn-outline-success float-md-right" href="/Service/Edit/@Model.ServiceId"> Edytuj</a>
             <a class="btn btn-xs btn-outline-success float-md-right" href="/Service/Index/@Model.ServiceId"> Wróć</a>
-            <div class="wrap d-flex justify-content-start justify-content-sm-center flex-wrap">
-                <div class="wrap align-items-center ml-5">
-                    <p class="font-weight-bold text-success" style="font-size:20px">Numer serwisu: @Model.ServiceNo</p>
-                    <hr style="background-color:crimson" />
+            <div class="row">
+                <div class="col-lg-6 mb-5 ml-5"><h3><b>Szczegóły serwisu</b></h3></div>
+                <div class="col-lg-5 mb-5 ml-5"><h3><b>Płatności</b></h3></div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-5">
                     <p class="font-weight-normal"><b>Imię i nazwisko: </b>@Model.FullName</p>
                     <p class="font-weight-normal"><b>Data przyjęcia: </b>@Model.ServiceSince.ToString("dd/MM/yyyy")</p>
                     <p class="font-weight-normal"><b>Data zakończenia: </b>@Model.ServiceTo.ToString("dd/MM/yyyy")</p>
-                    <br /><br />
-                    <p class="font-weight-bold text-success">Samochód</p>
-                    <hr style="background-color:crimson" />
                     <p class="font-weight-normal"><b>Marka: </b>@Model.Brand</p>
                     <p class="font-weight-normal"><b>Model: </b>@Model.Model</p>
-                    <br /><br />
-                    <p class="font-weight-bold text-success">Opis naprawy</p>
-                    <hr style="background-color:crimson" />
                     <p class="font-weight-normal"><b>Opis: </b>@Model.Description</p>
                     <p class="font-weight-normal"><b>Status: </b>@Model.Status</p>
-                    <br /><br />
-                    <p class="font-weight-bold text-success">Dane kontaktowe</p>
-                    <hr style="background-color:crimson" />
                     <p class="font-weight-normal"><b>Telefon:  </b><a href="tel:@Model.Phone">@Model.Phone</a></p>
-                    <br /><br />
                 </div>
-
-            </div>
-
+                <div class="col-lg-4">
+                    <table class="table table-striped">
+                        <thead class="text-info">
+                            <tr>
+                                <th>Nazwa</th>
+                                <th>Opis</th>
+                                <th>Kwota netto</th>
+                                <th>Podatek</th>
+                                <th>Rabat</th>
+                                <th>Kwota brutto</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.PaymentRecords)
+                            {
+                                <tr>
+                                    <td>
+                                        <a asp-action="Detail" asp-controller="PaymentRecord" asp-route-id="@item.PaymentRecordId">@item.Name</a>
+                                    </td>
+                                    <td>@Html.DisplayFor(m => item.Description)</td>
+                                    <td>@Html.DisplayFor(m => item.NetAmount)</td>
+                                    <td>@Html.DisplayFor(m => item.Tax)</td>
+                                    <td>@Html.DisplayFor(m => item.Discount)</td>
+                                    <td>@Html.DisplayFor(m => item.TotalAmount)</td>
+                                    <td>@Html.DisplayFor(m => item.Status)</td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table><br />
+                </div>
+            </div> 
         </div>
     </div>
 </div>

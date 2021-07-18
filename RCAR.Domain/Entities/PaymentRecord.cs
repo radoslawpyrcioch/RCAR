@@ -18,11 +18,11 @@ namespace RCAR.Domain.Entities
         public bool IsRemoved { get; set; }
         public string Status { get; set; }
 
-        public int CarId { get; set; }
+        public int? CarId { get; set; }
         public virtual Car Car { get; set; }
-        public int MemberId { get; set; }
+        public int? MemberId { get; set; }
         public virtual Member Member { get; set; }
-        public int ServiceId { get; set; }
+        public int? ServiceId { get; set; }
         public virtual Service Service { get; set; }
     }
 }

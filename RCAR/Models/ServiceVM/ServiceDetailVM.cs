@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RCAR.Models.PaymentRecordVM;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -25,5 +26,7 @@ namespace RCAR.Models.ServiceVM
         public string Model { get; set; }
         public string Description { get; set; }
         public string Status { get; set; }
+
+        public IEnumerable<PaymentVM> PaymentRecords { get; set; }
     }
 }
