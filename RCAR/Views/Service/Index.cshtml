@@ -59,6 +59,9 @@
                                             <a class="text-danger" asp-action="Delete" asp-route-id="@item.ServiceId">
                                                 <i class="far fa-trash-alt"></i>Zakończ
                                             </a>
+                                            <a class="text-danger" asp-controller="PaymentRecord" asp-action="Create" asp-route-id="@item.ServiceId">
+                                                <i class="far fa-trash-alt"></i>Płatność
+                                            </a>
                                             @*@Html.ActionLink("Zakończ", "Remove", new { id = item.ServiceId }, new { onclick =                     "return confirm('Czy serwis został zakończony?');"})*@
 
                                         </td>

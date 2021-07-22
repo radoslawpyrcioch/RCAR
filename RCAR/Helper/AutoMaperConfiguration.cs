@@ -25,6 +25,7 @@ namespace RCarManager.Helper
             CreateMap<Member, MemberEditVM>().ReverseMap();
 
             CreateMap<PaymentRecord, PaymentVM>();
+            CreateMap<PaymentRecord, PaymentCreateVM>().ReverseMap();
         }
     }
 }

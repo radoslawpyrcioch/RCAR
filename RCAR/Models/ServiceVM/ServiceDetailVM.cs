@@ -9,6 +9,7 @@ namespace RCAR.Models.ServiceVM
 {
     public class ServiceDetailVM
     {
+        public PaymentCreateVM PaymentCreateVM { get; set; }
         public int ServiceId { get; set; }
         public string ServiceNo { get; set; }
         public string FirstName { get; set; }

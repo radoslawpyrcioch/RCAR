@@ -9,5 +9,6 @@ namespace RCAR.Services.Interfaces
     public interface IPaymentRecordService
     {
         Task<IEnumerable<PaymentVM>> GetAllPaymentAsync(int serviceId);
+        Task<bool> CreatePaymentAsync(PaymentCreateVM paymentVM, int serviceId, string userId);
     }
 }
