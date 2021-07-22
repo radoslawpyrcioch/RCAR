@@ -10,5 +10,7 @@ namespace RCAR.Services.Interfaces
     {
         Task<IEnumerable<PaymentVM>> GetAllPaymentAsync(int serviceId);
         Task<bool> CreatePaymentAsync(PaymentCreateVM paymentVM, int serviceId, string userId);
+        decimal CalculateNetAmount(decimal totalDiscount, decimal totalAmount);
+        decimal CalculateDiscount(decimal totalDiscount, decimal totalAmount);
     }
 }

@@ -36,7 +36,7 @@
                                 <th>Nazwa</th>
                                 <th>Opis</th>
                                 <th>Kwota netto</th>
-                                <th>Podatek</th>
+                                @*<th>Podatek</th>*@ 
                                 <th>Rabat</th>
                                 <th>Kwota brutto</th>
                                 <th>Status</th>
@@ -46,9 +46,7 @@
                             @foreach (var item in Model.PaymentRecords)
                             {
                                 <tr>
-                                    <td>
-                                        <a asp-action="Detail" asp-controller="PaymentRecord" asp-route-id="@item.PaymentRecordId">@item.Name</a>
-                                    </td>
+                                    <td>@Html.DisplayFor(m => item.Name)</td>
                                     <td>@Html.DisplayFor(m => item.Description)</td>
                                     <td>@Html.DisplayFor(m => item.NetAmount)</td>
                                     <td>@Html.DisplayFor(m => item.Tax)</td>

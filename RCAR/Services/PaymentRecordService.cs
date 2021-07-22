@@ -12,11 +12,12 @@ namespace RCAR.Services
 {
     public class PaymentRecordService : IPaymentRecordService
     {
+       
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
         public PaymentRecordService(IUnitOfWork unitOfWork, IMapper mapper)
-        {
+        {  
             _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
@@ -48,9 +49,9 @@ namespace RCAR.Services
                         Name = paymentVM.Name,
                         Description = paymentVM.Description,
                         Tax = paymentVM.Tax,
-                        NetAmount = paymentVM.NetAmount,
-                        TotalAmount = paymentVM.TotalAmount,
                         Discount = paymentVM.Discount,
+                        TotalAmount = CalculateDiscount(paymentVM.Discount, paymentVM.TotalAmount),    
+                        NetAmount = CalculateNetAmount(paymentVM.Discount, paymentVM.TotalAmount),
                         Status = paymentVM.Status,
                         ServiceId = serviceId
                     };
@@ -60,6 +61,16 @@ namespace RCAR.Services
                 return await _unitOfWork.SaveChangesAsync();
             }
             return false;
+        }
+
+        public decimal CalculateNetAmount(decimal totalDiscount, decimal totalAmount)
+        {
+            return (totalAmount - totalDiscount) / 1.23m;  
+        }
+
+        public decimal CalculateDiscount(decimal totalDiscount, decimal totalAmount)
+        {
+            return totalAmount - totalDiscount;
         }
     }
 }
