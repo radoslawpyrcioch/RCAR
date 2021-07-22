@@ -72,5 +72,14 @@ namespace RCAR.Services
         {
             return totalAmount - totalDiscount;
         }
+
+        public async Task<bool> RemovePaymentAsync(int paymentId)
+        {
+            var payment = await _unitOfWork.PaymentRecord.GetByIdAsync(paymentId);
+            _unitOfWork.PaymentRecord.Remove(payment);
+            //payment.IsRemoved = true;
+            //payment.Status = "Płatność usunięta";
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

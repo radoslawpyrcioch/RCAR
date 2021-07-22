@@ -40,6 +40,7 @@
                                 <th>Rabat</th>
                                 <th>Kwota brutto</th>
                                 <th>Status</th>
+                                <th class="text-warning">Akcje</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -49,10 +50,13 @@
                                     <td>@Html.DisplayFor(m => item.Name)</td>
                                     <td>@Html.DisplayFor(m => item.Description)</td>
                                     <td>@Html.DisplayFor(m => item.NetAmount)</td>
-                                    <td>@Html.DisplayFor(m => item.Tax)</td>
+                                    @*<td>@Html.DisplayFor(m => item.Tax)</td>*@
                                     <td>@Html.DisplayFor(m => item.Discount)</td>
                                     <td>@Html.DisplayFor(m => item.TotalAmount)</td>
                                     <td>@Html.DisplayFor(m => item.Status)</td>
+                                    <td>
+                                        @Html.ActionLink("Usuń", "Delete", "PaymentRecord", new { id = item.PaymentRecordId }, new { onclick = "return confirm('Czy napewno chcesz usunąc tą płatność?');" })
+                                    </td>
                                 </tr>
                             }
                         </tbody>

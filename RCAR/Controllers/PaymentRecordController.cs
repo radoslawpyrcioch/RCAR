@@ -40,6 +40,18 @@ namespace RCAR.Controllers
                 return BadRequest("Brak możliwości dodania płatności");
         }
 
+        public async Task<IActionResult> Delete(int id)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await _paymentRecordService.RemovePaymentAsync(id);
+                if (result)
+                    return RedirectToAction("Index", "Service");
+                ModelState.AddModelError("", "Niestety nie udało się usunąć.");
+            }
+            return View();
+        }
+
 
     }
 }
