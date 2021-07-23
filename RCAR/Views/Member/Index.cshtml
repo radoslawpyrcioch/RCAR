@@ -44,15 +44,16 @@
                                         <td>@item.Phone</td>
                                         <td>@item.Status</td>
                                         <td>
-                                            <a class="text-primary" asp-action="Edit" asp-route-id="@item.MemberId">
-                                                <i class="fas fa-edit"></i>Edytuj
-                                            </a>
-                                            <a class="text-success" asp-action="Detail" asp-route-id="@item.MemberId">
-                                                <i class="fas fa-bars"></i>Szczegóły
-                                            </a>
-                                            <a class="text-danger" asp-action="Delete" asp-route-id="@item.MemberId">
-                                                <i class="far fa-trash-alt"></i>Zakończ
-                                            </a>
+                                            <div class="dropdown btn-block pull-right">
+                                                <button class="btn btn-xs btn-primary btn-block" data-toggle="dropdown">
+                                                    Opcje
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.MemberId })</li>
+                                                    <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.MemberId })</li>
+                                                    <li>@Html.ActionLink("Zakończ", "Delete", new { id = item.MemberId }, new { onclick = "return confirm('Czy na pewno chcesz usunąć?');" })</li>
+                                                </ul>
+                                            </div>
 
                                         </td>
                                     </tr>

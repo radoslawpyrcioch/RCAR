@@ -50,20 +50,17 @@
                                         <td>@item.Description</td>
                                         <td>@item.Status</td>
                                         <td>
-                                            <a class="text-primary" asp-action="Edit" asp-route-id="@item.ServiceId">
-                                                <i class="fas fa-edit"></i>Edytuj
-                                            </a>
-                                            <a class="text-success" asp-action="Detail" asp-route-id="@item.ServiceId">
-                                                <i class="fas fa-bars"></i>Szczegóły
-                                            </a>
-                                            <a class="text-danger" asp-action="Delete" asp-route-id="@item.ServiceId">
-                                                <i class="far fa-trash-alt"></i>Zakończ
-                                            </a>
-                                            <a class="text-danger" asp-controller="PaymentRecord" asp-action="Create" asp-route-id="@item.ServiceId">
-                                                <i class="far fa-trash-alt"></i>Płatność
-                                            </a>
-                                            @*@Html.ActionLink("Zakończ", "Remove", new { id = item.ServiceId }, new { onclick =                     "return confirm('Czy serwis został zakończony?');"})*@
-
+                                            <div class="dropdown btn-block pull-right">
+                                                <button class="btn btn-xs btn-primary btn-block" data-toggle="dropdown">
+                                                Opcje
+                                                </button>
+                                                <ul class="dropdown-menu">
+                                                    <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId})</li>
+                                                    <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId})</li>
+                                                    <li>@Html.ActionLink("Zakończ", "Delete", new { id = item.ServiceId}, new { onclick = "return confirm('Czy na pewno chcesz usunąć?');"})</li>
+                                                    <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId})</li>
+                                                </ul>
+                                            </div>
                                         </td>
                                     </tr>
                                 }
