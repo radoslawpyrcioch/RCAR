@@ -18,11 +18,6 @@ namespace RCAR.Controllers
             _paymentRecordService = paymentRecordService;
         }
 
-        public IActionResult Index()
-        {
-            return View();
-        }
-
         public IActionResult Create()
         {
             var model = new PaymentCreateVM();

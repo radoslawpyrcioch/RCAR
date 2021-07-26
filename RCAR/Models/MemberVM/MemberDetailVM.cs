@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RCAR.Models.CarVM;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -27,5 +28,6 @@ namespace RCAR.Models.MemberVM
         public string PostCode { get; set; }
         public bool IsRemoved { get; set; }
         public string Status { get; set; }
+        public IEnumerable<CarsVM> Cars { get; set; }
     }
 }

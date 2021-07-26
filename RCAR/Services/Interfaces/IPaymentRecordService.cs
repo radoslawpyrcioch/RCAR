@@ -1,4 +1,5 @@
 ﻿using RCAR.Models.PaymentRecordVM;
+using RCAR.Models.ServiceVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,6 @@ namespace RCAR.Services.Interfaces
 {
     public interface IPaymentRecordService
     {
-        Task<IEnumerable<PaymentVM>> GetAllPaymentAsync(int serviceId);
         Task<bool> CreatePaymentAsync(PaymentCreateVM paymentVM, int serviceId, string userId);
         decimal CalculateNetAmount(decimal totalDiscount, decimal totalAmount);
         decimal CalculateDiscount(decimal totalDiscount, decimal totalAmount);

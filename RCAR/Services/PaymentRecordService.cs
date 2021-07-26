@@ -2,6 +2,7 @@
 using RCAR.Domain.Entities;
 using RCAR.Domain.Interfaces;
 using RCAR.Models.PaymentRecordVM;
+using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -20,19 +21,6 @@ namespace RCAR.Services
         {  
             _mapper = mapper;
             _unitOfWork = unitOfWork;
-        }
-
-
-        public async Task<IEnumerable<PaymentVM>> GetAllPaymentAsync(int serviceId)
-        {
-            var user = await _unitOfWork.Service.GetByIdAsync(serviceId);
-            if (user.PaymentRecords.Count() > 0)
-            {
-                var payment = user.PaymentRecords.Where(p => !p.IsRemoved);
-                var model = _mapper.Map<IEnumerable<PaymentRecord>, IEnumerable<PaymentVM>>(payment);
-                return model;
-            }
-            return new List<PaymentVM>();
         }
 
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using RCAR.Domain.Entities;
+using RCAR.Models.CarVM;
 using RCAR.Models.MemberVM;
 using RCAR.Models.PaymentRecordVM;
 using RCAR.Models.ServiceVM;
@@ -26,6 +27,8 @@ namespace RCarManager.Helper
 
             CreateMap<PaymentRecord, PaymentVM>();
             CreateMap<PaymentRecord, PaymentCreateVM>().ReverseMap();
+
+            CreateMap<Car, CarsVM>();
         }
     }
 }

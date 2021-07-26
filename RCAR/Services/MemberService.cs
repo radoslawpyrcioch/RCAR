@@ -111,7 +111,7 @@ namespace RCAR.Services
         {
             var member = await _unitOfWork.Member.GetByIdAsync(memberId);
             member.IsRemoved = false;
-            member.Status = "Aktywny";
+            member.Status = "Cofnięty";
             return await _unitOfWork.SaveChangesAsync();
         }
 
