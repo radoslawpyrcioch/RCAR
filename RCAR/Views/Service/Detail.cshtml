@@ -55,7 +55,16 @@
                                     <td>@Html.DisplayFor(m => item.TotalAmount)</td>
                                     <td>@Html.DisplayFor(m => item.Status)</td>
                                     <td>
-                                        @Html.ActionLink("Usuń", "Delete", "PaymentRecord", new { id = item.PaymentRecordId }, new { onclick = "return confirm('Czy napewno chcesz usunąc tą płatność?');" })
+                                        <div class="dropdown btn-block pull-right">
+                                            <button class="btn btn-xs btn-primary btn-block" data-toggle="dropdown">
+                                                Opcje
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>@Html.ActionLink("Zapłacone", "Paid", "PaymentRecord", new { id = item.PaymentRecordId })</li>
+                                                <li>@Html.ActionLink("Usuń", "Delete", "PaymentRecord", new { id = item.PaymentRecordId }, new { onclick = "return confirm('Czy napewno chcesz usunąc tą płatność?');" })</li>
+                                            </ul>
+                                        </div>
+                                        
                                     </td>
                                 </tr>
                             }

@@ -69,5 +69,12 @@ namespace RCAR.Services
             //payment.Status = "Płatność usunięta";
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        public async Task<bool> PaidPaymentAsync(int paymentId)
+        {
+            var payment = await _unitOfWork.PaymentRecord.GetByIdAsync(paymentId);
+            payment.Status = "Zapłacone";
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

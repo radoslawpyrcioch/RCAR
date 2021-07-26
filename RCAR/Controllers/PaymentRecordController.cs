@@ -47,6 +47,18 @@ namespace RCAR.Controllers
             return View();
         }
 
+        public async Task<IActionResult> Paid(int id)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await _paymentRecordService.PaidPaymentAsync(id);
+                if (result)
+                    return RedirectToAction("Index", "Service");
+                ModelState.AddModelError("", "Niestety nie udało się zmienić statusu.");
+            }
+            return View();
+        }
+
 
     }
 }
