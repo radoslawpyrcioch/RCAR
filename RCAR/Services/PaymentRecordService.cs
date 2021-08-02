@@ -51,6 +51,31 @@ namespace RCAR.Services
             return false;
         }
 
+        public async Task<bool> CreateCarPaymentAsync(PaymentCarCreateVM paymentVM, int carId, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            if(paymentVM != null)
+            {
+                if (!user.Cars.Where(c => c.CarId == paymentVM.CarId && !c.IsRemoved).Any())
+                {
+                    var payment = new PaymentRecord()
+                    {
+                        Name = paymentVM.Name,
+                        Description = paymentVM.Description,
+                        Tax = paymentVM.Tax,
+                        Discount = paymentVM.Discount,
+                        TotalAmount = CalculateDiscount(paymentVM.Discount, paymentVM.TotalAmount),
+                        NetAmount = CalculateNetAmount(paymentVM.Discount, paymentVM.TotalAmount),
+                        Status = paymentVM.Status,
+                        CarId = carId
+                    };
+                    _unitOfWork.PaymentRecord.Add(payment);
+                }
+                return await _unitOfWork.SaveChangesAsync();
+            }
+            return false;
+        }
+
         public decimal CalculateNetAmount(decimal totalDiscount, decimal totalAmount)
         {
             return (totalAmount - totalDiscount) / 1.23m;  
@@ -76,5 +101,7 @@ namespace RCAR.Services
             payment.Status = "Zapłacone";
             return await _unitOfWork.SaveChangesAsync();
         }
+
+        
     }
 }

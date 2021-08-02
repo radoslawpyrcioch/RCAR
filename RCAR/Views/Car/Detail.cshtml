@@ -11,8 +11,8 @@
                     <li class="breadcrumb-item active" aria-current="page">Szczegóły samochodu</li>
                 </ol>
             </nav><br /><br />
-            <a class="btn btn-xs btn-outline-success float-md-right" href="/PaymentRecord/Create/@Model.CarId"> Nowa płatność</a>
-            <a class="btn btn-xs btn-outline-success float-md-right" href="/Service/Index/@Model.CarId"> Wróć</a>
+            <a class="btn btn-xs btn-outline-success float-md-right" href="/PaymentRecord/CreateCar/@Model.CarId"> Nowa płatność</a>
+            <a class="btn btn-xs btn-outline-success float-md-right" href="/Member/Index/@Model.CarId"> Wróć</a>
             <div class="row">
                 <div class="col-lg-6 mb-5 ml-5"><h3><b>Szczegóły samochodu</b></h3></div>
                 <div class="col-lg-2 mb-5 ml-5"><h3><b>Płatności</b></h3></div>
@@ -31,11 +31,11 @@
 
                         <thead class="text-info">
                             <tr>
-                                <th>Marka</th>
-                                <th>Model</th>
-                                <th>Data przyjęcia</th>
-                                <th>Data zakończenia</th>
+                                <th>Numer</th>
                                 <th>Opis</th>
+                                <th>Kwota netto</th>
+                                <th>Rabat</th>
+                                <th>Kwota brutto</th>
                                 <th>Status</th>
                                 <th class="text-warning">Akcje</th>
                             </tr>

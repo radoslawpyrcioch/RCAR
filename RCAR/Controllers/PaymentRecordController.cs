@@ -35,6 +35,23 @@ namespace RCAR.Controllers
                 return BadRequest("Brak możliwości dodania płatności");
         }
 
+        public IActionResult CreateCar()
+        {
+            var model = new PaymentCarCreateVM();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateCar(PaymentCarCreateVM paymentCarCreateVM, int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var paymentCreate = await _paymentRecordService.CreateCarPaymentAsync(paymentCarCreateVM, id, currentUserId);
+            if (paymentCreate)
+                return RedirectToAction("Index", "Member");
+            else
+                return BadRequest("Brak możliwości dodania płatności");
+        }
+
         public async Task<IActionResult> Delete(int id)
         {
             if(ModelState.IsValid)
