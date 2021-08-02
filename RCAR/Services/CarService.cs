@@ -42,6 +42,13 @@ namespace RCAR.Services
             return false;
         }
 
+        public async Task<CarDetailVM> DetailCarAsync(int carId)
+        {
+            var car = await _unitOfWork.Car.GetByIdAsync(carId);
+            var model = _mapper.Map<Car, CarDetailVM>(car);
+            return model;
+        }
+
         public async Task<bool> DoneCarSeriveAsync(int carId)
         {
             var car = await _unitOfWork.Car.GetByIdAsync(carId);

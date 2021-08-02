@@ -61,6 +61,7 @@
                                         </button>
                                         <ul class="dropdown-menu">
                                             <li>@Html.ActionLink("Zakończ", "Done", "Car", new { id = item.CarId})</li>
+                                            <li>@Html.ActionLink("Szczegóły", "Detail", "Car", new { id = item.CarId})</li>
                                             <li>@Html.ActionLink("Usuń", "Delete", "Car", new { id = item.CarId }, new { onclick = "return confirm('Czy napewno chcesz usunąc ten samochód?');" })</li>
                                         </ul>
                                     </div>

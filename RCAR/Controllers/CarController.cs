@@ -60,5 +60,14 @@ namespace RCAR.Controllers
             }
             return RedirectToAction("Index", "Home");
         }
+
+
+        public async Task<IActionResult> Detail(int id)
+        {
+            var model = await _carService.DetailCarAsync(id);
+            if (model == null)
+                return RedirectToAction("Index", "Member");
+            return View(model);
+        }
     }
 }

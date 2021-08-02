@@ -29,6 +29,7 @@ namespace RCarManager.Helper
             CreateMap<PaymentRecord, PaymentCreateVM>().ReverseMap();
 
             CreateMap<Car, CarsVM>();
+            CreateMap<Car, CarDetailVM>();
         }
     }
 }
