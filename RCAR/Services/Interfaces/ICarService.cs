@@ -10,5 +10,6 @@ namespace RCAR.Services.Interfaces
     {
         Task<bool> CreateCarAsync(CarCreateVM carVM, int memberId, string userId);
         Task<bool> RemoveCarAsync(int carId);
+        Task<bool> DoneCarSeriveAsync(int carId);
     }
 }

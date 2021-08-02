@@ -46,7 +46,19 @@ namespace RCAR.Controllers
                     return RedirectToAction("Index", "Member");
                 ModelState.AddModelError("", "Niestety nie udało się usunąć.");
             }
-            return View();
+            return RedirectToAction("Index", "Home");
+        }
+
+        public async Task<IActionResult> Done(int id)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await _carService.DoneCarSeriveAsync(id);
+                if (result)
+                    return RedirectToAction("Index", "Member");
+                ModelState.AddModelError("", "Niestety nie udało się zmienić statusu.");
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }

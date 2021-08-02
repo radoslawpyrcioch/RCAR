@@ -42,6 +42,13 @@ namespace RCAR.Services
             return false;
         }
 
+        public async Task<bool> DoneCarSeriveAsync(int carId)
+        {
+            var car = await _unitOfWork.Car.GetByIdAsync(carId);
+            car.Status = "Zakończony";
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
         public async Task<bool> RemoveCarAsync(int carId)
         {
             var car = await _unitOfWork.Car.GetByIdAsync(carId);
