@@ -36,5 +36,17 @@ namespace RCAR.Controllers
             }
             return View();
         }
+
+        public async Task<IActionResult> Delete(int id)
+        {
+            if(ModelState.IsValid)
+            {
+                var result = await _carService.RemoveCarAsync(id);
+                if (result)
+                    return RedirectToAction("Index", "Member");
+                ModelState.AddModelError("", "Niestety nie udało się usunąć.");
+            }
+            return View();
+        }
     }
 }

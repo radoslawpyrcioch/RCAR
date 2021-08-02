@@ -41,5 +41,12 @@ namespace RCAR.Services
             }
             return false;
         }
+
+        public async Task<bool> RemoveCarAsync(int carId)
+        {
+            var car = await _unitOfWork.Car.GetByIdAsync(carId);
+            _unitOfWork.Car.Remove(car);
+            return await _unitOfWork.SaveChangesAsync();
+        }
     }
 }

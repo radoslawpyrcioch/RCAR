@@ -47,14 +47,25 @@
                         <tbody>
                             @foreach (var item in Model.Cars)
                             {
-                                <tr>
-                                    <td>@Html.DisplayFor(m => item.Brand)</td>
-                                    <td>@Html.DisplayFor(m => item.Model)</td>
-                                    <td>@Html.DisplayFor(m => item.Description)</td>
-                                    <td>@Html.DisplayFor(m => item.ServiceSince)</td>
-                                    <td>@Html.DisplayFor(m => item.ServiceTo)</td>
-                                    <td>@Html.DisplayFor(m => item.Status)</td>
-                                </tr>
+                            <tr>
+                                <td>@Html.DisplayFor(m => item.Brand)</td>
+                                <td>@Html.DisplayFor(m => item.Model)</td>
+                                <td>@Html.DisplayFor(m => item.Description)</td>
+                                <td>@Html.DisplayFor(m => item.ServiceSince)</td>
+                                <td>@Html.DisplayFor(m => item.ServiceTo)</td>
+                                <td>@Html.DisplayFor(m => item.Status)</td>
+                                <td>
+                                    <div class="dropdown btn-block pull-right">
+                                        <button class="btn btn-xs btn-primary btn-block" data-toggle="dropdown">
+                                            Opcje
+                                        </button>
+                                        <ul class="dropdown-menu">
+                                            <li>@Html.ActionLink("Usuń", "Delete", "Car", new { id = item.CarId }, new { onclick = "return confirm('Czy napewno chcesz usunąc ten samochód?');" })</li>
+                                        </ul>
+                                    </div>
+
+                                </td>
+                            </tr>
                             }
                         </tbody>
                     </table><br />
