@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using RCAR.Models.CarVM;
 using RCAR.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -16,8 +17,23 @@ namespace RCAR.Controllers
             _carService = carService;
         }
 
-        public IActionResult Index()
+        public IActionResult Create()
         {
+            var model = new CarCreateVM();
+            return View(model);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Create(CarCreateVM carCreateVM, int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            if (ModelState.IsValid)
+            {
+                var carCreate = await _carService.CreateCarAsync(carCreateVM, id, currentUserId);
+                if (carCreate)
+                    return RedirectToAction("Index", "Member");
+                ModelState.AddModelError("", "Niestety nie udało się usunąć.");
+            }
             return View();
         }
     }

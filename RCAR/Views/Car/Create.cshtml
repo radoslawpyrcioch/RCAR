@@ -1,0 +1,129 @@
+﻿@model RCAR.Models.CarVM.CarCreateVM
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<div class="col-md-12 col-lg-12">
+    <div class="panel">
+        <div class="panel-body">
+
+        </div>
+    </div>
+</div>
+
+
+<div class="row">
+    <div class="col-md-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <nav aria-label="breadcrumb">
+                    <ol class="breadcrumb">
+                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                        <li class="breadcrumb-item"><a asp-controller="Member" asp-action="Index">Członkowie</a></li>
+                        <li class="breadcrumb-item active" aria-current="page">Nowy samochód</li>
+                    </ol>
+                </nav><br /><br />
+                <form id="create" method="post">
+                    <div class="form-row">
+                        <div class="form-group col-lg-4"></div>
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.Brand)
+                            @Html.EditorFor(m => m.Brand, new { htmlAttributes = new { @class = "form-control", placeholder = "Marka" } })
+                            @Html.ValidationMessageFor(m => m.Brand, "", new { @class = "field-validation text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-4"></div>
+                        <div class="form-group col-lg-4">
+                            @Html.LabelFor(m => m.Model)
+                            @Html.EditorFor(m => m.Model, new { htmlAttributes = new { @class = "form-control", placeholder = "Model" } })
+                            @Html.ValidationMessageFor(m => m.Model, "", new { @class = "field-validation text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-4"></div>
+                        <div class="form-group col-sm-4">
+                            @Html.LabelFor(m => m.Description)
+                            @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Opis" } })
+                            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "field-validation text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-4"></div>
+                        <div class="form-group col-sm-4">
+                            @Html.LabelFor(m => m.ServiceSince)
+                            @Html.EditorFor(m => m.ServiceSince, new { htmlAttributes = new { @class = "form-control", placeholder = "Data rozpoczecia" } })
+                            @Html.ValidationMessageFor(m => m.ServiceSince, "", new { @class = "field-validation text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-4"></div>
+                        <div class="form-group col-sm-4">
+                            @Html.LabelFor(m => m.ServiceTo)
+                            @Html.EditorFor(m => m.ServiceTo, new { htmlAttributes = new { @class = "form-control", placeholder = "Data zakończenia" } })
+                            @Html.ValidationMessageFor(m => m.ServiceTo, "", new { @class = "field-validation text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-4"></div>
+                        <div class="form-group col-sm-4">
+                            @Html.LabelFor(m => m.Status)
+                            @{
+                                List<SelectListItem> listItems = new List<SelectListItem>();
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Przyjęty",
+                                    Value = "Przyjęty",
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "W trakcie",
+                                    Value = "W trakcie"
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Zakończony",
+                                    Value = "Zakończony",
+                                });
+                                listItems.Add(new SelectListItem
+                                {
+                                    Text = "Nieaktywny",
+                                    Value = "Nieaktywny",
+                                });
+                            }
+                            @Html.DropDownListFor(m => m.Status, listItems, "Status:*", new { @class = "form-control" })<br />
+                            @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col-lg-4"></div>
+                        <div class="form-group col-sm-4 text-right">
+                            <div class="col-sm-12 ">
+                                <a href="/Member/Index" class="btn btn-link"><i class="ti-angle-left"></i> Wróć</a>
+                                <button type="submit" class="btn btn-primary">
+                                    <span class="fa fa-floppy-o text-light"></span>
+                                    Zapisz
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group col-sm-5">
+                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+@section Scripts{
+    <script src="~/js/create-service.js"></script>
+}
+
+
+
+
+

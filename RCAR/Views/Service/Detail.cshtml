@@ -31,12 +31,13 @@
                 </div>
                 <div class="col-lg-4">
                     <table class="table table-striped">
+
                         <thead class="text-info">
                             <tr>
                                 <th>Nazwa</th>
                                 <th>Opis</th>
                                 <th>Kwota netto</th>
-                                @*<th>Podatek</th>*@ 
+                                @*<th>Podatek</th>*@
                                 <th>Rabat</th>
                                 <th>Kwota brutto</th>
                                 <th>Status</th>
@@ -46,6 +47,7 @@
                         <tbody>
                             @foreach (var item in Model.PaymentRecords)
                             {
+
                                 <tr>
                                     <td>@Html.DisplayFor(m => item.Name)</td>
                                     <td>@Html.DisplayFor(m => item.Description)</td>
@@ -64,7 +66,7 @@
                                                 <li>@Html.ActionLink("Usuń", "Delete", "PaymentRecord", new { id = item.PaymentRecordId }, new { onclick = "return confirm('Czy napewno chcesz usunąc tą płatność?');" })</li>
                                             </ul>
                                         </div>
-                                        
+
                                     </td>
                                 </tr>
                             }
