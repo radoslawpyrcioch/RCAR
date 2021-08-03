@@ -19,8 +19,9 @@
             <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end" style="color:aliceblue">
                 <form class="form-inline">
                     <partial name="_LoginPartial" />
+                    
                     @*<a class="form-control mr-sm-2" href="/Account/Register">Zarejestruj sie</a>
-                    <a class="form-control mr-sm-2" href="/Account/LogIn">Zaloguj sie</a>*@
+        <a class="form-control mr-sm-2" href="/Account/LogIn">Zaloguj sie</a>*@
                 </form>
             </div>
         </nav>
@@ -31,7 +32,7 @@
                         <a class="nav-link" data-toggle="collapse" href="#Service" aria-expanded="false" aria-controls="ui-basic">
                             <i class="fas fa-wrench fa-lg text-primary" style="margin-right:0.7em"></i>
                             <span class="menu-title">Serwis</span>
-                            
+
                         </a>
                         <div class="collapse" id="Service">
                             <ul class="nav flex-column sub-menu">
@@ -43,7 +44,7 @@
                         <a class="nav-link" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="ui-basic">
                             <i class="fas fa-users fa-lg text-primary" style="margin-right:0.7em"></i>
                             <span class="menu-title">Członkowie</span>
-                            
+
                         </a>
                         <div class="collapse" id="Member">
                             <ul class="nav flex-column sub-menu">
@@ -52,21 +53,22 @@
                         </div>
                     </li>
                     @*<li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#Payment" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="fas fa-shopping-bag fa-lg text-primary" style="margin-right:0.7em"></i>
-                            <span class="menu-title">Payment</span>
-                           
-                        </a>
-                        <div class="collapse" id="Payment">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" asp-controller="PaymentRecord" asp-action="Create">Nowa płatność</a></li>
-                                <li class="nav-item"><a class="nav-link" asp-controller="PaymentRecord" asp-action="Index">Płatności</a></li>
-                            </ul>
-                        </div>
-                    </li>*@
+                    <a class="nav-link" data-toggle="collapse" href="#Payment" aria-expanded="false" aria-controls="ui-basic">
+                        <i class="fas fa-shopping-bag fa-lg text-primary" style="margin-right:0.7em"></i>
+                        <span class="menu-title">Payment</span>
+
+                    </a>
+                    <div class="collapse" id="Payment">
+                        <ul class="nav flex-column sub-menu">
+                            <li class="nav-item"><a class="nav-link" asp-controller="PaymentRecord" asp-action="Create">Nowa płatność</a></li>
+                            <li class="nav-item"><a class="nav-link" asp-controller="PaymentRecord" asp-action="Index">Płatności</a></li>
+                        </ul>
+                    </div>
+                </li>*@
 
                 </ul>
             </nav>
+           
             <div class="main-panel">
                 <partial name="_CookieConsentPartial" />
                 <div class="content-wrapper">

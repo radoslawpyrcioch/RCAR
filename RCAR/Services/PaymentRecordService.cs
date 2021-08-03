@@ -16,6 +16,7 @@ namespace RCAR.Services
        
         private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
+        private decimal totalPayment;
 
         public PaymentRecordService(IUnitOfWork unitOfWork, IMapper mapper)
         {  
