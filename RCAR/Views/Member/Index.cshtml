@@ -51,7 +51,7 @@
                                                 <ul class="dropdown-menu">
                                                     <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.MemberId })</li>
                                                     <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.MemberId })</li>
-                                                    <li>@Html.ActionLink("Zakończ", "Delete", new { id = item.MemberId }, new { onclick = "return confirm('Czy na pewno chcesz usunąć?');" })</li>
+                                                    <li><a href="#" id="@item.MemberId" onclick="RemoveFromTable(this.id)">Usuń</a></li>
                                                 </ul>
                                             </div>
 
@@ -68,6 +68,7 @@
     </div>
 </div>
 
+<script src="~/js/delete-member.js"></script>
 
 <body onload="OpenModalWithValidation()">
     <!-- Modal -->

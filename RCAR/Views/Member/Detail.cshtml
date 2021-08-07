@@ -11,6 +11,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Szczegóły członka</li>
                 </ol>
             </nav><br /><br />
+            <a class="btn btn-xs btn-outline-success float-md-right" href="/Car/Create/@Model.MemberId"> Nowy samochód</a>
             <a class="btn btn-xs btn-outline-success float-md-right" href="/Member/Edit/@Model.MemberId"> Edytuj</a>
             <a class="btn btn-xs btn-outline-success float-md-right" href="/Member/Index/@Model.MemberId"> Wróć</a>
             <div class="row">
@@ -46,28 +47,28 @@
                         <tbody>
                             @foreach (var item in Model.Cars)
                             {
-                            <tr>
-                                <td>@Html.DisplayFor(m => item.Brand)</td>
-                                <td>@Html.DisplayFor(m => item.Model)</td>
-                                <td>@Html.DisplayFor(m => item.Description)</td>
-                                <td>@Html.DisplayFor(m => item.ServiceSince)</td>
-                                <td>@Html.DisplayFor(m => item.ServiceTo)</td>
-                                <td>@Html.DisplayFor(m => item.Status)</td>
-                                <td>
-                                    <div class="dropdown btn-block pull-right">
-                                        <button class="btn btn-xs btn-primary btn-block" data-toggle="dropdown">
-                                            Opcje
-                                        </button>
-                                        <ul class="dropdown-menu">
-                                            <li>@Html.ActionLink("Zakończ", "Done", "Car", new { id = item.CarId})</li>
-                                            <li>@Html.ActionLink("Nowa płatność", "CreateCar", "PaymentRecord", new { id = item.CarId})</li>
-                                            <li>@Html.ActionLink("Szczegóły", "Detail", "Car", new { id = item.CarId})</li>
-                                            <li>@Html.ActionLink("Usuń", "Delete", "Car", new { id = item.CarId }, new { onclick = "return confirm('Czy napewno chcesz usunąc ten samochód?');" })</li>
-                                        </ul>
-                                    </div>
+                                <tr>
+                                    <td>@Html.DisplayFor(m => item.Brand)</td>
+                                    <td>@Html.DisplayFor(m => item.Model)</td>
+                                    <td>@Html.DisplayFor(m => item.Description)</td>
+                                    <td>@Html.DisplayFor(m => item.ServiceSince)</td>
+                                    <td>@Html.DisplayFor(m => item.ServiceTo)</td>
+                                    <td>@Html.DisplayFor(m => item.Status)</td>
+                                    <td>
+                                        <div class="dropdown btn-block pull-right">
+                                            <button class="btn btn-xs btn-primary btn-block" data-toggle="dropdown">
+                                                Opcje
+                                            </button>
+                                            <ul class="dropdown-menu">
+                                                <li>@Html.ActionLink("Zakończ", "Done", "Car", new { id = item.CarId })</li>
+                                                <li>@Html.ActionLink("Nowa płatność", "CreateCar", "PaymentRecord", new { id = item.CarId })</li>
+                                                <li>@Html.ActionLink("Szczegóły", "Detail", "Car", new { id = item.CarId })</li>
+                                                <li><a href="#" id="@item.CarId" onclick="RemoveFromTable(this.id)">Usuń</a></li>
+                                            </ul>
+                                        </div>
 
-                                </td>
-                            </tr>
+                                    </td>
+                                </tr>
                             }
                         </tbody>
                     </table><br />
@@ -78,3 +79,4 @@
     </div>
 </div>
 
+<script src="~/js/delete-car.js"></script>

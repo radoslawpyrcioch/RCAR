@@ -59,7 +59,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>@Html.ActionLink("Zapłacone", "Paid", "PaymentRecord", new { id = item.PaymentRecordId })</li>
-                                                <li>@Html.ActionLink("Usuń", "Delete", "PaymentRecord", new { id = item.PaymentRecordId }, new { onclick = "return confirm('Czy napewno chcesz usunąc tą płatność?');" })</li>
+                                                <li><a href="#" id="@item.PaymentRecordId" onclick="RemoveFromTable(this.id)">Usuń</a></li>
                                             </ul>
                                         </div>
 
@@ -75,3 +75,4 @@
 </div>
 
 
+<script src="~/js/delete-payment.js"></script>

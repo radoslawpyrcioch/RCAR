@@ -57,7 +57,7 @@
                                                 <ul class="dropdown-menu">
                                                     <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId})</li>
                                                     <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId})</li>
-                                                    <li>@Html.ActionLink("Zakończ", "Delete", new { id = item.ServiceId}, new { onclick = "return confirm('Czy na pewno chcesz usunąć?');"})</li>
+                                                    <li><a href="#" id="@item.ServiceId" onclick="RemoveFromTable(this.id)">Usuń</a></li>
                                                     <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId})</li>
                                                 </ul>
                                             </div>
@@ -74,6 +74,7 @@
     </div>
 </div>
 
+<script src="~/js/delete-service.js"></script>
 
 <body onload="OpenModalWithValidation()">
     <!-- Modal -->
