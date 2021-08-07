@@ -12,5 +12,6 @@ namespace RCAR.Services.Interfaces
         Task<bool> RemoveCarAsync(int carId);
         Task<bool> DoneCarSeriveAsync(int carId);
         Task<CarDetailVM> DetailCarAsync(int carId);
+        Task<bool> InProgressCarStatusAsync(int carId);
     }
 }

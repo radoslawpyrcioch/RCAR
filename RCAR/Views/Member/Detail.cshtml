@@ -61,6 +61,7 @@
                                             </button>
                                             <ul class="dropdown-menu">
                                                 <li>@Html.ActionLink("Zakończ", "Done", "Car", new { id = item.CarId })</li>
+                                                <li>@Html.ActionLink("W trakcie", "InProgressStatus", "Car", new { id = item.CarId })</li>
                                                 <li>@Html.ActionLink("Nowa płatność", "CreateCar", "PaymentRecord", new { id = item.CarId })</li>
                                                 <li>@Html.ActionLink("Szczegóły", "Detail", "Car", new { id = item.CarId })</li>
                                                 <li><a href="#" id="@item.CarId" onclick="RemoveFromTable(this.id)">Usuń</a></li>

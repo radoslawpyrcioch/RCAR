@@ -1,7 +1,7 @@
-﻿@model RCAR.Models.PaymentRecordVM.PaymentCarCreateVM
+﻿@model RCAR.Models.PaymentRecordVM.PaymentCreateVM
 
 @{
-    ViewData["Title"] = "CreateCar";
+    ViewData["Title"] = "Create";
 }
 
 <div class="col-md-12 col-lg-12">
@@ -20,7 +20,7 @@
                 <nav aria-label="breadcrumb">
                     <ol class="breadcrumb">
                         <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
-                        <li class="breadcrumb-item"><a asp-controller="Member" asp-action="Index">Członkowie</a></li>
+                        <li class="breadcrumb-item"><a asp-controller="Serivce" asp-action="Index">Serwisy</a></li>
                         <li class="breadcrumb-item active" aria-current="page">Nowa płatność</li>
                     </ol>
                 </nav><br /><br />
@@ -82,7 +82,7 @@
                         <div class="form-group col-lg-4"></div>
                         <div class="form-group col-sm-4 text-right">
                             <div class="col-sm-12 ">
-                                <a href="/Member/Index" class="btn btn-link"><i class="ti-angle-left"></i> Wróć</a>
+                                <a href="/Service/Index" class="btn btn-link"><i class="ti-angle-left"></i> Wróć</a>
                                 <button type="submit" class="btn btn-primary">
                                     <span class="fa fa-floppy-o text-light"></span>
                                     Zapisz

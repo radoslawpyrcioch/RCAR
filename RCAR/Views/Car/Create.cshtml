@@ -86,11 +86,6 @@
                                     Text = "Zakończony",
                                     Value = "Zakończony",
                                 });
-                                listItems.Add(new SelectListItem
-                                {
-                                    Text = "Nieaktywny",
-                                    Value = "Nieaktywny",
-                                });
                             }
                             @Html.DropDownListFor(m => m.Status, listItems, "Status:*", new { @class = "form-control" })<br />
                             @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })

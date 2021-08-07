@@ -56,6 +56,13 @@ namespace RCAR.Services
             return await _unitOfWork.SaveChangesAsync();
         }
 
+        public async Task<bool> InProgressCarStatusAsync(int carId)
+        {
+            var car = await _unitOfWork.Car.GetByIdAsync(carId);
+            car.Status = "W trakcie";
+            return await _unitOfWork.SaveChangesAsync();
+        }
+
         public async Task<bool> RemoveCarAsync(int carId)
         {
             var car = await _unitOfWork.Car.GetByIdAsync(carId);

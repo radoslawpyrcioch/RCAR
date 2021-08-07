@@ -69,5 +69,18 @@ namespace RCAR.Controllers
                 return RedirectToAction("Index", "Member");
             return View(model);
         }
+
+        public async Task<IActionResult> InProgressStatus(int id)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await _carService.InProgressCarStatusAsync(id);
+                if (result)
+                    return RedirectToAction("Index", "Member");
+                ModelState.AddModelError("", "Niestety nie udało się zmienić statusu.");
+            }
+            return RedirectToAction("Index", "Member");
+        }
+ 
     }
 }
