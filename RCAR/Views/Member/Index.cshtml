@@ -34,7 +34,7 @@
                             <tbody>
                                 @foreach (var item in Model.Members)
                                 {
-                                    <tr>
+                                    <tr id="row_@item.MemberId">
                                         <td>
                                             <a asp-action="Detail" asp-route-id="@item.MemberId">@item.MemberNo</a>
                                         </td>

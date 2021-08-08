@@ -47,7 +47,7 @@
                         <tbody>
                             @foreach (var item in Model.Cars)
                             {
-                                <tr>
+                                <tr id="row_@item.CarId">
                                     <td>@Html.DisplayFor(m => item.Brand)</td>
                                     <td>@Html.DisplayFor(m => item.Model)</td>
                                     <td>@Html.DisplayFor(m => item.Description)</td>

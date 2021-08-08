@@ -10,7 +10,7 @@
             contentType: "application/json; charset=utf-8",
             dataType: "text",
             success: function () {
-                location.reload(true);
+                $("#row_" + paymentRecordId).remove();
             },
             error: function (response) {
                 alert(response);

@@ -48,7 +48,7 @@
                             @foreach (var item in Model.PaymentRecords)
                             {
 
-                                <tr>
+                                <tr id="row_@item.PaymentRecordId">
                                     <td>@Html.DisplayFor(m => item.Name)</td>
                                     <td>@Html.DisplayFor(m => item.Description)</td>
                                     <td>@Html.DisplayFor(m => item.NetAmount)</td>

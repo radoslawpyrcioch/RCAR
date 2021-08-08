@@ -10,7 +10,10 @@
             contentType: "application/json; charset=utf-8",
             dataType: "text",
             success: function () {
-                location.reload(true);
+
+                $("#row_" + serviceId).remove();
+
+               /* location.reload(true);*/
             },
             error: function (response) {
                 alert(response);

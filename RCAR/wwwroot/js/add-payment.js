@@ -1,20 +1,18 @@
-﻿function AddPaymentToTable(paymentRecordId) {
-    var result = confirm("Czy na pewno chcesz dodać ten rekord?");
-    if (!result)
-        return;
-    else {
-        $.ajax({
-            type: "POST",
-            url: "/PaymentRecord/Create",
-            data: { id: paymentRecordId },
-            contentType: "application/json; charset=utf-8",
-            dataType: "text",
-            success: function () {
-                location.reload(true);
-            },
-            error: function (response) {
-                alert(response);
-            }
-        })
-    }
+﻿function openModal () {
+    $("#exampleModalCenter").modal('show');
+}
+
+function createService() {
+
+    var data = $("#myform").serialize();
+
+    $ajax({
+        type: "post",
+        url: "/service/create",
+        data: data,
+        success: function (response) {
+            $("#loaderdiv").hide();
+            alert("you are done");
+        }
+    })
 }
