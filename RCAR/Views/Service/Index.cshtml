@@ -3,6 +3,12 @@
 
 @{ ViewBag.Title = "Service";}
 
+
+<head>
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <link href="~/css/service-index.css" rel="stylesheet" />
+</head>
+
 <div class="row">
     <div class="col-md-12 grid-margin">
         <div class="card">
@@ -15,10 +21,10 @@
                 </nav><br /><br />
                 <div class="row">
                     <div class="col-md-12 table-responsive-md">
-                        <button type="button" id="openModal" class="btn btn-xs btn-outline-success float-md-right" data-toggle="modal" data-target="#exampleModalCenter">
-                            Nowy serwis
-                        </button>
+                        <input type="button" value="Nowy serwis" id="btnOpen" class="btn btn-xs btn-outline-success float-md-right" />
+
                         <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Service" asp-action="Removed">Historia</a>
+
                         <table class="table table-striped">
                             <thead>
                                 <tr>
@@ -52,13 +58,13 @@
                                         <td>
                                             <div class="dropdown btn-block pull-right">
                                                 <button class="btn btn-xs btn-primary btn-block" data-toggle="dropdown">
-                                                Opcje
+                                                    Opcje
                                                 </button>
                                                 <ul class="dropdown-menu">
-                                                    <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId})</li>
-                                                    <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId})</li>
+                                                    <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId })</li>
+                                                    <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId })</li>
                                                     <li><a href="#" id="@item.ServiceId" onclick="RemoveFromTable(this.id)">Usuń</a></li>
-                                                    <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId})</li>
+                                                    <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId })</li>
                                                 </ul>
                                             </div>
                                         </td>
@@ -75,11 +81,16 @@
 </div>
 
 <script src="~/js/delete-service.js"></script>
+<script src="~/js/add-payment.js"></script>
+
+
 
 <body onload="OpenModalWithValidation()">
     <!-- Modal -->
-    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
+
+
+    <div class="modal fade" id="myModal" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-lg mt-0" role="document">
             <div class="modal-content">
                 <div class="modal-header">
                     <h3 class="modal-title" id="exampleModalLongTitle"><b>Nowy serwis</b></h3>
@@ -87,107 +98,105 @@
                         <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
-                <div class="modal-body">
-                    @using (Html.BeginForm("Create", "Service", FormMethod.Post))
-                    {
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            @Html.LabelFor(m => m.ServiceCreateVM.ServiceNo)
-                            @Html.EditorFor(m => m.ServiceCreateVM.ServiceNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Numer", id = "numberInput", maxlength = "4" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.ServiceNo, "", new { @class = "field-validation text-danger" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            @Html.LabelFor(m => m.ServiceCreateVM.FirstName)
-                            @Html.EditorFor(m => m.ServiceCreateVM.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Imię" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.FirstName, "", new { @class = "field-validation text-danger" })
-                        </div>
-                        <div class="form-group col-sm-6">
-                            @Html.LabelFor(m => m.ServiceCreateVM.LastName)
-                            @Html.EditorFor(m => m.ServiceCreateVM.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Nazwisko" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.LastName, "", new { @class = "field-validation text-danger" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-12">
-                            @Html.LabelFor(m => m.ServiceCreateVM.Phone)
-                            @Html.EditorFor(m => m.ServiceCreateVM.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Telefon", id = "numberInput", maxlength = "9" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.Phone, "", new { @class = "field-validation text-danger" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            @Html.LabelFor(m => m.ServiceCreateVM.ServiceSince)
-                            @Html.EditorFor(m => m.ServiceCreateVM.ServiceSince, new { htmlAttributes = new { @class = "form-control", placeholder = "Data przyjęcia" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.ServiceSince, "", new { @class = "field-validation text-danger" })
-                        </div>
-                        <div class="form-group col-sm-6">
-                            @Html.LabelFor(m => m.ServiceCreateVM.ServiceTo)
-                            @Html.EditorFor(m => m.ServiceCreateVM.ServiceTo, new { htmlAttributes = new { @class = "form-control", placeholder = "Data zakończenia" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.ServiceTo, "", new { @class = "field-validation text-danger" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-6">
-                            @Html.LabelFor(m => m.ServiceCreateVM.Brand)
-                            @Html.EditorFor(m => m.ServiceCreateVM.Brand, new { htmlAttributes = new { @class = "form-control", placeholder = "Marka samochodu" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.Brand, "", new { @class = "field-validation text-danger" })
-                        </div>
-                        <div class="form-group col-sm-6">
-                            @Html.LabelFor(m => m.ServiceCreateVM.Model)
-                            @Html.EditorFor(m => m.ServiceCreateVM.Model, new { htmlAttributes = new { @class = "form-control", placeholder = "Model" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.Model, "", new { @class = "field-validation text-danger" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-10">
-                            @Html.LabelFor(m => m.ServiceCreateVM.Description)
-                            @Html.EditorFor(m => m.ServiceCreateVM.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Opis" } })
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.Description, "", new { @class = "field-validation text-danger" })
-                        </div>
-                    </div>
-                    <div class="row">
-                        <div class="form-group col-sm-10">
-                            @{
-                                List<SelectListItem> listItems = new List<SelectListItem>();
-                                listItems.Add(new SelectListItem
-                                {
-                                    Text = "Przyjęty",
-                                    Value = "Przyjęty"
-                                });
-                                listItems.Add(new SelectListItem
-                                {
-                                    Text = "Rozpoczęty",
-                                    Value = "Rozpoczęty",
-                                });
-                                listItems.Add(new SelectListItem
-                                {
-                                    Text = "Zakończony",
-                                    Value = "Zakończony"
-                                });
-                            }
-                            @Html.DropDownListFor(m => m.ServiceCreateVM.Status, listItems, "Status:*", new { @class = "form-control" })<br />
-                            @Html.ValidationMessageFor(m => m.ServiceCreateVM.Status, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+                <form id="myform">
+                    <div class="modal-body">
+                        @using (Html.BeginForm("Create", "Service", FormMethod.Post))
+                        {
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.ServiceNo)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.ServiceNo, new { htmlAttributes = new { @class = "form-control", placeholder = "Numer", id = "numberInput", maxlength = "4" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.ServiceNo, "", new { @class = "field-validation text-danger" })
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.FirstName)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.FirstName, new { htmlAttributes = new { @class = "form-control", placeholder = "Imię" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.FirstName, "", new { @class = "field-validation text-danger" })
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.LastName)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.LastName, new { htmlAttributes = new { @class = "form-control", placeholder = "Nazwisko" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.LastName, "", new { @class = "field-validation text-danger" })
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.Phone)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.Phone, new { htmlAttributes = new { @class = "form-control", placeholder = "Telefon", id = "numberInput", maxlength = "9" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.Phone, "", new { @class = "field-validation text-danger" })
+                                </div>
+                            </div>
 
-                        <div class="modal-footer">
-                            <button type="submit" class="btn btn-primary" href="/Service/Index">
-                                <span class="fa fa-floppy-o text-light"></span>
-                                Zapisz
-                            </button>
-                        </div>
-                        <div class="form-group">
-                            @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                        </div>
-                    }
-                </div>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.ServiceSince)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.ServiceSince, new { htmlAttributes = new { @class = "form-control", placeholder = "Data przyjęcia" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.ServiceSince, "", new { @class = "field-validation text-danger" })
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.ServiceTo)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.ServiceTo, new { htmlAttributes = new { @class = "form-control", placeholder = "Data zakończenia" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.ServiceTo, "", new { @class = "field-validation text-danger" })
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.Brand)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.Brand, new { htmlAttributes = new { @class = "form-control", placeholder = "Marka samochodu" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.Brand, "", new { @class = "field-validation text-danger" })
+                                </div>
+                                <div class="form-group col-sm-3">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.Model)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.Model, new { htmlAttributes = new { @class = "form-control", placeholder = "Model" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.Model, "", new { @class = "field-validation text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-12">
+                                    @Html.LabelFor(m => m.ServiceCreateVM.Description)
+                                    @Html.EditorFor(m => m.ServiceCreateVM.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Opis" } })
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.Description, "", new { @class = "field-validation text-danger" })
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="form-group col-sm-3">
+                                    @{
+                                        List<SelectListItem> listItems = new List<SelectListItem>();
+                                        listItems.Add(new SelectListItem
+                                        {
+                                            Text = "Przyjęty",
+                                            Value = "Przyjęty"
+                                        });
+                                        listItems.Add(new SelectListItem
+                                        {
+                                            Text = "Rozpoczęty",
+                                            Value = "Rozpoczęty",
+                                        });
+                                        listItems.Add(new SelectListItem
+                                        {
+                                            Text = "Zakończony",
+                                            Value = "Zakończony"
+                                        });
+                                    }
+                                    @Html.DropDownListFor(m => m.ServiceCreateVM.Status, listItems, "Status:*", new { @class = "form-control" })<br />
+                                    @Html.ValidationMessageFor(m => m.ServiceCreateVM.Status, "", new { @class = "text-danger" })
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <input type="button" value="Dodaj" id="addService" class="btn btn-primary"/>
+                            </div>
+                            <div class="form-group">
+                                @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                            </div>
+                        }
+                    </div>
+                </form>
+
             </div>
         </div>
     </div>
+
+
     @section Scripts {
         <script src="~/js/datatables-filters-classic.js"></script>
         <script src="~/js/create-service.js"></script>
     }
 </body>
+
