@@ -31,6 +31,7 @@ namespace RCAR.Extension
             services.AddScoped<IServiceService, ServiceService>();
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IEmailService, EmailService>();
+            services.AddScoped<IAttachmentService, AttachmentService>();
 
             return services;
         }

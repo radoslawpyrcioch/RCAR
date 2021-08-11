@@ -13,11 +13,12 @@ namespace RCAR.Controllers
     [Authorize]
     public class ServiceController : Controller
     {
-        
+        private readonly IAttachmentService _attachmentService;
         private readonly IServiceService _serviceService;
 
-        public ServiceController(IServiceService serviceService)
+        public ServiceController(IServiceService serviceService, IAttachmentService attachmentService)
         {
+            _attachmentService = attachmentService;
             _serviceService = serviceService;
         }
 
@@ -121,5 +122,14 @@ namespace RCAR.Controllers
             return View(model);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DownloadAttachment()
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var fileContents = await _attachmentService.GenerateDoneServiceListAttachmentAsync(currentUserId);
+            var fileName = string.Format("SpisWykonanychSerwisow_{0}.pdf", DateTime.Today.ToShortDateString());
+
+            return File(fileContents, "spisWykonanychSerwisow/pdf", fileName);
+        }
     }
 }
