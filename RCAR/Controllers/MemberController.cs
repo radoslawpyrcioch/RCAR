@@ -12,10 +12,12 @@ namespace RCAR.Controllers
     [Authorize]
     public class MemberController : Controller
     {
+        private readonly IAttachmentService _attachmentService;
         private readonly IMemberService _memberService;
 
-        public MemberController(IMemberService memberService)
+        public MemberController(IMemberService memberService, IAttachmentService attachmentService)
         {
+            _attachmentService = attachmentService;
             _memberService = memberService;
         }
 
@@ -112,5 +114,16 @@ namespace RCAR.Controllers
             }
             return View();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadAttachment()
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var fileContents = await _attachmentService.GenerateActualMemberListAsync(currentUserId);
+            var fileName = string.Format("SpisWszystkichCzlonkow_{0}.pdf", DateTime.Today.ToShortDateString());
+
+            return File(fileContents, "SpisWszystkichCzlonkow/pdf", fileName);
+        }
+
     }
 }

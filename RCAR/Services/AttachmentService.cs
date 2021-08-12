@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RCAR.Domain.Interfaces;
 using RCAR.Helper;
+using RCAR.Models.MemberVM;
 using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
 using System;
@@ -19,6 +20,15 @@ namespace RCAR.Services
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+        }
+
+        public async Task<byte[]> GenerateActualMemberListAsync(string userId)
+        {
+            var member = await _unitOfWork.Member.FindAllAsync(m => m.UserId == userId & !m.IsRemoved);
+            var memberVM = _mapper.Map<IEnumerable<MemberVM>>(member);
+            var pdfHelper = new PdfDocumentMember(memberVM);
+
+            return pdfHelper.Generate();
         }
 
         public async Task<byte[]> GenerateDoneServiceListAttachmentAsync(string userId)

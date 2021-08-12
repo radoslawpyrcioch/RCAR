@@ -8,5 +8,6 @@ namespace RCAR.Services.Interfaces
     public interface IAttachmentService
     {
         Task<byte[]> GenerateDoneServiceListAttachmentAsync(string userId);
+        Task<byte[]> GenerateActualMemberListAsync(string userId);
     }
 }
