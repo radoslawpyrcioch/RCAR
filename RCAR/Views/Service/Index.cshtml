@@ -4,13 +4,6 @@
 @{ ViewBag.Title = "Service";}
 
 
-<head>
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <link href="~/css/service-index.css" rel="stylesheet" />
-    <script src="~/js/delete-service.js"></script>
-    <script src="~/js/add-service.js"></script>
-</head>
-
 <div class="row">
     <div class="col-md-12 grid-margin">
         <div class="card">
@@ -27,7 +20,7 @@
 
                         <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Service" asp-action="Removed">Historia</a>
 
-                        <table class="table table-striped">
+                        <table class="table table-striped" id="myTable" style="width:100%">
                             <thead>
                                 <tr>
                                     <th>Numer</th>
@@ -181,7 +174,7 @@
                             </div>
 
                             <div class="modal-footer">
-                                <input type="button" value="Dodaj" id="addService" class="btn btn-primary"/>
+                                <input type="button" value="Dodaj" id="addService" class="btn btn-primary" />
                             </div>
                             <div class="form-group">
                                 @Html.ValidationSummary(false, "", new { @class = "text-danger" })
@@ -193,6 +186,19 @@
             </div>
         </div>
     </div>
+
+    @section Scripts {
+        <link href="~/css/style.css" rel="stylesheet" />
+        <script src="~/js/delete-service.js"></script>
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+        <link href="~/lib/bootstrap/dist/css/bootstrap.css" rel="stylesheet" />
+        <script src="~/lib/bootstrap/dist/js/bootstrap.js"></script>
+        <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+        <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+        <script src="~/js/datatables.js"></script>
+        <script src="~/js/add-service.js"></script>
+    }
 
 </body>
 
