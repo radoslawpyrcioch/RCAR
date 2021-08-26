@@ -1,102 +1,105 @@
 ﻿<!DOCTYPE html>
+
 <html lang="en">
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - RCAR</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" />
+    <meta name="viewport" content="width=device-width" charset="utf-8" />
+    <title>Layout</title>
     <link href="~/css/style.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" charset="utf-8"></script>
 </head>
 <body>
+    <header>
+        <!--wrapper start-->
+        <div class="wrapper">
+            <!--header menu start-->
+            <div class="header">
+                <div class="header-menu">
+                    <div class="title">RCAR <span>SERWIS</span></div>
+                    <div class="sidebar-btn">
+                        <i class="fas fa-bars"></i>
+                    </div>
 
-    <div class="container-scroller">
-        <nav class="navbar col-lg-12 col-12 p-0 fixed-top d-flex flex-row">
-            <div class="text-center navbar-brand-wrapper d-flex align-items-center justify-content-center">
-                <a class="navbar-brand brand-logo" style="color:aliceblue">@*<img scr="" alt="logo" />*@RCAR</a>
-            </div>
-            <div class="navbar-menu-wrapper d-flex align-items-center justify-content-end" style="color:aliceblue">
-                <form class="form-inline">
-                    <partial name="_LoginPartial" />
-                    
-                    @*<a class="form-control mr-sm-2" href="/Account/Register">Zarejestruj sie</a>
-        <a class="form-control mr-sm-2" href="/Account/LogIn">Zaloguj sie</a>*@
-                </form>
-            </div>
-        </nav>
-        <div class="container-fluid page-body-wrapper">
-            <nav class="sidebar sidebar-offcanvas" id="sidebar">
-                <ul class="nav">
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#Service" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="fas fa-wrench fa-lg text-primary" style="margin-right:0.7em"></i>
-                            <span class="menu-title">Serwis</span>
+                    <!--sidebar administration menu-->
+                    <div class="action">
+                        <ul>
+                            <li>
+                                <a href="#" onclick="menuToggle();"><i class="fas fa-power-off"></i></a>
+                            </li>
+                        </ul>
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <div class="menu">
+                                <h3><strong>@User.Identity.Name</strong></h3>
+                                <div class="sub-menu">
+                                    <a href="/User/Index"><i class="fas fa-sliders-h"></i>Ustawienia</a>
+                                    <a href="/Account/LogOut"><i class="fa fa-power-off"></i>Wyloguj się</a>
+                                </div>
+                            </div>
+                        }
 
-                        </a>
-                        <div class="collapse" id="Service">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" asp-controller="Service" asp-action="Index">Serwisy</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#Member" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="fas fa-users fa-lg text-primary" style="margin-right:0.7em"></i>
-                            <span class="menu-title">Członkowie</span>
+                    </div>
 
-                        </a>
-                        <div class="collapse" id="Member">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" asp-controller="Member" asp-action="Index">Członkowie</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" data-toggle="collapse" href="#Raport" aria-expanded="false" aria-controls="ui-basic">
-                            <i class="fas fa-book fa-lg text-primary" style="margin-right:0.7em"></i>
-                            <span class="menu-title">Raporty</span>
 
-                        </a>
-                        <div class="collapse" id="Raport">
-                            <ul class="nav flex-column sub-menu">
-                                <li class="nav-item"><a class="nav-link" asp-controller="Raport" asp-action="Index">Generowanie raportów</a></li>
-                            </ul>
-                        </div>
-                    </li>
-                    @*<li class="nav-item">
-            <a class="nav-link" data-toggle="collapse" href="#Payment" aria-expanded="false" aria-controls="ui-basic">
-                <i class="fas fa-shopping-bag fa-lg text-primary" style="margin-right:0.7em"></i>
-                <span class="menu-title">Payment</span>
+                    <!--sidebar administration menu end-->
 
-            </a>
-            <div class="collapse" id="Payment">
-                <ul class="nav flex-column sub-menu">
-                    <li class="nav-item"><a class="nav-link" asp-controller="PaymentRecord" asp-action="Create">Nowa płatność</a></li>
-                    <li class="nav-item"><a class="nav-link" asp-controller="PaymentRecord" asp-action="Index">Płatności</a></li>
-                </ul>
-            </div>
-        </li>*@
-
-                </ul>
-            </nav>
-           
-            <div class="main-panel">
-                <partial name="_CookieConsentPartial" />
-                <div class="content-wrapper">
-                    @RenderBody()
                 </div>
-                <footer class="footer">
-                    <p> &copy; @DateTime.UtcNow.Year - RCAR - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a></p>
-                </footer>
             </div>
+            <!--header menu end-->
+            <!--sidebar start-->
+            <div class="sidebar">
+                <div class="sidebar-menu">
+                    <ul>
+                        <li class="item">
+                            <a href="#" class="menu-btn">
+                                <i class="fas fa-desktop"></i><span>Aktualności</span>
+                            </a>
+                        </li>
+                        <li class="item" id="service">
+                            <a href="#service" class="menu-btn">
+                                <i class="fas fa-wrench"></i><span>Seriwsy <i class="fas fa-chevron-down drop-down"></i></span>
+                            </a>
+                            <div class="sub-menu">
+                                <a asp-controller="Service" asp-action="Index"><i class="fas fa-image"></i><span>Aktualne</span></a>
+                                <a asp-controller="Service" asp-action="Removed"><i class="fas fa-image"></i><span>Historia</span></a>
+                            </div>
+                        </li>
+                        <li class="item" id="member">
+                            <a href="#member" class="menu-btn">
+                                <i class="fas fa-users"></i><span>Członkowie <i class="fas fa-chevron-down drop-down"></i></span>
+                            </a>
+                            <div class="sub-menu">
+                                <a asp-controller="Member" asp-action="Index"><i class="fas fa-image"></i><span>Aktualni</span></a>
+                                <a asp-controller="Member" asp-action="Removed"><i class="fas fa-image"></i><span>Historia</span></a>
+                            </div>
+                        </li>
+                        <li class="item">
+                            <a asp-controller="Raport" asp-action="Index" class="menu-btn">
+                                <i class="fas fa-book"></i><span>Raporty</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <!--sidebar end-->
+            <!--main container-->
+
+            <!--main container end-->
         </div>
+        <!--wrapper end-->
+    </header>
+
+    <script src="~/js/layout/layout-navsidebar.js"></script>
+
+    <div class="main-panel">
+        <partial name="_CookieConsentPartial" />
+        <div class="content-wrapper">
+            @RenderBody()
+        </div>
+        <footer class="footer">
+            <p> &copy; @DateTime.UtcNow.Year - RCAR - <a asp-area="" asp-controller="Home" asp-action="Privacy">Polityka</a></p>
+        </footer>
     </div>
-
-
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
