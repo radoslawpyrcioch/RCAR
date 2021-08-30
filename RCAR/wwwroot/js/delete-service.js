@@ -1,5 +1,5 @@
 ﻿function RemoveFromTable(serviceId) {
-    var result = confirm("Czy na pewno chcesz usuńąć ten rekord?");
+    var result = confirm("Czy na pewno chcesz zakończyć ten serwis?");
     if (!result)
         return;
     else {
@@ -13,7 +13,7 @@
 
                 $("#row_" + serviceId).remove();
 
-               /* location.reload(true);*/
+                location.reload(true);
             },
             error: function (response) {
                 alert(response);

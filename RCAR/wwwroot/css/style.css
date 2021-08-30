@@ -124,7 +124,7 @@ body {
                 }
 
             .wrapper .sidebar .sidebar-menu .item .sub-menu {
-                background: #3498DB;
+                background: #22242A;
                 overflow: hidden;
                 max-height: 0;
                 transition: 0.3s;
@@ -138,18 +138,19 @@ body {
                     white-space: nowrap;
                     font-size: 15px;
                     padding: 20px;
-                    border-bottom: 1px solid #8FC5E9;
+                    border-bottom: 1px solid #fff;
                     transition: 0.3s;
                     transition-property: background;
                 }
 
                     .wrapper .sidebar .sidebar-menu .item .sub-menu a:hover {
-                        background: #55B1F0;
+                        background: #55B1F0;       
                     }
 
                 .wrapper .sidebar .sidebar-menu .item .sub-menu i {
                     padding-right: 20px;
                     font-size: 10px;
+                    margin-left: 20px;
                 }
 
             .wrapper .sidebar .sidebar-menu .item:target .sub-menu {
@@ -211,6 +212,7 @@ body {
         transition: 0.5s;
         visibility: hidden;
         opacity: 0;
+        background: #2F323A;
     }
 
         .action .menu.active {
@@ -226,7 +228,7 @@ body {
             right: 28px;
             width: 20px;
             height: 20px;
-            background: #fff;
+            background: #2F323A;
             transform: rotate(45deg);
         }
 
@@ -237,7 +239,7 @@ body {
             padding: 20px 0;
             font-weight: 500;
             font-size: 18px;
-            color: #555;
+            color: #fff;
             line-height: 1.2em;
         }
 
@@ -251,7 +253,7 @@ body {
             justify-content: center;
             opacity: 0.7;
             transition: 0.5s;
-            color: #555;
+            color: #fff;
             font-weight: 500;
         }
 
