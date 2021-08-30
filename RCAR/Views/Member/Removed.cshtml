@@ -3,8 +3,7 @@
 
 @{ ViewBag.Title = "Member";}
 
-<div class="row">
-    <div class="col-md-12 grid-margin">
+<div class="main-container">
         <div class="card">
             <div class="card-body">
                 <nav aria-label="breadcrumb">
@@ -16,10 +15,10 @@
                 </nav><br /><br />
                 <div class="row">
                     <div class="col-md-12 table-responsive-md">
-                        <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Member" asp-action="Index"> Wróć do dostepnej listy członków</a>
+                        <a class="btn btn-xs btn-secondary float-md-right m-md-1" asp-controller="Member" asp-action="Index"> Wróć do dostepnej listy członków</a>
                         <br />
-                        <table class="table table-striped">
-                            <thead>
+                        <table class="table table-striped" id="myTable">
+                            <thead class="thead-dark">
                                 <tr>
                                     <th>Numer</th>
                                     <th>Imię</th>
@@ -43,7 +42,7 @@
                                         <td>@item.Phone</td>
                                         <td>@item.Status</td>
                                         <td>
-                                            <a class="text-danger" asp-action="BackToDraft" asp-route-id="@item.MemberId">
+                                            <a class="btn btn-danger" asp-action="BackToDraft" asp-route-id="@item.MemberId">
                                                 <i class="fas fa-undo-alt"></i>Cofnij
                                             </a>
 
@@ -57,8 +56,9 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 
-
+@section scripts{ 
+    <script src="~/js/members/datatables-removed.js"></script>
+}

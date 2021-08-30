@@ -1,7 +1,7 @@
 ﻿@model RCAR.Models.MemberVM.MemberEditVM
 @{ ViewBag.Title = "Edit"; }
 
-<div class="col-md-12 grid-margin stretch-card">
+<div class="main-container">
     <div class="card">
         <div class="card-body">
             <nav aria-label="breadcrumb">
@@ -11,7 +11,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Edycja</li>
                 </ol>
             </nav><br /><br />
-            <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Member" asp-action="Index">Wróć</a>
+
             <form id="create" method="post">
                 @Html.HiddenFor(m => m.MemberId)
                 <div class="form-row">
@@ -87,7 +87,8 @@
 
 
                 <div class="col-sm-12 ">
-                    <button type="submit" class="btn btn-outline-danger">Zapisz</button>
+                    <button type="submit" class="btn btn-danger">Zapisz</button>
+                    <a class="btn btn-xs btn-secondary" asp-controller="Member" asp-action="Index">Wróć</a>
                 </div>
                 <div class="form-group col-sm-5">
                     @Html.ValidationSummary(false, "", new { @class = "text-danger" })
