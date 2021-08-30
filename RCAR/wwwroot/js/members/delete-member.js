@@ -1,5 +1,5 @@
 ﻿function RemoveFromTable(memberId) {
-    var result = confirm("Czy na pewno chcesz usuńąć ten rekord?");
+    var result = confirm("Czy na pewno chcesz usuńąć tego członka?");
     if (!result)
         return;
     else {
