@@ -3,68 +3,72 @@
 
 @{ ViewBag.Title = "Service";}
 
-<div class="row">
-    <div class="col-md-12 grid-margin">
-        <div class="card">
-            <div class="card-body">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
-                        <li class="breadcrumb-item"><a asp-controller="Service" asp-action="Index">Lista Serwisów</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Historia Serwisów</li>
-                    </ol>
-                </nav><br /><br />
-                <div class="row">
-                    <div class="col-md-12 table-responsive-md">
-                        <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Service" asp-action="Index"> Wróć do dostepnej listy serwisów</a>
-                        <a class="btn btn-xs btn-outline-success float-md-right" asp-controller="Service" asp-action="DownloadAttachment">Pobierz PDF</a>
-                        <br />
-                        <table class="table table-striped">
-                            <thead>
+<div class="main-container">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Service" asp-action="Index">Lista Serwisów</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Historia Serwisów</li>
+                </ol>
+            </nav><br /><br />
+            <div class="row">
+                <div class="col-md-12 table-responsive-md">
+                    <a class="btn btn-xs btn-secondary float-md-right m-md-1" asp-controller="Service" asp-action="Index"> Wróć do dostepnej listy serwisów</a>
+                    <a class="btn btn-xs btn-secondary float-md-right mr-1 m-md-1" asp-controller="Service" asp-action="DownloadAttachment">Pobierz PDF</a>
+                    <br />
+                    <table class="table table-striped" id="myTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Numer</th>
+                                <th>Imie i Nazwisko</th>
+                                <th>Marka samochodu</th>
+                                <th>Model samochodu</th>
+                                <th>Telefon</th>
+                                <th>Data przyjecia</th>
+                                <th>Data zakończenia</th>
+                                <th>Opis</th>
+                                <th>Status</th>
+                                <th class="text-warning">Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Services)
+                            {
                                 <tr>
-                                    <th>Numer</th>
-                                    <th>Imie i Nazwisko</th>
-                                    <th>Marka samochodu</th>
-                                    <th>Model samochodu</th>
-                                    <th>Telefon</th>
-                                    <th>Data przyjecia</th>
-                                    <th>Data zakończenia</th>
-                                    <th>Opis</th>
-                                    <th>Status</th>
-                                    <th class="text-warning">Akcje</th>
+                                    <td>
+                                        <a asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
+                                    </td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Brand</td>
+                                    <td>@item.Model</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.ServiceSince.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.ServiceTo.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.Status</td>
+                                    <td>
+                                        <a class="btn btn-danger" asp-action="BackToDraft" asp-route-id="@item.ServiceId">
+                                            <i class="fas fa-undo-alt"></i>Cofnij
+                                        </a>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Services)
-                                {
-                                    <tr>
-                                        <td>
-                                            <a asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
-                                        </td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Brand</td>
-                                        <td>@item.Model</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.ServiceSince.ToString("dd/MM/yyyy")</td>
-                                        <td>@item.ServiceTo.ToString("dd/MM/yyyy")</td>
-                                        <td>@item.Description</td>
-                                        <td>@item.Status</td>
-                                        <td>
-                                            <a class="text-danger" asp-action="BackToDraft" asp-route-id="@item.ServiceId">
-                                                <i class="fas fa-undo-alt"></i>Cofnij
-                                            </a>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table><br />
+                            }
+                        </tbody>
+                    </table><br />
 
-                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+
+@section Scripts {
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.25/css/jquery.dataTables.css">
+    <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.25/js/jquery.dataTables.js"></script>
+    <script src="~/js/services/datatables-removed.js"></script>
+}
 
 
 
