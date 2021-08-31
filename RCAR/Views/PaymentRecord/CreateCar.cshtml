@@ -4,98 +4,87 @@
     ViewData["Title"] = "CreateCar";
 }
 
-<div class="col-md-12 col-lg-12">
-    <div class="panel">
-        <div class="panel-body">
-
-        </div>
-    </div>
-</div>
 
 
-<div class="row">
-    <div class="col-md-12 grid-margin">
-        <div class="card">
-            <div class="card-body">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
-                        <li class="breadcrumb-item"><a asp-controller="Member" asp-action="Index">Serwisy</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Nowa płatność</li>
-                    </ol>
-                </nav><br /><br />
-                <form id="create" method="post">
-                    <div class="form-row">
-                        <div class="form-group col-lg-4"></div>
-                        <div class="form-group col-lg-4">
-                            @Html.LabelFor(m => m.Name)
-                            @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Numer", id = "numberInput", maxlength = "4" } })
-                            @Html.ValidationMessageFor(m => m.Name, "", new { @class = "field-validation text-danger" })
-                        </div>
+<div class="main-container">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item"><a asp-controller="Member" asp-action="Index">Serwisy</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Nowa płatność</li>
+                </ol>
+            </nav><br /><br />
+            <form id="create" method="post">
+                <div class="form-row">
+                    <div class="form-group col-lg-4"></div>
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.Name)
+                        @Html.EditorFor(m => m.Name, new { htmlAttributes = new { @class = "form-control", placeholder = "Numer", id = "numberInput", maxlength = "4" } })
+                        @Html.ValidationMessageFor(m => m.Name, "", new { @class = "field-validation text-danger" })
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-lg-4"></div>
-                        <div class="form-group col-lg-4">
-                            @Html.LabelFor(m => m.Description)
-                            @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Opis" } })
-                            @Html.ValidationMessageFor(m => m.Description, "", new { @class = "field-validation text-danger" })
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg-4"></div>
+                    <div class="form-group col-lg-4">
+                        @Html.LabelFor(m => m.Description)
+                        @Html.EditorFor(m => m.Description, new { htmlAttributes = new { @class = "form-control", placeholder = "Opis" } })
+                        @Html.ValidationMessageFor(m => m.Description, "", new { @class = "field-validation text-danger" })
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-lg-4"></div>
-                        <div class="form-group col-sm-4">
-                            @Html.LabelFor(m => m.Discount)
-                            @Html.EditorFor(m => m.Discount, new { htmlAttributes = new { @class = "form-control", placeholder = "Rabat" } })
-                            @Html.ValidationMessageFor(m => m.Discount, "", new { @class = "field-validation text-danger" })
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg-4"></div>
+                    <div class="form-group col-sm-4">
+                        @Html.LabelFor(m => m.Discount)
+                        @Html.EditorFor(m => m.Discount, new { htmlAttributes = new { @class = "form-control", placeholder = "Rabat" } })
+                        @Html.ValidationMessageFor(m => m.Discount, "", new { @class = "field-validation text-danger" })
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-lg-4"></div>
-                        <div class="form-group col-sm-4">
-                            @Html.LabelFor(m => m.TotalAmount)
-                            @Html.EditorFor(m => m.TotalAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Kwota brutto" } })
-                            @Html.ValidationMessageFor(m => m.TotalAmount, "", new { @class = "field-validation text-danger" })
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg-4"></div>
+                    <div class="form-group col-sm-4">
+                        @Html.LabelFor(m => m.TotalAmount)
+                        @Html.EditorFor(m => m.TotalAmount, new { htmlAttributes = new { @class = "form-control", placeholder = "Kwota brutto" } })
+                        @Html.ValidationMessageFor(m => m.TotalAmount, "", new { @class = "field-validation text-danger" })
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-lg-4"></div>
-                        <div class="form-group col-sm-4">
-                            @Html.LabelFor(m => m.Status)
-                            @{
-                                List<SelectListItem> listItems = new List<SelectListItem>();
-                                listItems.Add(new SelectListItem
-                                {
-                                    Text = "Zapłacone",
-                                    Value = "Zapłacone"
-                                });
-                                listItems.Add(new SelectListItem
-                                {
-                                    Text = "Niezapłacone",
-                                    Value = "Niezapłacone",
-                                });
-                            }
-                            @Html.DropDownListFor(m => m.Status, listItems, "Status:*", new { @class = "form-control" })<br />
-                            @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg-4"></div>
+                    <div class="form-group col-sm-4">
+                        @Html.LabelFor(m => m.Status)
+                        @{
+                            List<SelectListItem> listItems = new List<SelectListItem>();
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Zapłacone",
+                                Value = "Zapłacone"
+                            });
+                            listItems.Add(new SelectListItem
+                            {
+                                Text = "Niezapłacone",
+                                Value = "Niezapłacone",
+                            });
+                        }
+                        @Html.DropDownListFor(m => m.Status, listItems, "Status:*", new { @class = "form-control" })<br />
+                        @Html.ValidationMessageFor(m => m.Status, "", new { @class = "text-danger" })
                     </div>
-                    <div class="form-row">
-                        <div class="form-group col-lg-4"></div>
-                        <div class="form-group col-sm-4 text-right">
-                            <div class="col-sm-12 ">
-                                <a href="/Member/Index" class="btn btn-link"><i class="ti-angle-left"></i> Wróć</a>
-                                <button type="submit" class="btn btn-primary">
-                                    <span class="fa fa-floppy-o text-light"></span>
-                                    Zapisz
-                                </button>
-                            </div>
-                        </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-lg-4"></div>
+                    <div class="form-group col-sm-4 text-left">
+                        <button type="submit" class="btn btn-danger">
+                            <span class="fa fa-floppy-o text-light"></span>
+                            Zapisz
+                        </button>
+                        <a href="/Member/Index" class="btn btn-secondary"><i class="ti-angle-left"></i> Wróć</a>
                     </div>
+                </div>
 
-                    <div class="form-group col-sm-5">
-                        @Html.ValidationSummary(false, "", new { @class = "text-danger" })
-                    </div>
-                </form>
-            </div>
+                <div class="form-group col-sm-5">
+                    @Html.ValidationSummary(false, "", new { @class = "text-danger" })
+                </div>
+            </form>
         </div>
     </div>
 </div>
