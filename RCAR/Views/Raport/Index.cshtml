@@ -1,8 +1,7 @@
 ﻿
 @{ ViewBag.Title = "Raport";}
 
-<div class="row">
-    <div class="col-md-12 grid-margin">
+<div class="main-container">
         <div class="card">
             <div class="card-body">
                 <nav aria-label="breadcrumb">
@@ -14,18 +13,18 @@
                 <div class="row">
                     <div class="col-sm-6">
                         <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Raport aktywnych członków</h5>
-                                <p class="card-text">Wygeneruj raport wszystkich aktywnych członków</p>
+                            <div class="card-body border border-dark bg-secondary">
+                                <h5 class="card-title text-white">Raport aktywnych członków</h5>
+                                <p class="card-text text-white-50">Wygeneruj raport wszystkich aktywnych członków</p>
                                 <a href="/Member/DownloadAttachment" class="btn btn-primary">Pobierz PDF</a>
                             </div>
                         </div>
                     </div>
                     <div class="col-sm-6">
                         <div class="card">
-                            <div class="card-body">
-                                <h5 class="card-title">Raport zakończonych serwisów</h5>
-                                <p class="card-text">Wygeneruj raport wszystkich zakończonych serwisów.</p>
+                            <div class="card-body border border-dark bg-secondary">
+                                <h5 class="card-title text-white">Raport zakończonych serwisów</h5>
+                                <p class="card-text text-white-50">Wygeneruj raport wszystkich zakończonych serwisów.</p>
                                 <a href="/Service/DownloadAttachment" class="btn btn-primary">Pobierz PDF</a>
                             </div>
                         </div>
@@ -33,7 +32,6 @@
                 </div>
             </div>
         </div>
-    </div>
 </div>
 
 
