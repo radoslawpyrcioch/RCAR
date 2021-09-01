@@ -19,6 +19,7 @@ namespace RCAR.Helper
         protected Font _boldFont { get; set; }
         protected BaseColor _tableHeaderWhiteColor { get; set; }
         protected BaseColor _tableHeaderGrayColor { get; set; }
+        protected int numberService = 0;
 
         public PdfDocumentServiceRemoved(object model)
         {
@@ -41,6 +42,7 @@ namespace RCAR.Helper
             cell.HorizontalAlignment = Element.ALIGN_CENTER;
             cell.Border = Rectangle.NO_BORDER;
             cell.BackgroundColor = _tableHeaderWhiteColor;
+            cell.PaddingBottom = 20f;
 
             titleTable.AddCell(cell);
 
@@ -51,22 +53,34 @@ namespace RCAR.Helper
         {
             var phrase = new Phrase(text, _boldFont);
             var cell = new PdfPCell(phrase);
-            cell.HorizontalAlignment = Element.ALIGN_CENTER;
-            cell.BackgroundColor = _tableHeaderGrayColor;
-            cell.PaddingBottom = 5f;
+            cell.Border = Rectangle.NO_BORDER;
+            cell.PaddingBottom = 10f;
 
             return cell;
         }
 
-        private PdfPCell GetCellWithBorderAlignCenter(string text)
+        private PdfPCell HeaderName(string text)
         {
             var phrase = new Phrase(text, _itemFont);
             var cell = new PdfPCell(phrase);
-            cell.HorizontalAlignment = Element.ALIGN_CENTER;
-            cell.PaddingBottom = 5f;
+            cell.Colspan = 2;
+            cell.Border = Rectangle.NO_BORDER;
 
             return cell;
         }
+
+        private PdfPCell HeaderNumber(string text)
+        {
+            var phrase = new Phrase(text);
+            var cell = new PdfPCell(phrase);
+            cell.BackgroundColor = BaseColor.LIGHT_GRAY;
+            cell.Colspan = 8;
+            cell.Padding = 5f;
+            cell.HorizontalAlignment = Element.ALIGN_CENTER;
+
+            return cell;
+        }
+
 
 
         public byte[] Generate()
@@ -84,34 +98,43 @@ namespace RCAR.Helper
 
                 _pdfDocument.Add(TitleTable(string.Format("Spis zakoczonych serwisów | Data: {0}", DateTime.Today.ToShortDateString())));
 
-                var itemTable = new PdfPTable(9);
+                var itemTable = new PdfPTable(8);
                 itemTable.WidthPercentage = 100;
-
-                itemTable.AddCell(GetHeaderTableCell("Numer"));
-                itemTable.AddCell(GetHeaderTableCell("Imię i Nazwisko"));
-                itemTable.AddCell(GetHeaderTableCell("Telefon"));
-                itemTable.AddCell(GetHeaderTableCell("Data przyjęcia"));
-                itemTable.AddCell(GetHeaderTableCell("Data zakończenia"));
-                itemTable.AddCell(GetHeaderTableCell("Marka samochodu"));
-                itemTable.AddCell(GetHeaderTableCell("Model samochodu"));
-                itemTable.AddCell(GetHeaderTableCell("Opis"));
-                itemTable.AddCell(GetHeaderTableCell("Status"));
 
 
                 foreach (var item in model)
                 {
-                    var cell = GetCellWithBorderAlignCenter(item.ServiceNo);
-                    cell.BackgroundColor = _tableHeaderGrayColor;
-                    itemTable.AddCell(cell);
-                    itemTable.AddCell(GetCellWithBorderAlignCenter(item.FullName));
-                    itemTable.AddCell(GetCellWithBorderAlignCenter(item.Phone));
-                    itemTable.AddCell(GetCellWithBorderAlignCenter(item.ServiceSince.ToShortDateString()));
-                    itemTable.AddCell(GetCellWithBorderAlignCenter(item.ServiceTo.ToShortDateString()));
-                    itemTable.AddCell(GetCellWithBorderAlignCenter(item.Brand));
-                    itemTable.AddCell(GetCellWithBorderAlignCenter(item.Model));
-                    itemTable.AddCell(GetCellWithBorderAlignCenter(item.Description));
-                    itemTable.AddCell(GetCellWithBorderAlignCenter(item.Status));
+                    numberService++;
+                    itemTable.AddCell(HeaderNumber(string.Format("Serwis numer: {0}", numberService)));
 
+                    itemTable.AddCell(GetHeaderTableCell("Numer: "));
+                    itemTable.AddCell(HeaderName(item.ServiceNo));
+
+                    itemTable.AddCell(GetHeaderTableCell("Imię i Nazwisko"));
+                    itemTable.AddCell(HeaderName(item.FullName));
+
+                    itemTable.AddCell(GetHeaderTableCell("Telefon"));
+                    itemTable.AddCell(HeaderName(item.Phone));
+
+                    itemTable.AddCell(GetHeaderTableCell("Data przyjęcia"));
+                    itemTable.AddCell(HeaderName(item.ServiceSince.ToShortDateString()));
+
+                    itemTable.AddCell(GetHeaderTableCell("Data zakończenia"));
+                    itemTable.AddCell(HeaderName(item.ServiceTo.ToShortDateString()));
+
+                    itemTable.AddCell(GetHeaderTableCell("Marka samochodu"));
+                    itemTable.AddCell(HeaderName(item.Brand));
+
+                    itemTable.AddCell(GetHeaderTableCell("Model samochodu"));
+                    itemTable.AddCell(HeaderName(item.Model));
+
+                    itemTable.AddCell(GetHeaderTableCell("Opis"));
+                    itemTable.AddCell(HeaderName(item.Description));
+
+                    itemTable.AddCell(GetHeaderTableCell("Status"));
+                    itemTable.AddCell(HeaderName(item.Status));
+
+                   
                 }
                 _pdfDocument.Add(itemTable);
 
