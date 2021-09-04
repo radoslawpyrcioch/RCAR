@@ -65,6 +65,14 @@ namespace RCAR.Controllers
         public async Task<IActionResult> Detail(int id)
         {
             var model = await _carService.DetailCarAsync(id);
+            if (model.PaymentRecords.Count() > 0)
+            {
+                var count = 0;
+                decimal totalPayment = 0;
+                _carService.CountPayment(model.PaymentRecords, ref count, ref totalPayment);
+                ViewBag.TotalInvoicePayment = totalPayment;
+                ViewBag.TotalCount = count;
+            }
             if (model == null)
                 return RedirectToAction("Index", "Member");
             return View(model);

@@ -25,6 +25,10 @@
                     <p class="font-weight-normal"><b>Data zakończenia: </b>@Model.ServiceTo.ToString("dd/MM/yyyy")</p>
                     <p class="font-weight-normal"><b>Opis: </b>@Model.Description</p>
                     <p class="font-weight-normal"><b>Status: </b>@Model.Status</p>
+                    @if (ViewBag.TotalCount != null)
+                    {
+                        <p class="font-weight-normal"><b>Ilość płatności: </b>@ViewBag.TotalCount</p>
+                    }
                 </div>
                 <div class="col-lg-7">
                     <table class="table table-striped table-responsive">
@@ -68,6 +72,16 @@
                             }
                         </tbody>
                     </table><br />
+                    <div id="totalPayment">
+                        @if (ViewBag.TotalCount != null)
+                        {
+                            <p class=""><b>Łączna kwota brutto: </b>@ViewBag.TotalInvoicePayment</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Łączna kwota brutto: </b>0</p>
+                        }
+                    </div>
                 </div>
             </div>
         </div>

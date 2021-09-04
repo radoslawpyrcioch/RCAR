@@ -1,4 +1,5 @@
-﻿using RCAR.Models.MemberVM;
+﻿using RCAR.Models.CarVM;
+using RCAR.Models.MemberVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,6 +17,7 @@ namespace RCAR.Services.Interfaces
         Task<bool> EditMemberAsync(MemberEditVM model);
         Task<bool> RemoveServiceAsync(int memberId);
         Task<bool> BackToDraftAsync(int memberId);
+        void CountCars(IEnumerable<CarsVM> model, ref int count);
        
     }
 }

@@ -2,6 +2,7 @@
 using RCAR.Domain.Entities;
 using RCAR.Domain.Interfaces;
 using RCAR.Models.CarVM;
+using RCAR.Models.PaymentRecordVM;
 using RCAR.Services.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -68,6 +69,12 @@ namespace RCAR.Services
             var car = await _unitOfWork.Car.GetByIdAsync(carId);
             _unitOfWork.Car.Remove(car);
             return await _unitOfWork.SaveChangesAsync();
+        }
+
+        public void CountPayment(IEnumerable<PaymentVM> model, ref int count, ref decimal totalPayment)
+        {
+            count = model.Count();
+            totalPayment = model.Sum(p => p.TotalAmount);
         }
     }
 }

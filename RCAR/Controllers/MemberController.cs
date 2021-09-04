@@ -64,6 +64,12 @@ namespace RCAR.Controllers
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = await _memberService.DetailMemberAsync(id, currentUserId);
+            if (model.Cars.Count() > 0)
+            {
+                var count = 0;
+                _memberService.CountCars(model.Cars, ref count);
+                ViewBag.TotalCountCar = count;
+            }
             return View(model);
         }
 

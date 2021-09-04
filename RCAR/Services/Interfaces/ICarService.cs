@@ -1,4 +1,5 @@
 ﻿using RCAR.Models.CarVM;
+using RCAR.Models.PaymentRecordVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,5 +14,6 @@ namespace RCAR.Services.Interfaces
         Task<bool> DoneCarSeriveAsync(int carId);
         Task<CarDetailVM> DetailCarAsync(int carId);
         Task<bool> InProgressCarStatusAsync(int carId);
+        void CountPayment(IEnumerable<PaymentVM> model, ref int count, ref decimal totalPayment);
     }
 }

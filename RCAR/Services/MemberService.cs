@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RCAR.Domain.Entities;
 using RCAR.Domain.Interfaces;
+using RCAR.Models.CarVM;
 using RCAR.Models.MemberVM;
 using RCAR.Services.Interfaces;
 using System;
@@ -115,6 +116,9 @@ namespace RCAR.Services
             return await _unitOfWork.SaveChangesAsync();
         }
 
-        
+        public void CountCars(IEnumerable<CarsVM> model, ref int count)
+        {
+            count = model.Count();
+        }
     }
 }
