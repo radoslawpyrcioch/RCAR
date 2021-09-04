@@ -1,4 +1,5 @@
-﻿using RCAR.Models.ServiceVM;
+﻿using RCAR.Models.PaymentRecordVM;
+using RCAR.Models.ServiceVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,8 +17,9 @@ namespace RCAR.Services.Interfaces
         Task<bool> BackServiceAsync(int serviceId);
         Task<ServiceEditVM> GetServiceForEditAsync(int serviceId, string userId);
         Task<bool> EditServiceAsync(ServiceEditVM model);
-        
-        
+
+        void CountPayment(IEnumerable<PaymentVM> model, ref int count, ref decimal totalAmount);
+      
 
     }
 }

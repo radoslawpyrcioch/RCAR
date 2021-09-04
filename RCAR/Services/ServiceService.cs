@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RCAR.Domain.Entities;
 using RCAR.Domain.Interfaces;
+using RCAR.Models.PaymentRecordVM;
 using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
 using System;
@@ -24,14 +25,14 @@ namespace RCAR.Services
         public async Task<IEnumerable<ServiceVM>> GetAllServiceAsync(string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
-            if(user != null)
+            if (user != null)
             {
-                if(user.Services.Count() > 0)
+                if (user.Services.Count() > 0)
                 {
                     var service = user.Services.Where(s => !s.IsRemoved);
                     var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ServiceVM>>(service);
                     return model;
-                }  
+                }
             }
             return new List<ServiceVM>();
         }
@@ -61,7 +62,7 @@ namespace RCAR.Services
                 _unitOfWork.Service.Add(service);
                 return await _unitOfWork.SaveChangesAsync();
             }
-            return false; 
+            return false;
         }
 
         public async Task<ServiceDetailVM> DetailServiceAsync(int serviceId, string userId)
@@ -112,6 +113,12 @@ namespace RCAR.Services
 
 
 
+        }
+
+        public void CountPayment(IEnumerable<PaymentVM> model, ref int count, ref decimal totalAmount)
+        {
+            totalAmount = model.Sum(p => p.TotalAmount);
+            count = model.Count();
         }
     }
 }

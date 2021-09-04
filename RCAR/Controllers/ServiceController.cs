@@ -96,6 +96,14 @@ namespace RCAR.Controllers
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = await _serviceService.DetailServiceAsync(id, currentUserId);
+            if( model.PaymentRecords.Count() > 0)
+            {
+                decimal totalAmount = 0;
+                var count = 0;
+                _serviceService.CountPayment(model.PaymentRecords, ref count, ref totalAmount);
+                ViewBag.TotalCount = count;
+                ViewBag.TotalInvoiceAmount = totalAmount;
+            }
             return View(model);
         }
 
