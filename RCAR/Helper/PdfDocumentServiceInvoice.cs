@@ -296,7 +296,7 @@ namespace RCAR.Helper
 
                 itemTable.AddCell(TableTotalAmountHeader("Razem"));
                 itemTable.AddCell(TableTotalAmount(string.Format("{0}", netAmount)));
-                itemTable.AddCell(TableTotalAmount(" "));
+                itemTable.AddCell(TableTotalAmount(string.Format("{0}", tax)));
                 itemTable.AddCell(TableTotalAmount(string.Format("{0}", discount)));
                 itemTable.AddCell(TableTotalAmount(string.Format("{0}", totalAmount)));
 

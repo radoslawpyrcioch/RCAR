@@ -14,13 +14,10 @@ namespace RCAR.Services
     public class PaymentRecordService : IPaymentRecordService
     {
        
-        private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
-        private decimal totalPayment;
 
-        public PaymentRecordService(IUnitOfWork unitOfWork, IMapper mapper)
+        public PaymentRecordService(IUnitOfWork unitOfWork)
         {  
-            _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
 
@@ -37,7 +34,7 @@ namespace RCAR.Services
                     {
                         Name = paymentVM.Name,
                         Description = paymentVM.Description,
-                        Tax = paymentVM.Tax,
+                        Tax = CalculateTaxAmount(paymentVM.Discount, paymentVM.TotalAmount),
                         Discount = paymentVM.Discount,
                         TotalAmount = CalculateDiscount(paymentVM.Discount, paymentVM.TotalAmount),    
                         NetAmount = CalculateNetAmount(paymentVM.Discount, paymentVM.TotalAmount),
@@ -63,7 +60,7 @@ namespace RCAR.Services
                     {
                         Name = paymentVM.Name,
                         Description = paymentVM.Description,
-                        Tax = paymentVM.Tax,
+                        Tax = CalculateTaxAmount(paymentVM.Discount, paymentVM.TotalAmount),
                         Discount = paymentVM.Discount,
                         TotalAmount = CalculateDiscount(paymentVM.Discount, paymentVM.TotalAmount),
                         NetAmount = CalculateNetAmount(paymentVM.Discount, paymentVM.TotalAmount),
@@ -87,6 +84,12 @@ namespace RCAR.Services
             return totalAmount - totalDiscount;
         }
 
+        public decimal CalculateTaxAmount(decimal totalDiscount, decimal totalAmount)
+        {
+            var netAmount = (totalAmount - totalDiscount) / 1.23m;
+            return totalAmount - totalDiscount - netAmount;
+        }
+
         public async Task<bool> RemovePaymentAsync(int paymentId)
         {
             var payment = await _unitOfWork.PaymentRecord.GetByIdAsync(paymentId);
@@ -102,7 +105,6 @@ namespace RCAR.Services
             payment.Status = "Zapłacone";
             return await _unitOfWork.SaveChangesAsync();
         }
-
-        
+    
     }
 }

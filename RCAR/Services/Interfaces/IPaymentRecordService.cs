@@ -11,6 +11,7 @@ namespace RCAR.Services.Interfaces
     {
         Task<bool> CreatePaymentAsync(PaymentCreateVM paymentVM, int serviceId, string userId);
         Task<bool> CreateCarPaymentAsync(PaymentCarCreateVM paymentVM, int carId, string userId);
+        decimal CalculateTaxAmount(decimal totalDiscount, decimal totalAmount);
         decimal CalculateNetAmount(decimal totalDiscount, decimal totalAmount);
         decimal CalculateDiscount(decimal totalDiscount, decimal totalAmount);
         Task<bool> RemovePaymentAsync(int paymentId);
