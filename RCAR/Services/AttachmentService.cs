@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using RCAR.Domain.Entities;
 using RCAR.Domain.Interfaces;
 using RCAR.Helper;
 using RCAR.Models.MemberVM;
@@ -36,6 +37,16 @@ namespace RCAR.Services
             var service = await _unitOfWork.Service.FindAllAsync(s => s.UserId == userId & s.IsRemoved);
             var serviceVM = _mapper.Map<IEnumerable<ServiceVM>>(service);
             var pdfHelper = new PdfDocumentServiceRemoved(serviceVM);
+
+            return pdfHelper.Generate();
+        }
+
+        public async Task<byte[]> GenerateServiceInvoice(int serviceId, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(s => s.Id == userId);
+            var service = user.Services.Where(s => s.ServiceId == serviceId && !s.IsRemoved).FirstOrDefault();
+            var serviceVM = _mapper.Map<Service, ServiceDetailVM>(service);
+            var pdfHelper = new PdfDocumentServiceInvoice(serviceVM);
 
             return pdfHelper.Generate();
         }

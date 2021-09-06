@@ -139,5 +139,15 @@ namespace RCAR.Controllers
 
             return File(fileContents, "spisWykonanychSerwisow/pdf", fileName);
         }
+
+        [HttpGet]
+        public async Task<IActionResult> DownloadInvoice(int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var fileContents = await _attachmentService.GenerateServiceInvoice(id, currentUserId);
+            var fileName = string.Format("FakturaZaSerwis_{0}.pdf", DateTime.Today.ToShortDateString());
+
+            return File(fileContents, "application/pdf", fileName);
+        }
     }
 }

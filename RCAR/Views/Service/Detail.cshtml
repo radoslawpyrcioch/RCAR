@@ -16,7 +16,10 @@
             <a class="btn btn-xs btn-secondary float-md-right mr-1" href="/Service/Index/@Model.ServiceId"> Wróć</a>
             <div class="row">
                 <div class="col-lg-4 ml-5">
-                    <div class="col-lg-10 mb-5"><h3><b>Szczegóły serwisu</b></h3></div>
+                    <div class="col-lg-10 mb-5">
+                        <h3><b>Szczegóły serwisu</b></h3>
+
+                    </div>
                     <p class="font-weight-normal"><b>Imię i nazwisko: </b>@Model.FullName</p>
                     <p class="font-weight-normal"><b>Data przyjęcia: </b>@Model.ServiceSince.ToString("dd/MM/yyyy")</p>
                     <p class="font-weight-normal"><b>Data zakończenia: </b>@Model.ServiceTo.ToString("dd/MM/yyyy")</p>
@@ -34,7 +37,6 @@
                     {
                         <p class="font-weight-normal"><b>Ilość płatności: </b>Brak</p>
                     }
-
                 </div>
                 <div class="col-lg-7">
                     <div class="text-center mb-5"><h3><b>Płatności</b></h3></div>
@@ -81,16 +83,17 @@
                             }
                         </tbody>
                     </table><br />
-                    <div id="totalPayment">
-                        @if (ViewBag.TotalCount != null)
-                        {
-                            <p class=""><b>Łączna kwota brutto: </b>@ViewBag.TotalInvoiceAmount</p>
-                        }
-                        else
-                        {
-                            <p class="font-weight-normal"><b>Łączna kwota brutto: </b>0</p>
-                        }
-                    </div>
+                            <div id="totalPayment">
+                                @if (ViewBag.TotalCount != null)
+                                {
+                                    <p class=""><b>Łączna kwota brutto: </b>@ViewBag.TotalInvoiceAmount</p>
+                                    <p class="font-weight-normal"> <a class="btn btn-xs btn-warning" href="/Service/DownloadInvoice/@Model.ServiceId">Pobierz Fakturę</a></p>
+                                }
+                                else
+                                {
+                                    <p class="font-weight-normal"><b>Łączna kwota brutto: </b>0</p>
+                                }
+                            </div>
                 </div>
             </div>
         </div>
