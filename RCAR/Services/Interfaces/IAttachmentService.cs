@@ -10,5 +10,6 @@ namespace RCAR.Services.Interfaces
         Task<byte[]> GenerateDoneServiceListAttachmentAsync(string userId);
         Task<byte[]> GenerateActualMemberListAsync(string userId);
         Task<byte[]> GenerateServiceInvoice(int serviceId, string userId);
+        Task<byte[]> GenerateMemberCars(int memberId, string userId);
     }
 }

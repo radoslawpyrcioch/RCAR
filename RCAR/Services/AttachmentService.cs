@@ -50,5 +50,14 @@ namespace RCAR.Services
 
             return pdfHelper.Generate();
         }
+        public async Task<byte[]> GenerateMemberCars(int memberId, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(s => s.Id == userId);
+            var member = user.Members.Where(s => s.MemberId == memberId).FirstOrDefault();
+            var memberVM = _mapper.Map<Member, MemberDetailVM>(member);
+            var pdfHelper = new PdfDocumentMemberCars(memberVM);
+
+            return pdfHelper.Generate();
+        }
     }
 }

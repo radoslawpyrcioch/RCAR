@@ -81,6 +81,16 @@
                             }
                         </tbody>
                     </table><br />
+                    <div id="totalPayment">
+                        @if (ViewBag.TotalCountCar != null)
+                        {
+                            <p class="font-weight-normal"> <a class="btn btn-xs btn-warning" href="/Member/DownloadMemberCar/@Model.MemberId">Pobierz listę samochodów</a></p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Brak samochodów: </b>0</p>
+                        }
+                    </div>
                 </div>
             </div>
 

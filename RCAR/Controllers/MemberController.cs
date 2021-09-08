@@ -131,5 +131,15 @@ namespace RCAR.Controllers
             return File(fileContents, "SpisWszystkichCzlonkow/pdf", fileName);
         }
 
+        [HttpGet]
+        public async Task<IActionResult> DownloadMemberCar(int id)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var fileContents = await _attachmentService.GenerateMemberCars(id, currentUserId);
+            var fileName = string.Format("SpisWszystkichSamochodow_{0}.pdf", DateTime.Today.ToShortDateString());
+
+            return File(fileContents, "application/pdf", fileName);
+        }
+
     }
 }
