@@ -68,7 +68,7 @@ namespace RCAR.Services
         public async Task<ServiceDetailVM> DetailServiceAsync(int serviceId, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
-            var service = user.Services.Where(s => s.ServiceId == serviceId && !s.IsRemoved).FirstOrDefault();
+            var service = user.Services.Where(s => s.ServiceId == serviceId).FirstOrDefault();
             var model = _mapper.Map<Service, ServiceDetailVM>(service);
             return model;
         }

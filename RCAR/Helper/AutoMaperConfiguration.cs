@@ -3,6 +3,7 @@ using RCAR.Domain.Entities;
 using RCAR.Models.CarVM;
 using RCAR.Models.MemberVM;
 using RCAR.Models.PaymentRecordVM;
+using RCAR.Models.ReportVM;
 using RCAR.Models.ServiceVM;
 using System;
 using System.Collections.Generic;
@@ -31,6 +32,12 @@ namespace RCarManager.Helper
 
             CreateMap<Car, CarsVM>();
             CreateMap<Car, CarDetailVM>();
+
+            CreateMap<PaymentRecord, ReportPaymentVM>();
+            CreateMap<Service, ReportVM>();
+            CreateMap<Service, ReportServiceVM>().ForMember(dest => dest.PaymentNetAmount, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().NetAmount))
+                                                 .ForMember(dest => dest.PaymentNumber, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().Name))
+                                                 .ForMember(dest => dest.PaymentStatus, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().Status));
         }
     }
 }
