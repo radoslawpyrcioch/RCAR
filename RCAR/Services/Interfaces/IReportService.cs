@@ -7,6 +7,6 @@ namespace RCAR.Services.Interfaces
 {
     public interface IReportService
     {
-        Task<IEnumerable<ReportServiceVM>> GetAllServiceWithLastPaymentAsync(string userId);
+        Task<IEnumerable<ReportServiceVM>> GetAllServiceWithLastPaymentAsync(string sortOrder, string userId);
     }
 }

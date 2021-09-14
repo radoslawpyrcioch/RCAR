@@ -23,17 +23,15 @@ namespace RCAR.Controllers
             return View();
         }
 
-        public async Task<IActionResult> DetailService()
+        public async Task<IActionResult> DetailService(string sortOrder)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = new ReportVM()
             {
-                ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(currentUserId),
+                ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(sortOrder, currentUserId),
             };
             return View(model);
         }
-
-
 
     }
 }

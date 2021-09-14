@@ -22,20 +22,51 @@ namespace RCAR.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ReportServiceVM>> GetAllServiceWithLastPaymentAsync(string userId)
+        public async Task<IEnumerable<ReportServiceVM>> GetAllServiceWithLastPaymentAsync(string sortOrder, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
             if (user != null)
             {
                 if (user.Services.Count() > 0)
                 {
-                    var service = user.Services.ToList();
-                    var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
-                    return model;
+                    switch (sortOrder)
+                    {
+                        case "Zakończone":
+                            {
+                                var service = user.Services.Where(s => s.Status == "Zakończony");
+                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
+                                return model;
+                            }
+                        case "Rozpoczęty":
+                            {
+                                var service = user.Services.Where(s => s.Status == "Rozpoczęty");
+                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
+                                return model;
+                            }
+                        case "Cofnięty":
+                            {
+                                var service = user.Services.Where(s => s.Status == "Cofnięty");
+                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
+                                return model;
+                            }
+                        case "Wszystkie":
+                            {
+                                var service = user.Services.ToList();
+                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
+                                return model;
+                            }
+
+                        default:
+                            {
+                                var service = user.Services.ToList();
+                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
+                                return model;
+                            }
+                    }
+
                 }
             }
             return new List<ReportServiceVM>();
-                   
-        }
+        }  
     }
 }

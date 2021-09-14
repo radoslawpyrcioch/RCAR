@@ -86,4 +86,18 @@ body {
     margin-left: 150px;
 }
 
+#dropDownListStatus{
+    font-size: 20px;
+    padding: 10px;
+    margin-bottom: 15px;
+    background-color: #fbf7f7;
+}
+
+#dropDownListStatusButton {
+    font-size: 20px;
+    padding: 2px;
+    margin-bottom: 15px;
+    margin-left: 5px;
+    background-color: #e5b66b;
+}
 
