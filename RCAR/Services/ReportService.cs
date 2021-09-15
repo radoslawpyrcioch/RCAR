@@ -29,41 +29,18 @@ namespace RCAR.Services
             {
                 if (user.Services.Count() > 0)
                 {
-                    switch (sortOrder)
+                    var service = new List<Service>();
+                    if (sortOrder == "Wszystkie")
                     {
-                        case "Zakończone":
-                            {
-                                var service = user.Services.Where(s => s.Status == "Zakończony");
-                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
-                                return model;
-                            }
-                        case "Rozpoczęty":
-                            {
-                                var service = user.Services.Where(s => s.Status == "Rozpoczęty");
-                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
-                                return model;
-                            }
-                        case "Cofnięty":
-                            {
-                                var service = user.Services.Where(s => s.Status == "Cofnięty");
-                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
-                                return model;
-                            }
-                        case "Wszystkie":
-                            {
-                                var service = user.Services.ToList();
-                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
-                                return model;
-                            }
-
-                        default:
-                            {
-                                var service = user.Services.ToList();
-                                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
-                                return model;
-                            }
+                        
+                        service = user.Services.ToList();
                     }
-
+                    else
+                    {
+                        service = user.Services.Where(s => s.Status.Equals(sortOrder)).ToList();
+                    }
+                    var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
+                    return model;
                 }
             }
             return new List<ReportServiceVM>();
