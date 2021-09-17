@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RCAR.Models.ReportVM;
 using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace RCAR.Controllers
 {
+    [Authorize]
     public class ReportController : Controller
     {
         private readonly IExcelService _excelService;
@@ -31,6 +33,16 @@ namespace RCAR.Controllers
             var model = new ReportVM()
             {
                 ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(sortOrder, currentUserId),
+            };
+            return View(model);
+        }
+
+        public async Task<IActionResult> DetailReportServiceAdministrator()
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = new ReportVM()
+            {
+                ReportAdministrator = await _reportService.GetAllServiceWithTotalPaymentNetAmount(currentUserId)
             };
             return View(model);
         }

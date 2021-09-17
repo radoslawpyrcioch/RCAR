@@ -38,10 +38,22 @@
                         </div>
                     </div>
                 </div>
+                @if (User.IsInRole("Administrator"))
+                {
+                    <div class="col-sm-6">
+                        <div class="card">
+                            <div class="card-body border border-dark bg-secondary">
+                                <h5 class="card-title text-white">Raport serwisów (Administrator)</h5>
+                                <p class="card-text text-white-50">Zobacz raport wszystkich serwisów z sumą wszystkich płatności</p>
+                                <a href="/Report/DetailReportServiceAdministrator" class="btn btn-primary">Pokaż</a>
+                            </div>
+                        </div>
+                    </div>
+                }
+
             </div>
         </div>
     </div>
 </div>
-
 
 
