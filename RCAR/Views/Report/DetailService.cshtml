@@ -10,20 +10,15 @@
                     <li class="breadcrumb-item active" aria-current="page">Lista Serwisów</li>
                 </ol>
             </nav><br /><br />
-
             <div class="row">
-                <form method="post">
-                    <div>
-                        <select id="dropDownListStatus" name="sortOrder">
-                            <option selected disabled>Wybierz status</option>
-                            <option value="Wszystkie">Wszystkie</option>
-                            <option value="Rozpoczęty">Rozpoczęty</option>
-                            <option value="Zakończony">Zakończony</option>
-                            <option value="Cofnięty">Cofnięty</option>
-                        </select>
-                        <input id="dropDownListStatusButton" type="submit" value="Filtruj po statusie" />
-                        <a href="/Report/ExportToExcel" class="btn btn-primary" name="sortOrder"><i class="fas fa-cloud-download-alt"></i></a>
-                    </div>
+                <form method="post" id="myForm">
+                    <select name="filterService" id="filterService">
+                        <option selected>Wyfiltruj według statusu</option>
+                        <option value="Wszystkie">Wszystkie</option>
+                        <option value="Rozpoczęty">Rozpoczęty</option>
+                        <option value="Zakończony">Zakończony</option>
+                        <option value="Cofnięty">Cofnięty</option>                      
+                    </select>
                 </form>
                 <div class="col-md-12 table-responsive-md">
                     <table class="table table-striped " id="myTable" style="width:100%">
@@ -88,6 +83,7 @@
                                     </td>
 
 
+
                                 </tr>
                             }
                         </tbody>
@@ -103,4 +99,5 @@
 
 @section Scripts{
     <script src="~/js/reports/datatables-index.js"></script>
+    <script src="~/js/services/filter-service-by-status.js"></script>
 }

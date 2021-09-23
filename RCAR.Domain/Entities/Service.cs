@@ -21,6 +21,7 @@ namespace RCAR.Domain.Entities
         public string Description { get; set; }
         public bool IsRemoved { get; set; }
         public string Status { get; set; }
+        public string Filter { get; set; }
 
         public virtual User User { get; set; }
         public string UserId { get; set; }

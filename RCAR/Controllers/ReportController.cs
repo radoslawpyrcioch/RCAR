@@ -27,12 +27,12 @@ namespace RCAR.Controllers
             return View();
         }
 
-        public async Task<IActionResult> DetailService(string sortOrder)
+        public async Task<IActionResult> DetailService(string filterService)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = new ReportVM()
             {
-                ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(sortOrder, currentUserId),
+                ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(filterService, currentUserId),
             };
             return View(model);
         }
@@ -47,11 +47,11 @@ namespace RCAR.Controllers
             return View(model);
         }
 
-        [HttpGet]
-        public async Task<IActionResult> ExportToExcel()
+
+        public async Task<IActionResult> ExportToExcel(string filterService)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
-            var model = await _excelService.GenerateReportServiceExcel(currentUserId);
+            var model = await _excelService.GenerateReportServiceExcel(filterService, currentUserId);
             string fileName = string.Format("RaportSerwisow_{0}.xlsx", DateTime.Today.ToShortDateString());
             string fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             return File(model, fileType, fileName);

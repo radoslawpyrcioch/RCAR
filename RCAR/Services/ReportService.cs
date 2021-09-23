@@ -22,7 +22,7 @@ namespace RCAR.Services
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<ReportServiceVM>> GetAllServiceWithLastPaymentAsync(string sortOrder, string userId)
+        public async Task<IEnumerable<ReportServiceVM>> GetAllServiceWithLastPaymentAsync(string filterService, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
             if (user != null)
@@ -30,14 +30,13 @@ namespace RCAR.Services
                 if (user.Services.Count() > 0)
                 {
                     var service = new List<Service>();
-                    if (sortOrder == "Wszystkie")
-                    {
-                        
+                    if (filterService == "Wszystkie")
+                    {                                              
                         service = user.Services.ToList();
                     }
                     else
                     {
-                        service = user.Services.Where(s => s.Status.Equals(sortOrder)).ToList();
+                        service = user.Services.Where(s => s.Status.Equals(filterService)).ToList();
                     }
                     var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceVM>>(service);
                     return model;
