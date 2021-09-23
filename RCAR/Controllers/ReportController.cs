@@ -48,10 +48,10 @@ namespace RCAR.Controllers
         }
 
 
-        public async Task<IActionResult> ExportToExcel(string filterService)
+        public async Task<IActionResult> ExportToExcel(string exportService)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
-            var model = await _excelService.GenerateReportServiceExcel(filterService, currentUserId);
+            var model = await _excelService.GenerateReportServiceExcel(exportService, currentUserId);
             string fileName = string.Format("RaportSerwisow_{0}.xlsx", DateTime.Today.ToShortDateString());
             string fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             return File(model, fileType, fileName);

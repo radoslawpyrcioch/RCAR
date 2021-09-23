@@ -7,6 +7,6 @@ namespace RCAR.Services.Interfaces
 {
     public interface IExcelService
     {
-        Task<byte[]> GenerateReportServiceExcel(string userId);
+        Task<byte[]> GenerateReportServiceExcel(string exportService, string userId);
     }
 }
