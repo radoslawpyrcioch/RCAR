@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RCAR.Models.PaymentRecordVM;
 using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
@@ -9,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace RCAR.Controllers
 {
+    [Authorize]
     public class PaymentRecordController : Controller
     {
         private readonly IPaymentRecordService _paymentRecordService;

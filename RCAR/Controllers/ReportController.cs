@@ -37,6 +37,7 @@ namespace RCAR.Controllers
             return View(model);
         }
 
+        [Authorize()]
         public async Task<IActionResult> DetailReportServiceAdministrator()
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
