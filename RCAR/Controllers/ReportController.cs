@@ -37,7 +37,7 @@ namespace RCAR.Controllers
             return View(model);
         }
 
-        [Authorize()]
+        [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DetailReportServiceAdministrator()
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
@@ -54,6 +54,16 @@ namespace RCAR.Controllers
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = await _excelService.GenerateReportServiceExcel(exportService, currentUserId);
             string fileName = string.Format("RaportSerwisow_{0}.xlsx", DateTime.Today.ToShortDateString());
+            string fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return File(model, fileType, fileName);
+        }
+
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> ExportToExcelAdministratorListService(string exportService)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _excelService.GenerateReportServiceAdministratorExcel(exportService, currentUserId);
+            string fileName = string.Format("RaportSerwisowAdministrator_{0}.xlsx", DateTime.Today.ToShortDateString());
             string fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
             return File(model, fileType, fileName);
         }
