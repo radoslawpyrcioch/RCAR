@@ -15,7 +15,7 @@ namespace RCAR.Controllers
     {
         private readonly IExcelService _excelService;
         private readonly IReportService _reportService;
-        private const string kowalskiId = "7b4d87a6-44be-4ef5-962f-7913bd97039c";
+        private const string kowalskiUserId = "7b4d87a6-44be-4ef5-962f-7913bd97039c";
 
         public ReportController(IReportService reportService, IExcelService excelService)
         {
@@ -38,13 +38,11 @@ namespace RCAR.Controllers
                 ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(filterService, currentUserId),
             };
 
-
-            if (currentUserId == kowalskiId)
+            if (currentUserId == kowalskiUserId)
             {
                 return View("DetailReportServiceKowalski", model);
             }
             return View(model);
-
         }
 
         [HttpGet, HttpPost]

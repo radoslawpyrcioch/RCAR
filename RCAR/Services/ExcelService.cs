@@ -16,6 +16,7 @@ namespace RCAR.Services
     {
         private readonly IUnitOfWork _unitOfWork;
         private readonly IMapper _mapper;
+        private const string kowalskiUserId = "7b4d87a6-44be-4ef5-962f-7913bd97039c";
 
         public ExcelService(IUnitOfWork unitOfWork, IMapper mapper)
         {
@@ -39,11 +40,19 @@ namespace RCAR.Services
                 {
                     service = user.Services.Where(s => s.Status.Equals(exportService)).ToList();
                 }
-                var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceExcelVM>>(service);
 
-                var worksheet = package.Workbook.Worksheets.Add("Raport");
-                worksheet.Cells.LoadFromCollection(model, PrintHeaders: true);
-
+                if (userId == kowalskiUserId)
+                {
+                    var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceExcelKowalskiVM>>(service);
+                    var worksheet = package.Workbook.Worksheets.Add("Raport");
+                    worksheet.Cells.LoadFromCollection(model, PrintHeaders: true);
+                }
+                else
+                {
+                    var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceExcelVM>>(service);
+                    var worksheet = package.Workbook.Worksheets.Add("Raport");
+                    worksheet.Cells.LoadFromCollection(model, PrintHeaders: true);
+               }               
                 package.Save();
             }
             return stream.GetBuffer();
