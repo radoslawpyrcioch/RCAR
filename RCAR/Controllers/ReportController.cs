@@ -38,12 +38,12 @@ namespace RCAR.Controllers
         }
 
         [Authorize(Roles = "Administrator")]
-        public async Task<IActionResult> DetailReportServiceAdministrator()
+        public async Task<IActionResult> DetailReportServiceAdministrator(string filterService)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = new ReportVM()
             {
-                ReportAdministrator = await _reportService.GetAllServiceWithTotalPaymentNetAmount(currentUserId)
+                ReportAdministrator = await _reportService.GetAllServiceWithTotalPaymentNetAmount(filterService, currentUserId)
             };
             return View(model);
         }

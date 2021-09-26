@@ -45,14 +45,22 @@ namespace RCAR.Services
             return new List<ReportServiceVM>();
         }
 
-        public async Task<IEnumerable<ReportServiceAdministratorVM>> GetAllServiceWithTotalPaymentNetAmount(string userId)
+        public async Task<IEnumerable<ReportServiceAdministratorVM>> GetAllServiceWithTotalPaymentNetAmount(string filterService, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
             if (user != null)
             {
                 if (user.Services.Count() > 0)
                 {
-                    var service = user.Services.ToList();
+                    var service = new List<Service>();
+                    if (filterService == "Wszystkie")
+                    {
+                        service = user.Services.ToList();
+                    }
+                    else
+                    {
+                        service = user.Services.Where(s => s.Status.Equals(filterService)).ToList();
+                    }
                     var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceAdministratorVM>>(service);
                     return model;
                 }

@@ -8,6 +8,6 @@ namespace RCAR.Services.Interfaces
     public interface IReportService
     {
         Task<IEnumerable<ReportServiceVM>> GetAllServiceWithLastPaymentAsync(string filterService, string userId);
-        Task<IEnumerable<ReportServiceAdministratorVM>> GetAllServiceWithTotalPaymentNetAmount(string userId);
+        Task<IEnumerable<ReportServiceAdministratorVM>> GetAllServiceWithTotalPaymentNetAmount(string filterService, string userId);
     }
 }

@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -8,33 +10,33 @@ namespace RCAR.Models.ReportVM
 {
     public class ReportServiceAdministratorExcelVM
     {
-        public int ServiceId { get; set; }
+       //public int ServiceId { get; set; }
 
-        [Display(Name = "Numer")]
+        [DisplayName("Numer")]
         public string ServiceNo { get; set; }
 
-        [Display(Name = "Imię")]
+        [DisplayName("Imię")]
         public string FirstName { get; set; }
 
-        [Display(Name = "Nazwisko")]
+        [DisplayName("Nazwisko")]
         public string LastName { get; set; }
 
-        [Display(Name = "Telefon")]
+        [DisplayName("Telefon")]
         public string Phone { get; set; }
 
-        [DataType(DataType.Date), Display(Name = "Data przyjęcia")]
+        [Column(TypeName = "date"), DisplayName("Data przyjęcia")]
         public DateTime ServiceSince { get; set; }
 
-        [DataType(DataType.Date), Display(Name = "Data zakończenia")]
+        [Column(TypeName = "date"), DisplayName("Data zakończenia")]
         public DateTime ServiceTo { get; set; }
 
-        [Display(Name = "Opis naprawy")]
+        [DisplayName("Opis naprawy")]
         public string Description { get; set; }
 
-        [Display(Name = "Status")]
+        [DisplayName("Status")]
         public string Status { get; set; }
 
-        [Display(Name = "Suma płatności netto")]
+        [DisplayName("Suma płatności netto")]
         public decimal PaymentNetAmount { get; set; }
 
     }

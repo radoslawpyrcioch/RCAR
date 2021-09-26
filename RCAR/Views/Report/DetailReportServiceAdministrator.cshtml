@@ -11,6 +11,15 @@
                 </ol>
             </nav><br /><br />
             <div class="row">
+                <form method="post" id="myForm">
+                    <select name="filterService" id="filterService">
+                        <option selected>Wyfiltruj według statusu</option>
+                        <option value="Wszystkie">Wszystkie</option>
+                        <option value="Rozpoczęty">Rozpoczęty</option>
+                        <option value="Zakończony">Zakończony</option>
+                        <option value="Cofnięty">Cofnięty</option>
+                    </select>
+                </form>
                 <form method="get" id="myFormExcel" asp-controller="Report" asp-action="ExportToExcelAdministratorListService">
                     <select name="exportService" id="exportService">
                         <option selected class="alert-danger">Pobierz excel</option>
@@ -75,4 +84,5 @@
 @section Scripts{
     <script src="~/js/reports/datatables-index.js"></script>
     <script src="~/js/reports/download-excel-service.js"></script>
+    <script src="~/js/reports/filter-service-by-status.js"></script>
 }
