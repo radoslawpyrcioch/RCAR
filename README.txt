@@ -1,0 +1,29 @@
+# RCAR
+
+## Project patterns:
+- MVC
+- Reporitory
+- Dependency Injection
+
+### Features:
+ - Service layer (thanks to which the controller actions are responsible mainly for generating views)
+ - Inversion of control (Extensions > IoCContainer.cs)
+ - Database build using Entity Framework (code first)
+ - Linq
+ - Sending e-mail via smtp protocol (Helpers > EmailSender.cs)
+ - Registration and login system with data encryption (ASP.NET Identity)
+ - User roles with different permissions ("Administrator", "Customer")
+ - Generating pdf documents in iTextSharp (Helpers > PdfDocument.cs)
+ - Views built in bootstrap
+ - Razor
+ - Java Script
+ - EPPlus (generate Excel files)
+ - Ajax request support (e.g asynchronous calculate date)
+
+### How to run:
+ - Clone this project to your computer
+ - Use the update-database command in the Visual Studio console 
+ - You can log in to the administrator account (Email: Administrator@poczta.pl, Hasło: Start123!)
+ 
+
+ 
