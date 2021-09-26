@@ -47,6 +47,7 @@ namespace RCAR.Models.ReportVM
         public decimal PaymentNetAmount { get; set; }
         public string PaymentNumber { get; set; }
         public string PaymentStatus { get; set; }
+        public string TotalNetPayment { get; set; }
 
 
         public IEnumerable<ReportPaymentVM> Payment { get; set; }

@@ -15,6 +15,7 @@ namespace RCAR.Controllers
     {
         private readonly IExcelService _excelService;
         private readonly IReportService _reportService;
+        private const string kowalskiId = "7b4d87a6-44be-4ef5-962f-7913bd97039c";
 
         public ReportController(IReportService reportService, IExcelService excelService)
         {
@@ -27,16 +28,26 @@ namespace RCAR.Controllers
             return View();
         }
 
+        [HttpGet, HttpPost]
         public async Task<IActionResult> DetailService(string filterService)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
+
             var model = new ReportVM()
             {
                 ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(filterService, currentUserId),
             };
+
+
+            if (currentUserId == kowalskiId)
+            {
+                return View("DetailReportServiceKowalski", model);
+            }
             return View(model);
+
         }
 
+        [HttpGet, HttpPost]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> DetailReportServiceAdministrator(string filterService)
         {
@@ -48,7 +59,7 @@ namespace RCAR.Controllers
             return View(model);
         }
 
-
+        [HttpGet]
         public async Task<IActionResult> ExportToExcel(string exportService)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
@@ -58,6 +69,7 @@ namespace RCAR.Controllers
             return File(model, fileType, fileName);
         }
 
+        [HttpGet]
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> ExportToExcelAdministratorListService(string exportService)
         {

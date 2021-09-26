@@ -37,7 +37,8 @@ namespace RCarManager.Helper
             CreateMap<Service, ReportVM>();
             CreateMap<Service, ReportServiceVM>().ForMember(dest => dest.PaymentNetAmount, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().NetAmount))
                                                  .ForMember(dest => dest.PaymentNumber, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().Name))
-                                                 .ForMember(dest => dest.PaymentStatus, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().Status));
+                                                 .ForMember(dest => dest.PaymentStatus, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().Status))
+                                                 .ForMember(dest => dest.TotalNetPayment, opt => opt.MapFrom(src => src.PaymentRecords.Sum( n => n.NetAmount)));
             CreateMap<Service, ReportServiceExcelVM>().ForMember(dest => dest.PaymentNetAmount, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().NetAmount))
                                                       .ForMember(dest => dest.PaymentNumber, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().Name))
                                                       .ForMember(dest => dest.PaymentStatus, opt => opt.MapFrom(src => src.PaymentRecords.LastOrDefault().Status));
