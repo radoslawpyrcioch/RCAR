@@ -17,6 +17,8 @@ namespace RCAR.Controllers
         private readonly IReportService _reportService;
         private const string kowalskiUserId = "7b4d87a6-44be-4ef5-962f-7913bd97039c";
 
+        private static string Filter;
+
         public ReportController(IReportService reportService, IExcelService excelService)
         {
             _excelService = excelService;
@@ -35,9 +37,10 @@ namespace RCAR.Controllers
 
             var model = new ReportVM()
             {
-                ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(filterService, currentUserId),
+                ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(filterService, currentUserId)
+               
             };
-
+            Filter = filterService;
             if (currentUserId == kowalskiUserId)
             {
                 return View("DetailReportServiceKowalski", model);
@@ -60,6 +63,7 @@ namespace RCAR.Controllers
         [HttpGet]
         public async Task<IActionResult> ExportToExcel(string exportService)
         {
+            exportService = Filter;
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = await _excelService.GenerateReportServiceExcel(exportService, currentUserId);
             string fileName = string.Format("RaportSerwisow_{0}.xlsx", DateTime.Today.ToShortDateString());
