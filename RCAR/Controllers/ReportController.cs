@@ -57,6 +57,7 @@ namespace RCAR.Controllers
             {
                 ReportAdministrator = await _reportService.GetAllServiceWithTotalPaymentNetAmount(filterService, currentUserId)
             };
+            Filter = filterService;
             return View(model);
         }
 
@@ -75,6 +76,7 @@ namespace RCAR.Controllers
         [Authorize(Roles = "Administrator")]
         public async Task<IActionResult> ExportToExcelAdministratorListService(string exportService)
         {
+            exportService = Filter;
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = await _excelService.GenerateReportServiceAdministratorExcel(exportService, currentUserId);
             string fileName = string.Format("RaportSerwisowAdministrator_{0}.xlsx", DateTime.Today.ToShortDateString());
