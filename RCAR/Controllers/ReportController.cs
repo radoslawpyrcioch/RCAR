@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using CsvHelper.Configuration;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using RCAR.Models.ReportVM;
 using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace RCAR.Controllers
@@ -38,7 +41,7 @@ namespace RCAR.Controllers
             var model = new ReportVM()
             {
                 ReportPayment = await _reportService.GetAllServiceWithLastPaymentAsync(filterService, currentUserId)
-               
+
             };
             Filter = filterService;
             if (currentUserId == kowalskiUserId)
@@ -81,6 +84,17 @@ namespace RCAR.Controllers
             var model = await _excelService.GenerateReportServiceAdministratorExcel(exportService, currentUserId);
             string fileName = string.Format("RaportSerwisowAdministrator_{0}.xlsx", DateTime.Today.ToShortDateString());
             string fileType = "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet";
+            return File(model, fileType, fileName);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> ExportCSV(string exportService)
+        {
+            exportService = Filter;
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _excelService.GenerateReportServiceCSV(exportService, currentUserId);
+            string fileName = string.Format("RaportSerwisowCSV_{0}.csv", DateTime.Today.ToShortDateString());
+            string fileType = "text/csv";
             return File(model, fileType, fileName);
         }
 

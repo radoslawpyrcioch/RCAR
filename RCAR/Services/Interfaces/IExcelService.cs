@@ -9,5 +9,6 @@ namespace RCAR.Services.Interfaces
     {
         Task<byte[]> GenerateReportServiceExcel(string exportService, string userId);
         Task<byte[]> GenerateReportServiceAdministratorExcel(string exportService, string userId);
+        Task<byte[]> GenerateReportServiceCSV(string exportService, string userId);
     }
 }
