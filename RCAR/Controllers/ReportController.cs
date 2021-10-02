@@ -98,5 +98,17 @@ namespace RCAR.Controllers
             return File(model, fileType, fileName);
         }
 
+        [HttpGet]
+        [Authorize(Roles = "Administrator")]
+        public async Task<IActionResult> ExportAdministratorCSV(string exportService)
+        {
+            exportService = Filter;
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _excelService.GenerateReportServiceAdministratorCSV(exportService, currentUserId);
+            string fileName = string.Format("RaportSerwisowAdministratorCSV_{0}.csv", DateTime.Today.ToShortDateString());
+            string fileType = "text/csv";
+            return File(model, fileType, fileName);
+        }
+
     }
 }

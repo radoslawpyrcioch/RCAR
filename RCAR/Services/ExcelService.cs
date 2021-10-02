@@ -131,5 +131,38 @@ namespace RCAR.Services
 
             return memoryStreamcsv.GetBuffer();
         }
+
+        public async Task<byte[]> GenerateReportServiceAdministratorCSV(string exportService, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+
+            var memoryStreamcsv = new MemoryStream();
+            var streamWritercsv = new StreamWriter(memoryStreamcsv, Encoding.UTF8);
+
+            var emptySpace = ",";
+
+            var service = new List<Service>();
+            if (exportService == "Wszystkie")
+            {
+                service = user.Services.ToList();
+            }
+            else
+            {
+                service = user.Services.Where(s => s.Status.Equals(exportService)).ToList();
+            }
+            var model = _mapper.Map<IEnumerable<Service>, IEnumerable<ReportServiceAdministratorExcelVM>>(service);
+
+            foreach (var item in model)
+            {
+                streamWritercsv.WriteLine(item.ServiceNo + emptySpace + item.FirstName + emptySpace
+                                             + item.LastName + emptySpace + item.Phone + emptySpace + item.ServiceSince + emptySpace
+                                             + item.ServiceTo + emptySpace + item.Description + emptySpace + item.Status + emptySpace
+                                             + item.PaymentNetAmount + emptySpace);
+            }
+            streamWritercsv.Close();
+            memoryStreamcsv.Close();
+
+            return memoryStreamcsv.GetBuffer();
+        }
     }
 }
