@@ -5,72 +5,77 @@
 
 
 <div class="main-container">
-        <div class="card">
-            <div class="card-body">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Lista Serwisów</li>
-                    </ol>
-                </nav><br /><br />
-                <div class="row">
-                    <div class="col-md-12 table-responsive-md">
-                        <input type="button" value="Nowy serwis" id="btnOpen" class="btn btn-xs btn-warning float-md-right m-md-1" />
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Lista Serwisów</li>
+                </ol>
+            </nav><br /><br />
+            <div class="row">
+                <div class="ml-3">
+                    <p>Dodaj plik excel</p>
+                    <form method="post" asp-controller="Service" asp-action="ImportExcel" enctype="multipart/form-data">
+                        <input type="file" name="file" onchange="javascript:this.form.submit();" />
+                    </form>
+                </div>
+                <div class="col-md-12 table-responsive-md">
+                    <input type="button" value="Nowy serwis" id="btnOpen" class="btn btn-xs btn-warning float-md-right m-md-1" />
+                    <a class="btn btn-xs btn-secondary float-md-right m-md-1" asp-controller="Service" asp-action="Removed">Historia</a>
 
-                        <a class="btn btn-xs btn-secondary float-md-right m-md-1" asp-controller="Service" asp-action="Removed">Historia</a>
-
-                        <table class="table table-striped " id="myTable" style="width:100%">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Numer</th>
-                                    <th>Imie i Nazwisko</th>
-                                    <th>Marka samochodu</th>
-                                    <th>Model samochodu</th>
-                                    <th>Telefon</th>
-                                    <th>Data przyjecia</th>
-                                    <th>Data zakończenia</th>
-                                    <th>Opis</th>
-                                    <th>Status</th>
-                                    <th class="text-warning">Akcje</th>
+                    <table class="table table-striped " id="myTable" style="width:100%">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Numer</th>
+                                <th>Imie i Nazwisko</th>
+                                <th>Marka samochodu</th>
+                                <th>Model samochodu</th>
+                                <th>Telefon</th>
+                                <th>Data przyjecia</th>
+                                <th>Data zakończenia</th>
+                                <th>Opis</th>
+                                <th>Status</th>
+                                <th class="text-warning">Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Services)
+                            {
+                                <tr id="row_@item.ServiceId">
+                                    <td class="text-justify">
+                                        <a asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
+                                    </td>
+                                    <td>@item.FullName</td>
+                                    <td>@item.Brand</td>
+                                    <td>@item.Model</td>
+                                    <td>@item.Phone</td>
+                                    <td>@item.ServiceSince.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.ServiceTo.ToString("dd/MM/yyyy")</td>
+                                    <td>@item.Description</td>
+                                    <td>@item.Status</td>
+                                    <td>
+                                        <div class="dropdown btn-block pull-right">
+                                            <button class="btn btn-xs btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
+                                                Opcje
+                                            </button>
+                                            <ul class="dropdown-menu bg-dark">
+                                                <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
+                                                <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
+                                                <li><a class="text-white" href="#" id="@item.ServiceId" onclick="RemoveFromTable(this.id)">Zakończ</a></li>
+                                                <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
+                                            </ul>
+                                        </div>
+                                    </td>
                                 </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Services)
-                                {
-                                    <tr id="row_@item.ServiceId">
-                                        <td class="text-justify">
-                                            <a asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
-                                        </td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Brand</td>
-                                        <td>@item.Model</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.ServiceSince.ToString("dd/MM/yyyy")</td>
-                                        <td>@item.ServiceTo.ToString("dd/MM/yyyy")</td>
-                                        <td>@item.Description</td>
-                                        <td>@item.Status</td>
-                                        <td>
-                                            <div class="dropdown btn-block pull-right">
-                                                <button class="btn btn-xs btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
-                                                    Opcje
-                                                </button>
-                                                <ul class="dropdown-menu bg-dark">
-                                                    <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId }, new { @style="color:#fff"})</li>
-                                                    <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
-                                                    <li><a class="text-white" href="#" id="@item.ServiceId" onclick="RemoveFromTable(this.id)">Zakończ</a></li>
-                                                    <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                            </tbody>
-                        </table><br />
+                            }
+                        </tbody>
+                    </table><br />
 
-                    </div>
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 

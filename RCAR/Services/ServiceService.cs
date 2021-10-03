@@ -1,4 +1,6 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
+using OfficeOpenXml;
 using RCAR.Domain.Entities;
 using RCAR.Domain.Interfaces;
 using RCAR.Models.PaymentRecordVM;
@@ -6,6 +8,7 @@ using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -119,6 +122,41 @@ namespace RCAR.Services
         {
             totalAmount = model.Sum(p => p.TotalAmount);
             count = model.Count();
+        }
+
+        public async Task<byte[]> ImportExcelServiceFromFile(IFormFile file, string userId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+
+            using (var stream = new MemoryStream())
+            {
+                await file.CopyToAsync(stream);
+                using (var package = new ExcelPackage(stream))
+                {
+                    ExcelWorksheet worksheet = package.Workbook.Worksheets[0];
+                    var rowcount = worksheet.Dimension.Rows;
+                    for (int row = 2; row < rowcount + 1; row++)
+                    {
+                        var list = new Service()
+                        {
+                            ServiceNo = worksheet.Cells[row, 1].Value.ToString().Trim(),
+                            FirstName = worksheet.Cells[row, 2].Value.ToString().Trim(),
+                            LastName = worksheet.Cells[row, 3].Value.ToString().Trim(),
+                            Phone = worksheet.Cells[row, 4].Value.ToString().Trim(),
+                            ServiceSince = DateTime.Parse(worksheet.Cells[row, 5].Value.ToString()),
+                            ServiceTo = DateTime.Parse(worksheet.Cells[row, 6].Value.ToString()),
+                            Brand = worksheet.Cells[row, 7].Value.ToString().Trim(),
+                            Model = worksheet.Cells[row, 8].Value.ToString().Trim(),
+                            Description = worksheet.Cells[row, 9].Value.ToString().Trim(),
+                            Status = worksheet.Cells[row, 10].Value.ToString().Trim(),
+                            UserId = userId
+                        };
+                        _unitOfWork.Service.Add(list);
+                    }
+                    await _unitOfWork.SaveChangesAsync();
+                }
+                return stream.GetBuffer();
+            }
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using RCAR.Models.PaymentRecordVM;
+﻿using Microsoft.AspNetCore.Http;
+using RCAR.Models.PaymentRecordVM;
 using RCAR.Models.ServiceVM;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,8 @@ namespace RCAR.Services.Interfaces
         Task<bool> EditServiceAsync(ServiceEditVM model);
 
         void CountPayment(IEnumerable<PaymentVM> model, ref int count, ref decimal totalAmount);
+
+        Task<byte[]> ImportExcelServiceFromFile(IFormFile file, string userId);
       
 
     }

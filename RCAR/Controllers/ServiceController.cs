@@ -1,10 +1,14 @@
 ﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using OfficeOpenXml;
+using RCAR.Domain.Entities;
 using RCAR.Helper;
 using RCAR.Models.ServiceVM;
 using RCAR.Services.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -53,10 +57,10 @@ namespace RCAR.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> Create([Bind(include: "ServiceCreateVM")]ServiceIndexVM model)
+        public async Task<IActionResult> Create([Bind(include: "ServiceCreateVM")] ServiceIndexVM model)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
-            if(ModelState.IsValid)
+            if (ModelState.IsValid)
             {
                 var result = await _serviceService.CreateServiceAsync(model.ServiceCreateVM, currentUserId);
                 if (result)
@@ -96,7 +100,7 @@ namespace RCAR.Controllers
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
             var model = await _serviceService.DetailServiceAsync(id, currentUserId);
-            if( model.PaymentRecords.Count() > 0)
+            if (model.PaymentRecords.Count() > 0)
             {
                 decimal totalAmount = 0;
                 var count = 0;
@@ -148,6 +152,19 @@ namespace RCAR.Controllers
             var fileName = string.Format("FakturaZaSerwis_{0}.pdf", DateTime.Today.ToShortDateString());
 
             return File(fileContents, "application/pdf", fileName);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ImportExcel(IFormFile file)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+
+            if (ModelState.IsValid)
+            {
+                await _serviceService.ImportExcelServiceFromFile(file, currentUserId);
+                return RedirectToAction("Index", "Service");
+            }
+            return RedirectToAction("Index", "Home");
         }
     }
 }
