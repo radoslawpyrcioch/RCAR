@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Identity;
 using RCAR.Domain.Entities;
 using RCAR.Models.CarVM;
 using RCAR.Models.MemberVM;
 using RCAR.Models.PaymentRecordVM;
 using RCAR.Models.ReportVM;
 using RCAR.Models.ServiceVM;
+using RCAR.Models.UserVM;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,6 +47,8 @@ namespace RCarManager.Helper
             CreateMap<Service, ReportServiceAdministratorVM>().ForMember(dest => dest.PaymentNetAmount, opt => opt.MapFrom(src => src.PaymentRecords.Sum(x => x.NetAmount)));
             CreateMap<Service, ReportServiceAdministratorExcelVM>().ForMember(dest => dest.PaymentNetAmount, opt => opt.MapFrom(src => src.PaymentRecords.Sum(x => x.NetAmount)));
             CreateMap<Service, ReportServiceExcelKowalskiVM>().ForMember(dest => dest.TotalNetPayment, opt => opt.MapFrom(src => src.PaymentRecords.Sum(x => x.NetAmount)));
+
+            CreateMap<IdentityUser, UserManageVM>();
         }
     }
 }
