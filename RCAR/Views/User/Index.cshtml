@@ -16,7 +16,17 @@
             <p class="card-text">Adres Email: @Model.Email</p>
             <button type="button" id="openModalChangePassword" class="btn btn-primary" data-toggle="modal" data-target="#exampleModalCenter">Zmień hasło</button>
         </div>
-        <div class="card-footer text-muted">          
+        <div class="card-footer text-muted">
+        </div>
+        <div class="card-body">
+            <h5 class="card-title">Usuwanie konta</h5>
+            <form asp-controller="User" asp-action="Delete" method="post">
+                @Html.HiddenFor(m => m.Email)
+                <button type="submit" class="btn btn-block btn-danger" onclick="return confirm('Czy napewo chcesz usunąć konto ? Zmian nie będzie można cofnąć.');">
+                    <span class="fa fa-trash text-light"></span>
+                    Usuń konto
+                </button>
+            </form>
         </div>
     </div>
 </div>

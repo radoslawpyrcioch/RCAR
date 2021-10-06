@@ -11,5 +11,6 @@ namespace RCAR.Services.Interfaces
     {
         Task<UserManageVM> GetUserEmailByIdAsync(string userId);
         Task<IdentityResult> ChangePasswordAsync(UserManageVM model, string userId);
+        Task<IdentityResult> DeleteUserAsync(string email, string userId);
     }
 }
