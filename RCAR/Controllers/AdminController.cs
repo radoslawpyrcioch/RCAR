@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
+using RCAR.Domain.Entities;
+using RCAR.Extension;
 using RCAR.Models.AdminPanelVM;
 using RCAR.Services.Interfaces;
 using System;
@@ -33,6 +35,19 @@ namespace RCAR.Controllers
                 Users = await _adminPanelService.GetAllUserAsync()
             };
             return View(model);
+        }
+
+        public async Task<IActionResult> Delete(string id)
+        {
+            var user = (User)await _adminPanelService.GetUserByEmailAsync(id);
+            var result = await _adminPanelService.DeleteUserAsync(user);
+            if (result.Succeeded)
+            {
+                _logger.LogInformation("Delete user: {0}", id);
+                return RedirectToAction("Index", "Admin");
+            }
+            _logger.LogError("Delete user: {0} errors: {1}", id, result.Errors);
+            return RedirectToAction("Index", "Message", new { Message = IdMessage.AdminDeleteAccountError });
         }
     }
 }
