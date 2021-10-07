@@ -34,6 +34,7 @@ namespace RCAR.Extension
             services.AddScoped<IAttachmentService, AttachmentService>();
             services.AddScoped<IReportService, ReportService>();
             services.AddScoped<IExcelService, ExcelService>();
+            services.AddScoped<IAdminPanelService, AdminPanelService>();
 
             return services;
         }

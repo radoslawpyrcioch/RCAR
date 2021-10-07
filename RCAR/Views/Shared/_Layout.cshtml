@@ -82,6 +82,14 @@
                                 <i class="fas fa-book"></i><span>Raporty</span>
                             </a>
                         </li>
+                        @if (User.IsInRole("Administrator"))
+                        {
+                            <li class="item">
+                                <a asp-controller="Admin" asp-action="Index" class="menu-btn">
+                                    <i class="fas fa-book"></i><span>Panel administratora</span>
+                                </a>
+                            </li>
+                        }
                     </ul>
                 </div>
             </div>

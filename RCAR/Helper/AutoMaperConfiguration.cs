@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Identity;
 using RCAR.Domain.Entities;
+using RCAR.Models.AdminPanelVM;
 using RCAR.Models.CarVM;
 using RCAR.Models.MemberVM;
 using RCAR.Models.PaymentRecordVM;
@@ -49,6 +50,7 @@ namespace RCarManager.Helper
             CreateMap<Service, ReportServiceExcelKowalskiVM>().ForMember(dest => dest.TotalNetPayment, opt => opt.MapFrom(src => src.PaymentRecords.Sum(x => x.NetAmount)));
 
             CreateMap<IdentityUser, UserManageVM>();
+            CreateMap<User, AdminVM>();
         }
     }
 }
