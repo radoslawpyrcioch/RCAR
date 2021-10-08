@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using RCAR.Models;
+using RCAR.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
@@ -13,27 +14,41 @@ namespace RCAR.Controllers
     [Authorize]
     public class HomeController : Controller
     {
-        private readonly ILogger<HomeController> _logger;
+        private readonly IHomeService _homeService;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(IHomeService homeService)
         {
-            _logger = logger;
+            _homeService = homeService;
         }
 
+        [HttpGet]
         public IActionResult Index()
         {
             return View();
         }
 
-        public IActionResult News()
+        [HttpGet]
+        public async Task<IActionResult> News()
         {
+
+            //dodaj inne county, zmien model i czy trzeba dac z serwisu model czy mozna to zrobic w home?
+
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            var model = await _homeService.GetAllServiceAsync(currentUserId);
+            if (model.Count() > 0)
+            {
+                var allService = 0;
+                var acceptedService = 0;
+                var startedService = 0;
+                var doneService = 0;
+                _homeService.CountService(model, ref allService, ref acceptedService, ref startedService, ref doneService);
+                ViewBag.TotalServiceCount = allService;
+                ViewBag.AcceptedServiceCount = acceptedService;
+                ViewBag.StartedServiceCount = startedService;
+                ViewBag.DoneServiceCount = doneService;
+            }
             return View();
         }
 
-        [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-        public IActionResult Error()
-        {
-            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
-        }
     }
 }

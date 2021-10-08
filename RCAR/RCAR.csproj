@@ -27,4 +27,8 @@
     <ProjectReference Include="..\RCAR.Domain\RCAR.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Models\Home\" />
+  </ItemGroup>
+
 </Project>

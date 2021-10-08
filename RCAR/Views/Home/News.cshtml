@@ -1,6 +1,57 @@
-﻿@{
-    ViewData["Title"] = "Privacy Policy";
-}
-<h1>@ViewData["Title"]</h1>
+﻿@model RCAR.Models.ServiceVM.ServiceIndexVM
 
-<p>Use this page to detail your site's privacy policy.</p>
+
+<div class="main-container">
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Lista Serwisów</li>
+                </ol>
+            </nav><br /><br />
+            <div class="row">
+                <div class="card border-success mb-3 ml-5" style="width: 350px;">
+                    <div class="card-header bg-secondary border-success" style="text-align:center; font-size:25px"><b>SERWISY</b></div>
+                    <div class="card-body text-dark" style="text-align:center">
+                        @if (ViewBag.TotalServiceCount != null)
+                        {
+                            <h5 class="card-title"><b>Ilość serwisów: </b>@ViewBag.TotalServiceCount</h5>
+                        }
+                        else
+                        {
+                            <h5 class="card-title"><b>Ilość serwisów: </b>Brak</h5>
+                        }
+                    </div>
+                    <div class="card-body text-dark" style="text-align:center">
+                        @if (ViewBag.AcceptedServiceCount != null)
+                        {
+                            <p class="font-weight-normal"><b>Przyjęte: </b>@ViewBag.AcceptedServiceCount</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Przyjęte: </b>Brak</p>
+                        }
+                        @if (ViewBag.StartedServiceCount != null)
+                        {
+                            <p class="font-weight-normal"><b>Rozpoczęte: </b>@ViewBag.StartedServiceCount</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Rozpoczęte: </b>Brak</p>
+                        }
+                        @if (ViewBag.DoneServiceCount != null)
+                        {
+                            <p class="font-weight-normal"><b>Zakończone: </b>@ViewBag.DoneServiceCount</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Zakończone: </b>Brak</p>
+                        }
+                    </div>
+                    <div class="card-footer bg-secondary border-success" style="text-align:center"><a class="btn btn-danger" asp-controller="Service" asp-action="Index">Przejdź do serwisów</a></div>
+                </div> 
+            </div>
+        </div>
+    </div>
+</div>
