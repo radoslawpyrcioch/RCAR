@@ -30,22 +30,36 @@ namespace RCAR.Controllers
         [HttpGet]
         public async Task<IActionResult> News()
         {
-
-            //dodaj inne county, zmien model i czy trzeba dac z serwisu model czy mozna to zrobic w home?
-
             var currentUserId = User.Claims.ElementAt(0).Value;
-            var model = await _homeService.GetAllServiceAsync(currentUserId);
-            if (model.Count() > 0)
+
+            var modelService = await _homeService.GetAllServiceAsync(currentUserId);
+            if (modelService.Count() > 0)
             {
                 var allService = 0;
                 var acceptedService = 0;
                 var startedService = 0;
                 var doneService = 0;
-                _homeService.CountService(model, ref allService, ref acceptedService, ref startedService, ref doneService);
+                var backService = 0;
+                _homeService.CountService(modelService, ref allService, ref acceptedService, ref startedService, ref doneService, ref backService);
                 ViewBag.TotalServiceCount = allService;
                 ViewBag.AcceptedServiceCount = acceptedService;
                 ViewBag.StartedServiceCount = startedService;
                 ViewBag.DoneServiceCount = doneService;
+                ViewBag.BackServiceCount = backService;
+            }
+
+            var modelMember = await _homeService.GetAllMeberAsync(currentUserId);
+            if (modelMember.Count() > 0)
+            {
+                var allMember = 0;
+                var activeMember = 0;
+                var inactiveMember = 0;
+                var backMember = 0;
+                _homeService.CountMember(modelMember, ref allMember, ref activeMember, ref inactiveMember, ref backMember);
+                ViewBag.TotalMemberCount = allMember;
+                ViewBag.ActiveMemberCount = activeMember;
+                ViewBag.InactiveMemberCount = inactiveMember;
+                ViewBag.BackMemberCount = backMember;
             }
             return View();
         }

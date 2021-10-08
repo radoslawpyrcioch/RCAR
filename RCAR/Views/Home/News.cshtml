@@ -10,7 +10,7 @@
                     <li class="breadcrumb-item active" aria-current="page">Lista Serwisów</li>
                 </ol>
             </nav><br /><br />
-            <div class="row">
+            <div class="row" style="text-align:center">
                 <div class="card border-success mb-3 ml-5" style="width: 350px;">
                     <div class="card-header bg-secondary border-success" style="text-align:center; font-size:25px"><b>SERWISY</b></div>
                     <div class="card-body text-dark" style="text-align:center">
@@ -48,9 +48,58 @@
                         {
                             <p class="font-weight-normal"><b>Zakończone: </b>Brak</p>
                         }
+                        @if (ViewBag.BackServiceCount != null)
+                        {
+                            <p class="font-weight-normal"><b>Cofnięty: </b>@ViewBag.BackServiceCount</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Cofnięty: </b>Brak</p>
+                        }
                     </div>
                     <div class="card-footer bg-secondary border-success" style="text-align:center"><a class="btn btn-danger" asp-controller="Service" asp-action="Index">Przejdź do serwisów</a></div>
-                </div> 
+                </div>
+
+                <div class="card border-success mb-3 ml-5" style="width: 350px;">
+                    <div class="card-header bg-secondary border-success" style="text-align:center; font-size:25px"><b>CZŁONKOWIE</b></div>
+                    <div class="card-body text-dark" style="text-align:center">
+                        @if (ViewBag.TotalMemberCount != null)
+                        {
+                            <h5 class="card-title"><b>Ilość członków: </b>@ViewBag.TotalMemberCount</h5>
+                        }
+                        else
+                        {
+                            <h5 class="card-title"><b>Ilość członków: </b>Brak</h5>
+                        }
+                    </div>
+                    <div class="card-body text-dark" style="text-align:center">
+                        @if (ViewBag.ActiveMemberCount != null)
+                        {
+                            <p class="font-weight-normal"><b>Aktywni: </b>@ViewBag.ActiveMemberCount</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Aktywni: </b>Brak</p>
+                        }
+                        @if (ViewBag.InactiveMemberCount != null)
+                        {
+                            <p class="font-weight-normal"><b>Nieaktywni: </b>@ViewBag.InactiveMemberCount</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Nieaktywni: </b>Brak</p>
+                        }
+                        @if (ViewBag.BackMemberCount != null)
+                        {
+                            <p class="font-weight-normal"><b>Cofnięty: </b>@ViewBag.BackMemberCount</p>
+                        }
+                        else
+                        {
+                            <p class="font-weight-normal"><b>Cofnięty: </b>Brak</p>
+                        }
+                    </div>
+                    <div class="card-footer bg-secondary border-success" style="text-align:center"><a class="btn btn-danger" asp-controller="Member" asp-action="Index">Przejdź do członków</a></div>
+                </div>
             </div>
         </div>
     </div>
