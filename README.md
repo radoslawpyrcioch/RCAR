@@ -17,7 +17,8 @@
  - Views built in bootstrap
  - Razor
  - Java Script
- - EPPlus (generate Excel files)
+ - EPPlus (generate / import Excel files)
+ - Export CSV file
  - Ajax request support (e.g asynchronous calculate date)
 
 ### How to run:
