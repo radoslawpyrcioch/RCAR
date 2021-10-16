@@ -13,5 +13,6 @@ namespace RCAR.Services.Interfaces
         Task<IEnumerable<AdminVM>> GetAllUserAsync();
         Task<IdentityUser> GetUserByEmailAsync(string userEmail);
         Task<IdentityResult> DeleteUserAsync(User user);
+        Task<string> GenerateConfirmTokenAsync(IdentityUser user);
     }
 }

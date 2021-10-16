@@ -44,6 +44,11 @@ namespace RCAR.Services
             return await _userManager.DeleteAsync(user);
         }
 
+        public async Task<string> GenerateConfirmTokenAsync(IdentityUser user)
+        {
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
         public async Task<IEnumerable<AdminVM>> GetAllUserAsync()
         {
             var user = await _unitOfWork.User.GetAllAsync();

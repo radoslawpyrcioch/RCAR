@@ -49,5 +49,16 @@ namespace RCAR.Controllers
             _logger.LogError("Delete user: {0} errors: {1}", id, result.Errors);
             return RedirectToAction("Index", "Message", new { Message = IdMessage.AdminDeleteAccountError });
         }
+
+        public async Task<IActionResult> SendConfirm(string id)
+        {
+            var user = await _adminPanelService.GetUserByEmailAsync(id);
+            var token = await _adminPanelService.GenerateConfirmTokenAsync(user);
+            var callBackUrl = Url.ActionLink("Confirmed", "Account", new { Token = token, UserId = user.Id });
+            var resultEmail = await _emailService.SendConfirmEmailAsync(callBackUrl, user.Email);
+            if (resultEmail)
+                return RedirectToAction("Index", "Message", new { Message = IdMessage.AdminSendConfirmationEmailSucces });
+            return RedirectToAction("Index", "Message", new { Message = IdMessage.AdminSendConfirmationEmailError });
+        }
     }
 }
