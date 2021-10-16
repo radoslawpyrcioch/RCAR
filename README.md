@@ -19,7 +19,7 @@
  - Java Script
  - EPPlus (generate / import Excel files)
  - Export CSV file
- - Ajax request support (e.g asynchronous calculate date)
+ - Ajax
 
 ### How to run:
  - Clone this project to your computer
