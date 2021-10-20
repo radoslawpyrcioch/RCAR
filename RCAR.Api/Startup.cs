@@ -1,18 +1,23 @@
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
+using RCAR.Api.DTOs;
 using RCAR.Api.Extension;
 using RCAR.Domain.Context;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace RCAR.Api
@@ -29,6 +34,7 @@ namespace RCAR.Api
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<JwtConfig>(Configuration.GetSection("JwtConfig"));
 
             services.AddControllers();
 
@@ -37,6 +43,33 @@ namespace RCAR.Api
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection"));
                 options.UseLazyLoadingProxies();
             });
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+                .AddJwtBearer(jwt =>
+                {
+                    var key = Encoding.ASCII.GetBytes(Configuration["JwtConfig:Secret"]);
+
+                    jwt.SaveToken = true;
+                    jwt.TokenValidationParameters = new TokenValidationParameters
+                    {
+                        ValidateIssuerSigningKey = true,
+                        IssuerSigningKey = new SymmetricSecurityKey(key),
+                        ValidateIssuer = false,
+                        ValidateAudience = false,
+                        ValidateLifetime = true,
+                        RequireExpirationTime = false
+                    };
+                });
+
+            // Add IdentityUser and IdentityRole
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders();
 
             services.RepositoryInjector();
 
@@ -62,6 +95,8 @@ namespace RCAR.Api
             app.UseHttpsRedirection();
 
             app.UseRouting();
+
+            app.UseAuthentication();
 
             app.UseAuthorization();
 

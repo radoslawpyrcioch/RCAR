@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using RCAR.Api.Services;
+using RCAR.Api.Services.Interfaces;
 using RCAR.Domain.Interfaces;
 using RCAR.Domain.Repositories;
 using System;
@@ -20,6 +22,8 @@ namespace RCAR.Api.Extension
 
         public static IServiceCollection ServiceInjector(this IServiceCollection services)
         {
+            services.AddScoped<IJwTokenService, JwTokenService>();
+
             return services;
         }
     }
