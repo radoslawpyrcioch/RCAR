@@ -12,5 +12,7 @@ namespace RCAR.Domain.Entities
         public virtual ICollection<Car> Cars { get; set; }
         public virtual ICollection<Member> Members { get; set; }
         public virtual ICollection<Service> Services { get; set; }
+
+        public string RefreshToken { get; set; }
     }
 }
