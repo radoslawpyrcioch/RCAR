@@ -44,6 +44,8 @@ namespace RCAR.Api
                 options.UseLazyLoadingProxies();
             });
 
+            services.AddAutoMapper(typeof(Startup));
+
             services.AddAuthentication(options =>
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
