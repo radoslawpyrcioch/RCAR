@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using RCAR.Api.DTOs.ServiceDTOs;
 using RCAR.Api.Services.Interfaces;
 using RCAR.Domain.Interfaces;
 using System;
@@ -17,6 +18,18 @@ namespace RCAR.Api.Services
         {
             _unitOfWork = unitOfWork;
             _mapper = mapper;
+        }
+
+        public async Task<IEnumerable<ServiceDTO>> GetAllServiceAsync(string email)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Email == email);
+            if (user != null)
+            {
+                var service = user.Services.Where(s => s.IsRemoved);
+                var dto = _mapper.Map<IEnumerable<ServiceDTO>>(service);
+                return dto;
+            }
+            return null;
         }
     }
 }

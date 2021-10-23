@@ -53,7 +53,7 @@ namespace RCAR.Api.Services
                     new Claim(ClaimTypes.Role, role[0]),
 
                 }),
-                    Expires = DateTime.UtcNow.AddMinutes(1),
+                    Expires = DateTime.UtcNow.AddHours(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256Signature)
                 };
 
@@ -115,7 +115,7 @@ namespace RCAR.Api.Services
                         new Claim(ClaimTypes.Name, principal.Claims.ElementAt(0).Value),
                         new Claim(ClaimTypes.Name, principal.Claims.ElementAt(1).Value)
                     }),
-                    Expires = DateTime.UtcNow.AddMinutes(10),
+                    Expires = DateTime.UtcNow.AddHours(1),
                     SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(key), SecurityAlgorithms.HmacSha256)
                 };
 

@@ -23,6 +23,7 @@ namespace RCAR.Api.Extension
         public static IServiceCollection ServiceInjector(this IServiceCollection services)
         {
             services.AddScoped<IJwTokenService, JwTokenService>();
+            services.AddScoped<IServiceService, ServiceService>();
 
             return services;
         }
