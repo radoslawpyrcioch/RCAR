@@ -62,7 +62,19 @@ namespace RCAR.Api
                         ValidateIssuer = false,
                         ValidateAudience = false,
                         ValidateLifetime = true,
-                        RequireExpirationTime = false
+                        RequireExpirationTime = false,
+                        ClockSkew = TimeSpan.Zero
+                    };
+                    jwt.Events = new JwtBearerEvents
+                    {
+                        OnAuthenticationFailed = context =>
+                        {
+                            if (context.Exception.GetType() == typeof(SecurityTokenExpiredException))
+                            {
+                                context.Response.Headers.Add("Token-Expired", "true");
+                            }
+                            return Task.CompletedTask;
+                        }
                     };
                 });
 

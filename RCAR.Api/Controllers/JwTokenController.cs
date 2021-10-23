@@ -30,5 +30,18 @@ namespace RCAR.Api.Controllers
             }
             return NotFound();
         }
+
+        [HttpPost("RefreshToken")]
+        public async Task<IActionResult> Refresh(RefreshTokenDTO dto)
+        {
+            var principal = _jwTokenService.GetPrincipalFromExpiredToken(dto.AccessToken);
+            if (principal != null)
+            {
+                var token = await _jwTokenService.GenerateFreshToken(principal, dto.RefreshToken);
+                if (token != null)
+                    return Ok(token);
+            }
+            return NotFound();
+        }
     }
 }
