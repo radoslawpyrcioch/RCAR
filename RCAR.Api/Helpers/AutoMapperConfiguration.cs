@@ -13,6 +13,7 @@ namespace RCAR.Api.Helpers
         public AutoMapperConfiguration()
         {
             CreateMap<Service, ServiceDTO>();
+            CreateMap<Service, ServiceOneDTO>().ReverseMap();
         }
     }
 }

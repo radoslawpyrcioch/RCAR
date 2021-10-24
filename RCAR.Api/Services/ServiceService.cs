@@ -31,5 +31,17 @@ namespace RCAR.Api.Services
             }
             return null;
         }
+
+        public async Task<ServiceOneDTO> GetOneServiceAsync(string email, int serviceId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Email == email);
+            if (user != null)
+            {
+                var service = user.Services.Where(s => s.ServiceId == serviceId).FirstOrDefault();
+                var dto = _mapper.Map<ServiceOneDTO>(service);
+                return dto;
+            }
+            return null;
+        }
     }
 }

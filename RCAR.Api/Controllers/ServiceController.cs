@@ -33,5 +33,19 @@ namespace RCAR.Api.Controllers
             }
             return BadRequest(new UnauthorizedAccessException());
         }
+
+        [HttpGet("{id}")]
+        public async Task<IActionResult> GetOneService(int id)
+        {
+            var currentUser = User.Claims.ElementAt(0).Value;
+            if (currentUser != null)
+            {
+                var dto = await _serviceService.GetOneServiceAsync(currentUser, id);
+                if (dto != null)
+                    return Ok(dto);
+                return NotFound();
+            }
+            return BadRequest(new UnauthorizedAccessException());
+        }
     }
 }
