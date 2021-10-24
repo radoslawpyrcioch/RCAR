@@ -37,13 +37,29 @@ namespace RCAR.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOneService(int id)
         {
-            var currentUser = User.Claims.ElementAt(0).Value;
+            var currentUser = "Administrator@poczta.pl";
             if (currentUser != null)
             {
                 var dto = await _serviceService.GetOneServiceAsync(currentUser, id);
                 if (dto != null)
                     return Ok(dto);
                 return NotFound();
+            }
+            return BadRequest(new UnauthorizedAccessException());
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> CreateServie(ServiceCreateDTO dto)
+        {
+            var currentUser = "Administrator@poczta.pl";
+            if (currentUser != null)
+            {
+                var resultDto = await _serviceService.CreateServiceAsync(dto, currentUser);
+                if (resultDto != null)
+                {
+                    return Created(string.Format("/Service/{0}", resultDto.ServiceId), resultDto);
+                }
+                return BadRequest(string.Format("Serwis o takim numerze {0} już istnieje", dto.ServiceNo));
             }
             return BadRequest(new UnauthorizedAccessException());
         }

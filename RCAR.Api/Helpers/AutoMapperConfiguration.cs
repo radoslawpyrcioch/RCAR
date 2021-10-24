@@ -14,6 +14,7 @@ namespace RCAR.Api.Helpers
         {
             CreateMap<Service, ServiceDTO>();
             CreateMap<Service, ServiceOneDTO>().ReverseMap();
+            CreateMap<ServiceCreateDTO, Service>();
         }
     }
 }

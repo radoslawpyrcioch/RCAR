@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using RCAR.Api.DTOs.ServiceDTOs;
 using RCAR.Api.Services.Interfaces;
+using RCAR.Domain.Entities;
 using RCAR.Domain.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -40,6 +41,21 @@ namespace RCAR.Api.Services
                 var service = user.Services.Where(s => s.ServiceId == serviceId).FirstOrDefault();
                 var dto = _mapper.Map<ServiceOneDTO>(service);
                 return dto;
+            }
+            return null;
+        }
+        public async Task<ServiceOneDTO> CreateServiceAsync(ServiceCreateDTO dto, string email)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Email == email);
+            if (user != null)
+            {
+                if (!user.Services.Any(s => s.ServiceNo == dto.ServiceNo))
+                {
+                    var service = _mapper.Map<Service>(dto);
+                    service.UserId = user.Id;
+                    _unitOfWork.Service.Add(service);
+                    return await GetOneServiceAsync(email, service.ServiceId);
+                }
             }
             return null;
         }

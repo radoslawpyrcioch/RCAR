@@ -37,9 +37,6 @@ namespace RCAR.Api.DTOs.ServiceDTOs
         [DataType(DataType.Date), Display(Name = "Data zakończenia")]
         public DateTime ServiceTo { get; set; } = DateTime.UtcNow;
 
-        [Display(Name = "Zdjęcie")]
-        public string ImageUrl { get; set; }
-
         [Display(Name = "Marka samochodu")]
         public string Brand { get; set; }
 
