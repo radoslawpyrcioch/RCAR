@@ -37,7 +37,7 @@ namespace RCAR.Api.Controllers
         [HttpGet("{id}")]
         public async Task<IActionResult> GetOneService(int id)
         {
-            var currentUser = "Administrator@poczta.pl";
+            var currentUser = User.Claims.ElementAt(0).Value;
             if (currentUser != null)
             {
                 var dto = await _serviceService.GetOneServiceAsync(currentUser, id);
@@ -51,7 +51,7 @@ namespace RCAR.Api.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateServie(ServiceCreateDTO dto)
         {
-            var currentUser = "Administrator@poczta.pl";
+            var currentUser = User.Claims.ElementAt(0).Value;
             if (currentUser != null)
             {
                 var resultDto = await _serviceService.CreateServiceAsync(dto, currentUser);

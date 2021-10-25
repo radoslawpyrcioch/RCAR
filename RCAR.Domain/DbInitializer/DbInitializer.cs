@@ -30,7 +30,7 @@ namespace RCAR.Domain.DbInitializer
             if (_userManager.FindByEmailAsync("Administrator@poczta.pl").GetAwaiter().GetResult() == null)
             {
                 var user = new User() { Email = "Administrator@poczta.pl", UserName = "Administrator@poczta.pl", EmailConfirmed = true };
-                var result = _userManager.CreateAsync(user, "Start123!").GetAwaiter().GetResult();
+                _userManager.CreateAsync(user, "Start123!").GetAwaiter().GetResult();
                 _userManager.AddToRoleAsync(user, "Administrator").GetAwaiter().GetResult();
             }
         }

@@ -25,11 +25,6 @@ namespace RCAR.Domain.Repositories
             _dbSet.Add(entity);
         }
 
-        public void AddRange(IEnumerable<TEntity> entities)
-        {
-            _dbSet.AddRange(entities);
-        }
-
         public async Task<IEnumerable<TEntity>> FindAllAsync(Expression<Func<TEntity, bool>> predicate)
         {
             return await _dbSet.Where(predicate).ToListAsync();
@@ -55,20 +50,9 @@ namespace RCAR.Domain.Repositories
             _dbSet.Remove(entity);
         }
 
-        public void RemoveById(int id)
-        {
-            TEntity entityToRemove = _dbSet.Find(id);
-            _dbSet.Remove(entityToRemove);
-        }
-
         public void RemoveRange(IEnumerable<TEntity> entities)
         {
             _dbSet.RemoveRange(entities);
-        }
-
-        public void Update(TEntity entity)
-        {
-            _dbContext.Entry(entity).State = EntityState.Modified;
         }
     }
 }
