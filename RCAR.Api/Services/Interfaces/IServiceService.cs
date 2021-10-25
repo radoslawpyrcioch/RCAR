@@ -11,5 +11,6 @@ namespace RCAR.Api.Services.Interfaces
         Task<IEnumerable<ServiceDTO>> GetAllServiceAsync(string email);
         Task<ServiceOneDTO> GetOneServiceAsync(string email, int serviceId);
         Task<ServiceOneDTO> CreateServiceAsync(ServiceCreateDTO dto, string email);
+        Task<bool> EditServiceAsync(ServiceOneDTO dto, string email);
     }
 }

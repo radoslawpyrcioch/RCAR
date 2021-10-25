@@ -22,7 +22,7 @@ namespace RCAR.Api.Controllers
         [HttpGet("Index")]
         public async Task<IActionResult> Index()
         {
-            var currentUser = User.Claims.ElementAt(0).Value;
+            var currentUser = "Administrator@poczta.pl";
             if (currentUser != null)
             {
                 var dto = new ServiceIndexDTO()
@@ -60,6 +60,20 @@ namespace RCAR.Api.Controllers
                     return Created(string.Format("/Service/{0}", resultDto.ServiceId), resultDto);
                 }
                 return BadRequest(string.Format("Serwis o takim numerze {0} już istnieje", dto.ServiceNo));
+            }
+            return BadRequest(new UnauthorizedAccessException());
+        }
+
+        [HttpPut]
+        public async Task<IActionResult> EditService(ServiceOneDTO dto)
+        {
+            var currentUser = "Administrator@poczta.pl";
+            if (currentUser != null)
+            {
+                var result = await _serviceService.EditServiceAsync(dto, currentUser);
+                if (result)
+                    return NoContent();
+                return NotFound();
             }
             return BadRequest(new UnauthorizedAccessException());
         }
