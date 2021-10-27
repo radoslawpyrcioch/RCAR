@@ -26,6 +26,18 @@ namespace RCAR.Api.Services
             var user = await _unitOfWork.User.FindOneAsync(u => u.Email == email);
             if (user != null)
             {
+                var service = user.Services.Where(s => !s.IsRemoved);
+                var dto = _mapper.Map<IEnumerable<ServiceDTO>>(service);
+                return dto;
+            }
+            return null;
+        }
+
+        public async Task<IEnumerable<ServiceDTO>> GetAllRemovedServiceAsync(string email)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Email == email);
+            if (user != null)
+            {
                 var service = user.Services.Where(s => s.IsRemoved);
                 var dto = _mapper.Map<IEnumerable<ServiceDTO>>(service);
                 return dto;
@@ -86,5 +98,6 @@ namespace RCAR.Api.Services
             }
             return false;
         }
+
     }
 }

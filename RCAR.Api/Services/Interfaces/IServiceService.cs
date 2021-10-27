@@ -9,6 +9,7 @@ namespace RCAR.Api.Services.Interfaces
     public interface IServiceService
     {
         Task<IEnumerable<ServiceDTO>> GetAllServiceAsync(string email);
+        Task<IEnumerable<ServiceDTO>> GetAllRemovedServiceAsync(string email);
         Task<ServiceOneDTO> GetOneServiceAsync(string email, int serviceId);
         Task<ServiceOneDTO> CreateServiceAsync(ServiceCreateDTO dto, string email);
         Task<bool> EditServiceAsync(ServiceOneDTO dto, string email);

@@ -19,15 +19,30 @@ namespace RCAR.Api.Controllers
             _serviceService = serviceService;
         }
 
-        [HttpGet("Index")]
-        public async Task<IActionResult> Index()
+        [HttpGet("GetAllService")]
+        public async Task<IActionResult> GetAllService()
         {
-            var currentUser = "Administrator@poczta.pl";
+            var currentUser = User.Claims.ElementAt(0).Value;
             if (currentUser != null)
             {
                 var dto = new ServiceIndexDTO()
                 {
                     Services = await _serviceService.GetAllServiceAsync(currentUser)
+                };
+                return Ok(dto);
+            }
+            return BadRequest(new UnauthorizedAccessException());
+        }
+
+        [HttpGet("GetAllRemovedService")]
+        public async Task<IActionResult> GetAllRemovedService()
+        {
+            var currentUser = User.Claims.ElementAt(0).Value;
+            if (currentUser != null)
+            {
+                var dto = new ServiceIndexDTO()
+                {
+                    Services = await _serviceService.GetAllRemovedServiceAsync(currentUser)
                 };
                 return Ok(dto);
             }
@@ -67,7 +82,7 @@ namespace RCAR.Api.Controllers
         [HttpPut]
         public async Task<IActionResult> EditService(ServiceOneDTO dto)
         {
-            var currentUser = "Administrator@poczta.pl";
+            var currentUser = User.Claims.ElementAt(0).Value;
             if (currentUser != null)
             {
                 var result = await _serviceService.EditServiceAsync(dto, currentUser);
@@ -81,7 +96,7 @@ namespace RCAR.Api.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> RemoveService(int id)
         {
-            var currentUser = "Administrator@poczta.pl";
+            var currentUser = User.Claims.ElementAt(0).Value;
             if (currentUser != null)
             {
                 var result = await _serviceService.RemoveServiceAsync(currentUser, id);
