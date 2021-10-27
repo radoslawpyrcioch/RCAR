@@ -71,5 +71,20 @@ namespace RCAR.Api.Services
             }
             return false;
         }
+
+        public async Task<bool> RemoveServiceAsync(string email, int serviceId)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Email == email);
+            if (user != null)
+            {
+                var service = user.Services.Where(s => s.ServiceId == serviceId).FirstOrDefault();
+                if (service != null)
+                {
+                    service.IsRemoved = false;
+                    return await _unitOfWork.SaveChangesAsync();
+                }
+            }
+            return false;
+        }
     }
 }

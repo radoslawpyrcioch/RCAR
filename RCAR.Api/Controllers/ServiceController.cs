@@ -77,5 +77,19 @@ namespace RCAR.Api.Controllers
             }
             return BadRequest(new UnauthorizedAccessException());
         }
+
+        [HttpDelete("{id}")]
+        public async Task<IActionResult> RemoveService(int id)
+        {
+            var currentUser = "Administrator@poczta.pl";
+            if (currentUser != null)
+            {
+                var result = await _serviceService.RemoveServiceAsync(currentUser, id);
+                if (result)
+                    return NoContent();
+                return NotFound();
+            }
+            return BadRequest(new UnauthorizedAccessException());
+        }
     }
 }
