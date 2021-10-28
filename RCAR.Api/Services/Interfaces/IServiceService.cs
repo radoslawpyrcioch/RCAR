@@ -14,5 +14,6 @@ namespace RCAR.Api.Services.Interfaces
         Task<ServiceOneDTO> CreateServiceAsync(ServiceCreateDTO dto, string email);
         Task<bool> EditServiceAsync(ServiceOneDTO dto, string email);
         Task<bool> RemoveServiceAsync(string email, int serviceId);
+        Task<bool> BackServiceAsync(string email, int serviceId);
     }
 }

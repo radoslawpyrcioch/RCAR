@@ -49,7 +49,7 @@ namespace RCAR.Api.Controllers
             return BadRequest(new UnauthorizedAccessException());
         }
 
-        [HttpGet("{id}")]
+        [HttpGet("GetOneService/{id}")]
         public async Task<IActionResult> GetOneService(int id)
         {
             var currentUser = User.Claims.ElementAt(0).Value;
@@ -93,13 +93,27 @@ namespace RCAR.Api.Controllers
             return BadRequest(new UnauthorizedAccessException());
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("RemoveService/{id}")]
         public async Task<IActionResult> RemoveService(int id)
         {
             var currentUser = User.Claims.ElementAt(0).Value;
             if (currentUser != null)
             {
                 var result = await _serviceService.RemoveServiceAsync(currentUser, id);
+                if (result)
+                    return NoContent();
+                return NotFound();
+            }
+            return BadRequest(new UnauthorizedAccessException());
+        }
+
+        [HttpPut("BackService/{id}")]
+        public async Task<IActionResult> BackService(int id)
+        {
+            var currentUser = User.Claims.ElementAt(0).Value;
+            if (currentUser != null)
+            {
+                var result = await _serviceService.BackServiceAsync(currentUser, id);
                 if (result)
                     return NoContent();
                 return NotFound();
