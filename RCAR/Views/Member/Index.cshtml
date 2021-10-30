@@ -6,33 +6,61 @@
 
 
 <div class="main-container">
-        <div class="card">
-            <div class="card-body">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Lista członków</li>
-                    </ol>
-                </nav><br /><br />
-                <div class="row">
-                    <div class="col-md-12 table-responsive-md">
-                        <input type="button" value="Nowy członek" id="btnOpen" class="btn btn-xs btn-warning float-md-right m-md-1" />
-                        <a class="btn btn-xs btn-secondary float-md-right mr-1 m-md-1" asp-controller="Member" asp-action="Removed">Członkowie nieaktywni</a>
-                        <a class="btn btn-xs btn-secondary float-md-right mr-1 m-md-1" asp-controller="Member" asp-action="DownloadAttachment">Pobierz PDF</a>
-                        <table class="table table-striped" id="myTable">
-                            <thead class="thead-dark">
-                                <tr>
-                                    <th>Numer</th>
-                                    <th>Imię</th>
-                                    <th>Nazwisko</th>
-                                    <th>Data przyjęcia</th>
-                                    <th>Telefon</th>
-                                    <th>Status</th>
-                                    <th class="text-warning">Akcje</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                @foreach (var item in Model.Members)
+    <div class="card">
+        <div class="card-body">
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a asp-controller="Home" asp-action="Index">Strona główna</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Lista członków</li>
+                </ol>
+            </nav><br /><br />
+            <div class="row">
+                <div class="col-md-12 table-responsive-md">
+                    <input type="button" value="Nowy członek" id="btnOpen" class="btn btn-xs btn-warning float-md-right m-md-1" />
+                    <a class="btn btn-xs btn-secondary float-md-right mr-1 m-md-1" asp-controller="Member" asp-action="Removed">Członkowie nieaktywni</a>
+                    <a class="btn btn-xs btn-secondary float-md-right mr-1 m-md-1" asp-controller="Member" asp-action="DownloadAttachment">Pobierz PDF</a>
+                    <table class="table table-striped" id="myTable">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>Numer</th>
+                                <th>Imię</th>
+                                <th>Nazwisko</th>
+                                <th>Data przyjęcia</th>
+                                <th>Telefon</th>
+                                <th>Status</th>
+                                <th class="text-warning">Akcje</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Members)
+                            {
+                                if (item.Status == "Cofnięty")
+                                {
+                                    <tr id="row_@item.MemberId" style="background-color:#989267">
+                                        <td>
+                                            <a asp-action="Detail" asp-route-id="@item.MemberId">@item.MemberNo</a>
+                                        </td>
+                                        <td>@item.FirstName</td>
+                                        <td>@item.LastName</td>
+                                        <td>@item.DateJoined.ToString("dd/MM/yyyy")</td>
+                                        <td>@item.Phone</td>
+                                        <td>@item.Status</td>
+                                        <td>
+                                            <div class="dropdown btn-block pull-right">
+                                                <button class="btn btn-xs btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
+                                                    Opcje
+                                                </button>
+                                                <ul class="dropdown-menu bg-dark">
+                                                    <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.MemberId }, new { @style = "color:#fff" })</li>
+                                                    <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.MemberId }, new { @style = "color:#fff" })</li>
+                                                    <li><a href="#" class="text-white" id="@item.MemberId" onclick="RemoveFromTable(this.id)">Usuń</a></li>
+                                                </ul>
+                                            </div>
+
+                                        </td>
+                                    </tr>
+                                }
+                                else
                                 {
                                     <tr id="row_@item.MemberId">
                                         <td>
@@ -58,13 +86,15 @@
                                         </td>
                                     </tr>
                                 }
-                            </tbody>
-                        </table><br />
 
-                    </div>
+                            }
+                        </tbody>
+                    </table><br />
+
                 </div>
             </div>
         </div>
+    </div>
 </div>
 
 <script src="~/js/delete-member.js"></script>

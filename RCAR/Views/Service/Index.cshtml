@@ -42,9 +42,9 @@
                         <tbody>
                             @foreach (var item in Model.Services)
                             {
-                                @if (item.ServiceTo < DateTime.Today)
+                                @if (item.Status == "Przyjęty")
                                 {
-                                    <tr id="row_@item.ServiceId" style="background-color:rosybrown">
+                                    <tr id="row_@item.ServiceId">
                                         <td class="text-justify">
                                             <a class="text-black-50" asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
                                         </td>
@@ -71,9 +71,9 @@
                                         </td>
                                     </tr>
                                 }
-                                else if (item.ServiceTo == DateTime.Today)
+                                else if (item.Status == "Rozpoczęty")
                                 {
-                                    <tr id="row_@item.ServiceId" style="background-color:yellowgreen">
+                                    <tr id="row_@item.ServiceId" style="background-color:#697879">
                                         <td class="text-justify">
                                             <a class="text-black-50" asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
                                         </td>
@@ -102,7 +102,7 @@
                                 }
                                 else
                                 {
-                                    <tr id="row_@item.ServiceId">
+                                    <tr id="row_@item.ServiceId" style="background-color:#847443">
                                         <td class="text-justify">
                                             <a class="text-black-50" asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
                                         </td>
