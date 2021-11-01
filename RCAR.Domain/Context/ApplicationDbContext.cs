@@ -36,16 +36,16 @@ namespace RCAR.Domain.Context
 
 
 
-            //Customer has many Workers 1:N relation
+            //Car has many PaymentRecords 1:N relation
             builder.Entity<Car>().HasMany(c => c.PaymentRecords).WithOne(c => c.Car).HasForeignKey(c => c.CarId);
 
-            //Customer has many Garages 1:N relation
+            //Member has many Cars 1:N relation
             builder.Entity<Member>().HasMany(c => c.Cars).WithOne(c => c.Member).HasForeignKey(c => c.MemberId);
 
-            //Customer has many Cars 1:N relation
+            //Member has many PaymentRecords 1:N relation
             builder.Entity<Member>().HasMany(c => c.PaymentRecords).WithOne(c => c.Member).HasForeignKey(c => c.MemberId);
 
-            //Garage has many Cars 1:N relation
+            //Service has many PaymentRecords 1:N relation
             builder.Entity<Service>().HasMany(g => g.PaymentRecords).WithOne(g => g.Service).HasForeignKey(g => g.ServiceId);
 
             //User has many Cars 1:N
