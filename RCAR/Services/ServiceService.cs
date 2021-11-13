@@ -76,22 +76,6 @@ namespace RCAR.Services
             return model;
         }
 
-        public async Task<bool> RemoveServiceAsync(int serviceId)
-        {
-            var service = await _unitOfWork.Service.GetByIdAsync(serviceId);
-            service.IsRemoved = true;
-            service.Status = "Zakończony";
-            return await _unitOfWork.SaveChangesAsync();
-        }
-
-        public async Task<bool> BackServiceAsync(int serviceId)
-        {
-            var service = await _unitOfWork.Service.GetByIdAsync(serviceId);
-            service.IsRemoved = false;
-            service.Status = "Cofnięty";
-            return await _unitOfWork.SaveChangesAsync();
-        }
-
         public async Task<bool> ChangeStatusAsync(string userId, int serviceId, string status)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
