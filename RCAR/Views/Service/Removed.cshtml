@@ -49,9 +49,13 @@
                                     <td>@item.Description</td>
                                     <td>@item.Status</td>
                                     <td>
-                                        <a class="btn btn-danger" asp-action="BackToDraft" asp-route-id="@item.ServiceId">
-                                            <i class="fas fa-undo-alt"></i>Cofnij
-                                        </a>
+                                        <button class="btn btn-danger" data-toggle="dropdown">
+                                            <i class="fas fa-undo"></i>
+                                        </button>
+
+                                        <ul class="dropdown-menu bg-light" style="text-align:center">
+                                            <li>@Html.ActionLink("Cofnij", "ChangeStatus", new { id = item.ServiceId, status = "BackService" }, new { onclick = "return confirm('Czy napewno chcesz cofnąć ten serwis?');" })</li>
+                                        </ul>
                                     </td>
                                 </tr>
                             }

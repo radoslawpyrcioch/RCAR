@@ -92,6 +92,27 @@ namespace RCAR.Services
             return await _unitOfWork.SaveChangesAsync();
         }
 
+        public async Task<bool> ChangeStatusAsync(string userId, int serviceId, string status)
+        {
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            if (user != null)
+            {
+                var service = await _unitOfWork.Service.GetByIdAsync(serviceId);
+                if (status.Equals("RemoveService"))
+                {
+                    service.IsRemoved = true;
+                    service.Status = "Zakończony";
+                }
+                else if (status.Equals("BackService"))
+                {
+                    service.IsRemoved = false;
+                    service.Status = "Cofnięty";
+                }
+                return await _unitOfWork.SaveChangesAsync();
+            }
+            return false;
+        }
+
         public async Task<ServiceEditVM> GetServiceForEditAsync(int serviceId, string userId)
         {
             var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
@@ -158,5 +179,6 @@ namespace RCAR.Services
                 return stream.GetBuffer();
             }
         }
+
     }
 }

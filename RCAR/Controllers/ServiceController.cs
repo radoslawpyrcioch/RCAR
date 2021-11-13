@@ -95,6 +95,19 @@ namespace RCAR.Controllers
             return View();
         }
 
+        public async Task<IActionResult> ChangeStatus(int id, string status)
+        {
+            var currentUserId = User.Claims.ElementAt(0).Value;
+            if (ModelState.IsValid)
+            {
+                var result = await _serviceService.ChangeStatusAsync(currentUserId, id, status);
+                if (result)
+                    return RedirectToAction("Index");
+                ModelState.AddModelError("", "Nie udało się zmienić statusu.");
+            }
+            return View();
+        }
+
         [HttpGet]
         public async Task<IActionResult> Detail(int id)
         {

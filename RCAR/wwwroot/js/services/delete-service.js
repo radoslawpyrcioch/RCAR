@@ -5,7 +5,7 @@
     else {
         $.ajax({
             type: "GET",
-            url: "/Service/Delete",
+            url: "/Service/ChangeStatus",
             data: { id: serviceId },
             contentType: "application/json; charset=utf-8",
             dataType: "text",

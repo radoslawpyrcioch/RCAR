@@ -64,7 +64,7 @@
                                                 <ul class="dropdown-menu bg-dark">
                                                     <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
                                                     <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
-                                                    <li><a class="text-white" href="#" id="@item.ServiceId" onclick="RemoveFromTable(this.id)">Zakończ</a></li>
+                                                    <li>@Html.ActionLink("Zakończ", "ChangeStatus", new { id = item.ServiceId, status = "RemoveService" }, new { onclick = "return confirm('Czy napewno chcesz zakończyć ten serwis?');" })</li>
                                                     <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
                                                 </ul>
                                             </div>
@@ -93,7 +93,7 @@
                                                 <ul class="dropdown-menu bg-dark">
                                                     <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
                                                     <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
-                                                    <li><a class="text-white" href="#" id="@item.ServiceId" onclick="RemoveFromTable(this.id)">Zakończ</a></li>
+                                                    <li>@Html.ActionLink("Zakończ", "ChangeStatus", new { id = item.ServiceId, status = "RemoveService" }, new { onclick = "return confirm('Czy napewno chcesz zakończyć ten serwis?');" })</li>
                                                     <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
                                                 </ul>
                                             </div>
@@ -122,7 +122,7 @@
                                                 <ul class="dropdown-menu bg-dark">
                                                     <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
                                                     <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
-                                                    <li><a class="text-white" href="#" id="@item.ServiceId" onclick="RemoveFromTable(this.id)">Zakończ</a></li>
+                                                    <li>@Html.ActionLink("Zakończ", "ChangeStatus", new { id = item.ServiceId, status = "RemoveService" }, new { onclick = "return confirm('Czy napewno chcesz zakończyć ten serwis?');" })</li>
                                                     <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
                                                 </ul>
                                             </div>
