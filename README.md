@@ -28,6 +28,9 @@
  
 ## Project photos:
 
+### Login and Register view
+![image](https://user-images.githubusercontent.com/81586206/141859418-c8eb518e-c630-43d0-89d7-c951a0bc91a9.png)
+
 ### Index view
 ![image](https://user-images.githubusercontent.com/81586206/141844897-ef0cfdf9-75d8-4d9e-aea8-31d3b707a630.png)
 
