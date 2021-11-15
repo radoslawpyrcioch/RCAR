@@ -10,7 +10,7 @@
 
 
     $('#myTable').DataTable({
-        "order": [[6, "desc"]],
+        "order": [[8, "asc"]],
         "language": {
             "lengthMenu": "Wyświetl _MENU_ pozycji na stronie",
             "zeroRecords": "Nic nie znaleziono - przykro nam",
