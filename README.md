@@ -26,5 +26,9 @@
  - Use the update-database command in the Visual Studio console 
  - You can log in to the administrator account (Email: Administrator@poczta.pl, Hasło: Start123!)
  
+### Project photos:
+
+## Index service view
+![image](https://user-images.githubusercontent.com/81586206/141843939-7a2a7003-d7d1-4191-8e33-9bbc8e40b8ae.png)
 
  
