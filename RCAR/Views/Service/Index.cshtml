@@ -42,38 +42,9 @@
                         <tbody>
                             @foreach (var item in Model.Services)
                             {
-                                @if (item.Status == "Przyjęty")
+                                @if (item.Status == "Przyjęty" || item.Status == "Rozpoczęty")
                                 {
                                     <tr id="row_@item.ServiceId">
-                                        <td class="text-justify">
-                                            <a class="text-black-50" asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
-                                        </td>
-                                        <td>@item.FullName</td>
-                                        <td>@item.Brand</td>
-                                        <td>@item.Model</td>
-                                        <td>@item.Phone</td>
-                                        <td>@item.ServiceSince.ToString("dd/MM/yyyy")</td>
-                                        <td>@item.ServiceTo.ToString("dd/MM/yyyy")</td>
-                                        <td>@item.Description</td>
-                                        <td>@item.Status</td>
-                                        <td>
-                                            <div class="dropdown btn-block pull-right">
-                                                <button class="btn btn-xs btn-danger btn-block dropdown-toggle" data-toggle="dropdown">
-                                                    Opcje
-                                                </button>
-                                                <ul class="dropdown-menu bg-dark">
-                                                    <li>@Html.ActionLink("Edytuj", "Edit", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
-                                                    <li>@Html.ActionLink("Szczegóły", "Detail", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
-                                                    <li>@Html.ActionLink("Zakończ", "ChangeStatus", new { id = item.ServiceId, status = "RemoveService" }, new { onclick = "return confirm('Czy napewno chcesz zakończyć ten serwis?');" })</li>
-                                                    <li>@Html.ActionLink("Nowa płatność", "Create", "PaymentRecord", new { id = item.ServiceId }, new { @style = "color:#fff" })</li>
-                                                </ul>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                }
-                                else if (item.Status == "Rozpoczęty")
-                                {
-                                    <tr id="row_@item.ServiceId" style="background-color:#697879">
                                         <td class="text-justify">
                                             <a class="text-black-50" asp-action="Detail" asp-route-id="@item.ServiceId">@item.ServiceNo</a>
                                         </td>
