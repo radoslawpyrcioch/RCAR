@@ -20,14 +20,14 @@
                         <h3><b>Szczegóły serwisu</b></h3>
 
                     </div>
-                    <p class="font-weight-normal"><b>Imię i nazwisko: </b>@Model.FullName</p>
-                    <p class="font-weight-normal"><b>Data przyjęcia: </b>@Model.ServiceSince.ToString("dd/MM/yyyy")</p>
-                    <p class="font-weight-normal"><b>Data zakończenia: </b>@Model.ServiceTo.ToString("dd/MM/yyyy")</p>
-                    <p class="font-weight-normal"><b>Marka: </b>@Model.Brand</p>
-                    <p class="font-weight-normal"><b>Model: </b>@Model.Model</p>
-                    <p class="font-weight-normal"><b>Opis: </b>@Model.Description</p>
-                    <p class="font-weight-normal"><b>Status: </b>@Model.Status</p>
-                    <p class="font-weight-normal"><b>Telefon:  </b><a href="tel:@Model.Phone">@Model.Phone</a></p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.FullName): </b>@Model.FullName</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.ServiceSince): </b>@Model.ServiceSince.ToString("dd/MM/yyyy")</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.ServiceTo): </b>@Model.ServiceTo.ToString("dd/MM/yyyy")</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Brand): </b>@Model.Brand</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Model): </b>@Model.Model</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Description): </b>@Model.Description</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Status): </b>@Model.Status</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Phone):  </b><a href="tel:@Model.Phone">@Model.Phone</a></p>
 
                     @if (ViewBag.TotalCount != null)
                     {
@@ -44,7 +44,7 @@
 
                         <thead class="text-info bg-dark">
                             <tr>
-                                <th>Nazwa</th>
+                                <th>Numer</th>
                                 <th>Opis</th>
                                 <th>Kwota netto</th>
                                 @*<th>Podatek</th>*@
