@@ -44,13 +44,12 @@
 
                         <thead class="text-info bg-dark">
                             <tr>
-                                <th>Numer</th>
-                                <th>Opis</th>
-                                <th>Kwota netto</th>
-                                @*<th>Podatek</th>*@
-                                <th>Rabat</th>
-                                <th>Kwota brutto</th>
-                                <th>Status</th>
+                                <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().Name)</th>
+                                <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().Description)</th>
+                                <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().NetAmount)</th>
+                                <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().Discount)</th>
+                                <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().Status)</th>
+                                <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().TotalAmount)</th>
                                 <th class="text-warning">Akcje</th>
                             </tr>
                         </thead>
@@ -62,7 +61,6 @@
                                     <td>@Html.DisplayFor(m => item.Name)</td>
                                     <td>@Html.DisplayFor(m => item.Description)</td>
                                     <td>@Html.DisplayFor(m => item.NetAmount)</td>
-                                    @*<td>@Html.DisplayFor(m => item.Tax)</td>*@
                                     <td>@Html.DisplayFor(m => item.Discount)</td>
                                     <td>@Html.DisplayFor(m => item.TotalAmount)</td>
                                     <td>@Html.DisplayFor(m => item.Status)</td>
@@ -73,7 +71,6 @@
                                             </button>
                                             <ul class="dropdown-menu bg-dark">
                                                 <li>@Html.ActionLink("Zapłacone", "Paid", "PaymentRecord", new { id = item.PaymentRecordId }, new { @style = "color:#fff" })</li>
-                                                @*<li>@Html.ActionLink("Usuń", "Delete", "PaymentRecord", new { id = item.PaymentRecordId }, new { onclick = "return confirm('Czy napewno chcesz usunąc tą płatność?');" })</li>*@
                                                 <li><a href="#" class="text-white" id="@item.PaymentRecordId" onclick="RemoveFromTable(this.id)">Usuń</a></li>
                                             </ul>
                                         </div>

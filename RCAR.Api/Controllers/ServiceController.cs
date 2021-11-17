@@ -64,7 +64,7 @@ namespace RCAR.Api.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateServie(ServiceCreateDTO dto)
+        public async Task<IActionResult> CreateService(ServiceCreateDTO dto)
         {
             var currentUser = User.Claims.ElementAt(0).Value;
             if (currentUser != null)
