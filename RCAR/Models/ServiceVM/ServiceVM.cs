@@ -19,6 +19,7 @@ namespace RCAR.Models.ServiceVM
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; } 
 
+        [Display(Name = "Imię i nazwisko")]
         public string FullName
         {
             get
