@@ -23,19 +23,18 @@
                 <div class="col-md-12 table-responsive-md">
                     <input type="button" value="Nowy serwis" id="btnOpen" class="btn btn-xs btn-warning float-md-right m-md-1" />
                     <a class="btn btn-xs btn-secondary float-md-right m-md-1" asp-controller="Service" asp-action="Removed">Historia</a>
-
                     <table class="table table-striped " id="myTable" style="width:100%">
-                        <thead class="thead-dark">
+                        <thead class="thead-dark" style="text-align:center;">
                             <tr>
-                                <th>Numer</th>
-                                <th>Imie i Nazwisko</th>
-                                <th>Marka samochodu</th>
-                                <th>Model samochodu</th>
-                                <th>Telefon</th>
-                                <th>Data przyjecia</th>
-                                <th>Data zakończenia</th>
-                                <th>Opis</th>
-                                <th>Status</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().ServiceNo)</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().FullName)</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().Brand)</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().Model)</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().Phone)</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().ServiceSince)</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().ServiceTo)</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().Description)</th>
+                                <th>@Html.DisplayNameFor(m => m.Services.FirstOrDefault().Status)</th>
                                 <th class="text-warning">Akcje</th>
                             </tr>
                         </thead>
@@ -100,11 +99,9 @@
                                         </td>
                                     </tr>
                                 }
-
                             }
                         </tbody>
                     </table><br />
-
                 </div>
             </div>
         </div>
