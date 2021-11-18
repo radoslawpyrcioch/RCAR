@@ -19,6 +19,7 @@ namespace RCAR.Models.ReportVM
         [Display(Name = "Nazwisko")]
         public string LastName { get; set; }
 
+        [Display(Name = "Imię i nazwisko")]
         public string FullName
         {
             get
@@ -44,9 +45,16 @@ namespace RCAR.Models.ReportVM
         [Display(Name = "Status")]
         public string Status { get; set; }
 
+        [Display(Name = "Kwota Netto")]
         public decimal PaymentNetAmount { get; set; }
+
+        [Display(Name = "Numer")]
         public string PaymentNumber { get; set; }
+
+        [Display(Name = "Status")]
         public string PaymentStatus { get; set; }
+
+        [Display(Name = "Suma płatności netto")]
         public string TotalNetPayment { get; set; }
 
 
