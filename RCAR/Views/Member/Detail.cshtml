@@ -17,16 +17,16 @@
             <div class="row">
                 <div class="col-lg-4 ml-5">
                     <div class="col-lg-10 mb-5"><h3><b>Szczegóły członka</b></h3></div>
-                    <p class="font-weight-normal"><b>Numer: </b>@Model.MemberNo</p>
-                    <p class="font-weight-normal"><b>Imię i nazwisko: </b>@Model.FullName</p>
-                    <p class="font-weight-normal"><b>Data przyjęcia: </b>@Model.DateJoined.ToString("dd/MM/yyyy")</p>
-                    <p class="font-weight-normal"><b>Data zakończenia: </b>@Model.DateLeaves.ToString("dd/MM/yyyy")</p>
-                    <p class="font-weight-normal"><b>Adres: </b>@Model.Address</p>
-                    <p class="font-weight-normal"><b>Miasto: </b>@Model.City</p>
-                    <p class="font-weight-normal"><b>Kod pocztowy: </b>@Model.PostCode</p>
-                    <p class="font-weight-normal"><b>Status: </b>@Model.Status</p>
-                    <p class="font-weight-normal"><b>Telefon:  </b>@Model.Phone</p>
-                    <p class="font-weight-normal"><b>Email:  </b>@Model.Email</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.MemberNo): </b>@Model.MemberNo</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.FullName): </b>@Model.FullName</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.DateJoined): </b>@Model.DateJoined.ToString("dd/MM/yyyy")</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.DateLeaves): </b>@Model.DateLeaves.ToString("dd/MM/yyyy")</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Address): </b>@Model.Address</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.City): </b>@Model.City</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.PostCode): </b>@Model.PostCode</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Status): </b>@Model.Status</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Phone): </b>@Model.Phone</p>
+                    <p class="font-weight-normal"><b>@Html.DisplayNameFor(m => m.Email): </b>@Model.Email</p>
 
                     @if (ViewBag.TotalCountCar != null)
                     {
@@ -43,12 +43,12 @@
                     <table class="table table-striped table-responsive">
                         <thead class="text-info bg-dark">
                             <tr>
-                                <th>Marka</th>
-                                <th>Model</th>
-                                <th>Opis</th>
-                                <th>Ostatni serwis od</th>
-                                <th>Ostatni serwis do</th>
-                                <th>Status</th>
+                                <th>@Html.DisplayNameFor(m => m.Cars.FirstOrDefault().Brand)</th>
+                                <th>@Html.DisplayNameFor(m => m.Cars.FirstOrDefault().Model)</th>
+                                <th>@Html.DisplayNameFor(m => m.Cars.FirstOrDefault().Description)</th>
+                                <th>@Html.DisplayNameFor(m => m.Cars.FirstOrDefault().ServiceSince)</th>
+                                <th>@Html.DisplayNameFor(m => m.Cars.FirstOrDefault().ServiceTo)</th>
+                                <th>@Html.DisplayNameFor(m => m.Cars.FirstOrDefault().Status)</th>
                                 <th class="text-warning">Akcje</th>
                             </tr>
                         </thead>
@@ -88,7 +88,7 @@
                         }
                         else
                         {
-                            <p class="font-weight-normal"><b>Brak samochodów: </b>0</p>
+                            <p class="font-weight-normal"><b>Brak samochodów</b></p>
                         }
                     </div>
                 </div>
