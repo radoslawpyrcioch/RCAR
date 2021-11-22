@@ -9,5 +9,6 @@ namespace RCAR.Api.Services.Interfaces
     public interface IPaymentRecordService
     {
         Task<bool> CreatePaymentAsync(PaymentCreateDTO paymentDTO, int serviceId, string email);
+        decimal CalculateTaxAmount(decimal totalDiscount, decimal totalAmount);
     }
 }
