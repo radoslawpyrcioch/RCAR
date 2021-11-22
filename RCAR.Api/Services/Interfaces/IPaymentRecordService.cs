@@ -11,5 +11,6 @@ namespace RCAR.Api.Services.Interfaces
         Task<bool> CreatePaymentAsync(PaymentCreateDTO paymentDTO, int serviceId, string email);
         decimal CalculateTaxAmount(decimal totalDiscount, decimal totalAmount);
         decimal CalculateNetAmount(decimal totalDiscount, decimal totalAmount);
+        decimal CalculateDiscount(decimal totalDiscount, decimal totalAmount);
     }
 }
