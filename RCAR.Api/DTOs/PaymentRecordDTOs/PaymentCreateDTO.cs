@@ -8,7 +8,7 @@ namespace RCAR.Api.DTOs.PaymentRecordDTOs
 {
     public class PaymentCreateDTO
     {
-        public PaymentCreateVM() => IsRemoved = false;
+        public PaymentCreateDTO() => IsRemoved = false;
 
         public int PaymentRecordId { get; set; }
 

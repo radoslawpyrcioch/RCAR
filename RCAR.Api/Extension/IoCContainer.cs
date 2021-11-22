@@ -24,6 +24,7 @@ namespace RCAR.Api.Extension
         {
             services.AddScoped<IJwTokenService, JwTokenService>();
             services.AddScoped<IServiceService, ServiceService>();
+            services.AddScoped<IPaymentRecordService, PaymentRecordService>();
 
             return services;
         }
