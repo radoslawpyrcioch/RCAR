@@ -33,7 +33,7 @@ namespace RCAR.Api.Services
                         Description = paymentDTO.Description,
                         Tax = CalculateTaxAmount(paymentDTO.Discount, paymentDTO.TotalAmount),
                         TotalAmount = paymentDTO.TotalAmount,
-                        NetAmount = paymentDTO.NetAmount,
+                        NetAmount = CalculateNetAmount(paymentDTO.Discount, paymentDTO.TotalAmount),
                         Status = paymentDTO.Status,
                         ServiceId = serviceId
                     };
@@ -48,6 +48,11 @@ namespace RCAR.Api.Services
         {
             var netAmount = (totalAmount - totalDiscount) / 1.23m;
             return totalAmount - totalDiscount - netAmount;
+        }
+
+        public decimal CalculateNetAmount(decimal totalDiscount, decimal totalAmount)
+        {
+            return (totalAmount - totalDiscount) / 1.23m;
         }
     }
 }
