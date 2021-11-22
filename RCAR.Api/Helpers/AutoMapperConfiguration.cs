@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using RCAR.Api.DTOs.PaymentRecordDTOs;
 using RCAR.Api.DTOs.ServiceDTOs;
 using RCAR.Domain.Entities;
 using System;
@@ -15,6 +16,8 @@ namespace RCAR.Api.Helpers
             CreateMap<Service, ServiceDTO>();
             CreateMap<Service, ServiceOneDTO>().ReverseMap();
             CreateMap<ServiceCreateDTO, Service>();
+
+            CreateMap<PaymentCreateDTO, PaymentCreateDTO>().ReverseMap();
         }
     }
 }
