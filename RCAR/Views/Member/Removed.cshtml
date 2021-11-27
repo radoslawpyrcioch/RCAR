@@ -20,12 +20,12 @@
                         <table class="table table-striped" id="myTable">
                             <thead class="thead-dark">
                                 <tr>
-                                    <th>Numer</th>
-                                    <th>Imię</th>
-                                    <th>Nazwisko</th>
-                                    <th>Data przyjęcia</th>
-                                    <th>Telefon</th>
-                                    <th>Status</th>
+                                    <th>@Html.DisplayNameFor(m => m.Members.FirstOrDefault().MemberNo)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Members.FirstOrDefault().FirstName)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Members.FirstOrDefault().LastName)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Members.FirstOrDefault().DateJoined)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Members.FirstOrDefault().Phone)</th>
+                                    <th>@Html.DisplayNameFor(m => m.Members.FirstOrDefault().Status)</th>
                                     <th class="text-warning">Akcje</th>
                                 </tr>
                             </thead>
