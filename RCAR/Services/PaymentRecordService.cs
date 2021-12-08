@@ -90,21 +90,27 @@ namespace RCAR.Services
             return totalAmount - totalDiscount - netAmount;
         }
 
-        public async Task<bool> RemovePaymentAsync(int paymentId)
+        public async Task<bool> RemovePaymentAsync(int paymentId, string userId)
         {
-            var payment = await _unitOfWork.PaymentRecord.GetByIdAsync(paymentId);
-            _unitOfWork.PaymentRecord.Remove(payment);
-            //payment.IsRemoved = true;
-            //payment.Status = "Płatność usunięta";
-            return await _unitOfWork.SaveChangesAsync();
+            if (userId != null)
+            {
+                var payment = await _unitOfWork.PaymentRecord.GetByIdAsync(paymentId);
+                _unitOfWork.PaymentRecord.Remove(payment);
+                return await _unitOfWork.SaveChangesAsync();
+            }
+            return false;
+            
         }
 
-        public async Task<bool> PaidPaymentAsync(int paymentId)
+        public async Task<bool> PaidPaymentAsync(int paymentId, string userId)
         {
-            var payment = await _unitOfWork.PaymentRecord.GetByIdAsync(paymentId);
-            payment.Status = "Zapłacone";
-            return await _unitOfWork.SaveChangesAsync();
-        }
-    
+            if (userId != null)
+            {
+                var payment = await _unitOfWork.PaymentRecord.GetByIdAsync(paymentId);
+                payment.Status = "Zapłacone";
+                return await _unitOfWork.SaveChangesAsync();
+            }
+            return false;        
+        }   
     }
 }

@@ -14,7 +14,7 @@ namespace RCAR.Services.Interfaces
         decimal CalculateTaxAmount(decimal totalDiscount, decimal totalAmount);
         decimal CalculateNetAmount(decimal totalDiscount, decimal totalAmount);
         decimal CalculateDiscount(decimal totalDiscount, decimal totalAmount);
-        Task<bool> RemovePaymentAsync(int paymentId);
-        Task<bool> PaidPaymentAsync(int paymentId);
+        Task<bool> RemovePaymentAsync(int paymentId, string userId);
+        Task<bool> PaidPaymentAsync(int paymentId, string userId);
     }
 }

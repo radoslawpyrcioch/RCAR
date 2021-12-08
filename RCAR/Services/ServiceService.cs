@@ -118,9 +118,6 @@ namespace RCAR.Services
             }
             _mapper.Map(model, service);
             return await _unitOfWork.SaveChangesAsync();
-
-
-
         }
 
         public void CountPayment(IEnumerable<PaymentVM> model, ref int count, ref decimal totalAmount)
