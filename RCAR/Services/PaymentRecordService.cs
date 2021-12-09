@@ -13,11 +13,12 @@ namespace RCAR.Services
 {
     public class PaymentRecordService : IPaymentRecordService
     {
-       
+        private readonly IMapper _mapper;
         private readonly IUnitOfWork _unitOfWork;
 
-        public PaymentRecordService(IUnitOfWork unitOfWork)
-        {  
+        public PaymentRecordService(IUnitOfWork unitOfWork, IMapper mapper)
+        {
+            _mapper = mapper;
             _unitOfWork = unitOfWork;
         }
 
@@ -30,17 +31,23 @@ namespace RCAR.Services
                 // var payment = _mapper.Map<PaymentCreateVM, PaymentRecord>(paymentVM);
                 if (!user.Services.Where(s => s.ServiceId == paymentVM.ServiceId && !s.IsRemoved).Any())
                 {
-                    var payment = new PaymentRecord()
-                    {
-                        Name = paymentVM.Name,
-                        Description = paymentVM.Description,
-                        Tax = CalculateTaxAmount(paymentVM.Discount, paymentVM.TotalAmount),
-                        Discount = paymentVM.Discount,
-                        TotalAmount = CalculateDiscount(paymentVM.Discount, paymentVM.TotalAmount),    
-                        NetAmount = CalculateNetAmount(paymentVM.Discount, paymentVM.TotalAmount),
-                        Status = paymentVM.Status,
-                        ServiceId = serviceId
-                    };
+                    //var payment = new PaymentRecord()
+                    //{
+                    //    Name = paymentVM.Name,
+                    //    Description = paymentVM.Description,
+                    //    Tax = CalculateTaxAmount(paymentVM.Discount, paymentVM.TotalAmount),
+                    //    Discount = paymentVM.Discount,
+                    //    TotalAmount = CalculateDiscount(paymentVM.Discount, paymentVM.TotalAmount),    
+                    //    NetAmount = CalculateNetAmount(paymentVM.Discount, paymentVM.TotalAmount),
+                    //    Status = paymentVM.Status,
+                    //    ServiceId = serviceId
+                    //};
+                    var payment = _mapper.Map<PaymentCreateVM, PaymentRecord>(paymentVM);
+                    payment.ServiceId = serviceId;
+                    payment.Tax = CalculateTaxAmount(paymentVM.Discount, paymentVM.TotalAmount);
+                    payment.TotalAmount = CalculateDiscount(paymentVM.Discount, paymentVM.TotalAmount);
+                    payment.NetAmount = CalculateNetAmount(paymentVM.Discount, paymentVM.TotalAmount);
+
                     _unitOfWork.PaymentRecord.Add(payment);
                 }
    

@@ -56,9 +56,10 @@ namespace RCAR.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
+            var currentUserId = User.Claims.ElementAt(0).Value;
             if(ModelState.IsValid)
             {
-                var result = await _paymentRecordService.RemovePaymentAsync(id);
+                var result = await _paymentRecordService.RemovePaymentAsync(id, currentUserId);
                 if (result)
                     return RedirectToAction("Index", "Service");
                 ModelState.AddModelError("", "Niestety nie udało się usunąć.");
@@ -68,9 +69,10 @@ namespace RCAR.Controllers
 
         public async Task<IActionResult> Paid(int id)
         {
+            var currentUserId = User.Claims.ElementAt(0).Value;
             if(ModelState.IsValid)
             {
-                var result = await _paymentRecordService.PaidPaymentAsync(id);
+                var result = await _paymentRecordService.PaidPaymentAsync(id, currentUserId);
                 if (result)
                     return RedirectToAction("Index", "Service");
                 ModelState.AddModelError("", "Niestety nie udało się zmienić statusu.");

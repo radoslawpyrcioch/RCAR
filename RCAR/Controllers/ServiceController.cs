@@ -115,7 +115,7 @@ namespace RCAR.Controllers
             var currentUserId = User.Claims.ElementAt(0).Value;
             if (ModelState.IsValid)
             {
-                var result = await _serviceService.EditServiceAsync(model);
+                var result = await _serviceService.EditServiceAsync(model, currentUserId);
                 if (result)
                     return RedirectToAction("Index");
                 ModelState.AddModelError("", "Niestety nie udało się dokonać zmian.");
