@@ -16,7 +16,7 @@ namespace RCAR.Services.Interfaces
         Task<ServiceDetailVM> DetailServiceAsync(int serviceId, string userId);
         Task<bool> ChangeStatusAsync(string userId, int serviceId, string status);
         Task<ServiceEditVM> GetServiceForEditAsync(int serviceId, string userId);
-        Task<bool> EditServiceAsync(ServiceEditVM model);
+        Task<bool> EditServiceAsync(ServiceEditVM model, string userId);
 
         void CountPayment(IEnumerable<PaymentVM> model, ref int count, ref decimal totalAmount);
 

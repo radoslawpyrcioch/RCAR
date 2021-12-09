@@ -105,19 +105,24 @@ namespace RCAR.Services
             return model;
         }
 
-        public async Task<bool> EditServiceAsync(ServiceEditVM model)
+        public async Task<bool> EditServiceAsync(ServiceEditVM model, string userId)
         {
-            var service = await _unitOfWork.Service.GetByIdAsync(model.ServiceId);
-            if (model.Status == "Przyjęty")
+            var user = await _unitOfWork.User.FindOneAsync(u => u.Id == userId);
+            if (user != null)
             {
-                model.Status = "Przyjęty";
+                var service = await _unitOfWork.Service.GetByIdAsync(model.ServiceId);
+                if (model.Status == "Przyjęty")
+                {
+                    model.Status = "Przyjęty";
+                }
+                if (model.Status == "Rozpoczęty")
+                {
+                    model.Status = "Rozpoczęty";
+                }
+                _mapper.Map(model, service);
+                return await _unitOfWork.SaveChangesAsync();
             }
-            if (model.Status == "Rozpoczęty")
-            {
-                model.Status = "Rozpoczęty";
-            }
-            _mapper.Map(model, service);
-            return await _unitOfWork.SaveChangesAsync();
+            return false;         
         }
 
         public void CountPayment(IEnumerable<PaymentVM> model, ref int count, ref decimal totalAmount)
