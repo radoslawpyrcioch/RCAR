@@ -14,7 +14,7 @@ namespace RCAR.Models.PaymentRecordVM
         public int ServiceId { get; set; }
         public Service Service { get; set; }
 
-        [Display(Name = "Nazwa")]
+        [Display(Name = "Numer")]
         public string Name { get; set; }
 
         [Display(Name = "Opis")]

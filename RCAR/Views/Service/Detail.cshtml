@@ -48,8 +48,8 @@
                                 <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().Description)</th>
                                 <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().NetAmount)</th>
                                 <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().Discount)</th>
-                                <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().Status)</th>
                                 <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().TotalAmount)</th>
+                                <th>@Html.DisplayNameFor(m => m.PaymentRecords.FirstOrDefault().Status)</th>
                                 <th class="text-warning">Akcje</th>
                             </tr>
                         </thead>
@@ -74,7 +74,6 @@
                                                 <li><a href="#" class="text-white" id="@item.PaymentRecordId" onclick="RemoveFromTable(this.id)">Usuń</a></li>
                                             </ul>
                                         </div>
-
                                     </td>
                                 </tr>
                             }
