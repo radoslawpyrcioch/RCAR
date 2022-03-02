@@ -41,25 +41,19 @@ namespace RCAR.Controllers
 
         public async Task<IActionResult> Delete(int id)
         {
-            if(ModelState.IsValid)
-            {
                 var result = await _carService.RemoveCarAsync(id);
                 if (result)
                     return RedirectToAction("Index", "Member");
                 ModelState.AddModelError("", "Niestety nie udało się usunąć.");
-            }
             return RedirectToAction("Index", "Home");
         }
 
         public async Task<IActionResult> Done(int id)
         {
-            if(ModelState.IsValid)
-            {
                 var result = await _carService.DoneCarSeriveAsync(id);
                 if (result)
                     return RedirectToAction("Index", "Member");
                 ModelState.AddModelError("", "Niestety nie udało się zmienić statusu.");
-            }
             return RedirectToAction("Index", "Home");
         }
 
@@ -82,13 +76,10 @@ namespace RCAR.Controllers
 
         public async Task<IActionResult> InProgressStatus(int id)
         {
-            if (ModelState.IsValid)
-            {
                 var result = await _carService.InProgressCarStatusAsync(id);
                 if (result)
                     return RedirectToAction("Index", "Member");
                 ModelState.AddModelError("", "Niestety nie udało się zmienić statusu.");
-            }
             return RedirectToAction("Index", "Member");
         }
  
