@@ -52,8 +52,7 @@ namespace RCAR.Controllers
 
         public IActionResult Create()
         {
-            var model = new ServiceCreateVM();
-            return View(model);
+            return View(new ServiceCreateVM());
         }
 
         [HttpPost]
@@ -74,13 +73,10 @@ namespace RCAR.Controllers
         public async Task<IActionResult> ChangeStatus(int id, string status)
         {
             var currentUserId = User.Claims.ElementAt(0).Value;
-            if (ModelState.IsValid)
-            {
                 var result = await _serviceService.ChangeStatusAsync(currentUserId, id, status);
                 if (result)
                     return RedirectToAction("Index");
                 ModelState.AddModelError("", "Nie udało się zmienić statusu.");
-            }
             return View();
         }
 
