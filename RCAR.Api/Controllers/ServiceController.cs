@@ -1,16 +1,19 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using RCAR.Api.DTOs.ServiceDTOs;
 using RCAR.Api.Services.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Threading.Tasks;
 
 namespace RCAR.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = "Bearer")]
     public class ServiceController : ControllerBase
     {
         private readonly IServiceService _serviceService;

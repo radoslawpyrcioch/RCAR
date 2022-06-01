@@ -10,7 +10,7 @@ namespace RCAR.Api.Controllers
 {
     [Route("[controller]")]
     [ApiController]
-    public class JwTokenController : Controller
+    public class JwTokenController : ControllerBase
     {
         private readonly IJwTokenService _jwTokenService;
 

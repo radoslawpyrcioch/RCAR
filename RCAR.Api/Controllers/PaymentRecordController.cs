@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using RCAR.Api.DTOs.PaymentRecordDTOs;
 using RCAR.Api.Services.Interfaces;
 using System;
@@ -10,7 +11,8 @@ namespace RCAR.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PaymentRecordController : Controller
+    [Authorize(AuthenticationSchemes = "Bearer")]
+    public class PaymentRecordController : ControllerBase
     {
         public readonly IPaymentRecordService _paymentRecordService;
         public PaymentRecordController(IPaymentRecordService paymentRecordService)
